@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
 
-  <title><![CDATA[Striving for Adequacy]]></title>
-  <link href="http://calvached.github.io/atom.xml" rel="self"/>
+  <title><![CDATA[Category: .bash_profile | Striving for Adequacy]]></title>
+  <link href="http://calvached.github.io/blog/categories/dot-bash-profile/atom.xml" rel="self"/>
   <link href="http://calvached.github.io/"/>
   <updated>2014-05-07T15:49:33-05:00</updated>
   <id>http://calvached.github.io/</id>
