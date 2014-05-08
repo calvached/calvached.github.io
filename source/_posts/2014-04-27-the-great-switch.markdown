@@ -13,7 +13,7 @@ I also found this nifty [cheatsheet](https://github.com/adam-p/markdown-here/wik
 
 _So what's this about a "Great Switch"?_
 <!-- more -->
-I caved and got a Mac. So I went back home for about two weeks and gave my brother my laptop so he can take to college. I took that as an opportunity to get a Mac this time around and try to avoid the hardships of making Windows play nicely with RoR. Although once I got back I realized that I forgot to merge the partition I made for Linux on my Windows system soo...it now has half as much hard drive space (oops, sorry bro!). 
+I caved and got a Mac. So I went back home for about two weeks and gave my brother my laptop for him to use in college. I took that as an opportunity to get a Mac this time around and try to avoid the hardships of making Windows play nicely with RoR. Although once I got back I realized that I forgot to merge the partition I made for Linux on my Windows system soo...it now has half as much hard drive space (oops, sorry bro!). 
 
 I also then realized that gaming on a Mac looks like [this](http://weknowmemes.com/wp-content/uploads/2013/09/gaming-on-a-mac-meme.jpg) and I proceeded to react [appropriately](http://www.reactiongifs.com/wp-content/uploads/2013/12/wut.gif).
 
