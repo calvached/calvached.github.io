@@ -2,15 +2,19 @@
 <urlset xmlns='http://www.sitemaps.org/schemas/sitemap/0.9'>
     <url>
         <loc>http://calvached.github.io/blog/2014/04/27/the-great-switch/</loc>
-        <lastmod>2014-05-07T15:56:39-05:00</lastmod>
+        <lastmod>2014-05-12T16:55:23-05:00</lastmod>
+    </url>
+    <url>
+        <loc>http://calvached.github.io/blog/2014/05/12/railsconf-2014-recap/</loc>
+        <lastmod>2014-05-13T15:18:33-05:00</lastmod>
     </url>
     <url>
         <loc>http://calvached.github.io/blog/archives/</loc>
-        <lastmod>2014-05-07T15:56:39-05:00</lastmod>
+        <lastmod>2014-05-13T15:18:33-05:00</lastmod>
     </url>
     <url>
         <loc>http://calvached.github.io/</loc>
-        <lastmod>2014-05-07T15:56:39-05:00</lastmod>
+        <lastmod>2014-05-13T15:18:33-05:00</lastmod>
     </url>
     <url>
         <loc>http://calvached.github.io/robots.txt</loc>
