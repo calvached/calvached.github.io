@@ -25,10 +25,5 @@ Although there were a few bumps along the way. I mysteriously (and accidentally)
 
 _So what was I doing that caused this situation?_ I was trying to setup Sublime to launch from the command line, but was unsuccessful. Time to try it again! 
 
-
-<!--_Random Stuff_
-
-I've also decided to start Aerial Dance classes! Figured I needed a way to de-stress and stay sane. Plus you never know when that upper body strength training might come in handy~ -->
-
 **Current Status:** Stalking people's github profiles :3
 
