@@ -3,7 +3,7 @@ layout: post
 title: "The Great Switch"
 date: 2014-04-27 18:01:39 -0500
 comments: true
-categories: [octopress, .bash_profile]
+categories: [octopress, .bash_profile, markdown]
 ---
 
 ![openmind](http://media.giphy.com/media/auqDHeqoMMMhy/giphy.gif)
