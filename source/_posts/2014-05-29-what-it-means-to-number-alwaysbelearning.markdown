@@ -27,7 +27,7 @@ What do I hope to get out of an apprenticeship?
   * Better understanding of what is good code/tests and how to write it   
   * Learn from great people
 
-In reality #AlwaysBeLearning simply means to always surround yourself with brilliant inspiring people who will push you to be better than you ever thought you could be.
+In reality #AlwaysBeLearning simply means to always surround yourself with brilliant, inspiring people who will push you to be better than you ever thought you could be.
 
 
 
