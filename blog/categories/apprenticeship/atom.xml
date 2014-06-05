@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Apprenticeship | Striving for Adequacy]]></title>
   <link href="http://calvached.github.io/blog/categories/apprenticeship/atom.xml" rel="self"/>
   <link href="http://calvached.github.io/"/>
-  <updated>2014-06-04T17:24:57-05:00</updated>
+  <updated>2014-06-05T15:04:26-05:00</updated>
   <id>http://calvached.github.io/</id>
   <author>
     <name><![CDATA[Diana Calvache]]></name>
@@ -33,7 +33,7 @@
 
 <p>Surround your pullquote like this {" text to be quoted "}</p>
 
-<p>I joined <a href="http://www.8thlight.com/">8th Light</a> as a student apprentice, in hopes of continuing my adventures in web development by learning how to write <u>good</u> code! 8th Light is a software consulting company who truly cares about the work they do and prefers to do things the <u>right</u> way the <u>first</u> time instead of monkey patching later on. A lot of the principles and good practices that 8th Light follows were taught at DBC (such as good naming conventions, decoupling, managing dependencies, etc) so applying was a natural next step.</p>
+<p>I joined <a href="http://www.8thlight.com/">8th Light</a> as a student apprentice, in hopes of continuing my adventures in web development by learning how to write <u>good</u> code! 8th Light is a software consulting company who truly cares about the work they do and prefers to do things the right way the first time instead of monkey patching later on. A lot of the principles and good practices that 8th Light follows were taught at DBC (such as good naming conventions, decoupling, managing dependencies, etc) so applying was a natural next step.</p>
 
 <p>What do I hope to get out of an apprenticeship?<br/>
   * Lots of practice with TDD<br/>
