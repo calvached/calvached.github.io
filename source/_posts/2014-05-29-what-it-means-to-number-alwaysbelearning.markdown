@@ -16,9 +16,11 @@ _So what exactly attracted me to the idea of apprenticeship?_
 <!-- more -->
 One of the most attractive things about doing an apprenticeship is being given the chance to continue to grow with the guidance of a mentor. A mentor is someone who won't give you the answers, but will nudge you in the right direction and make sure you don't venture too far off from the path to your goal. I think that in order to be successful in any career you must have a mentor available to give advice.
 
-During one of our 1 o'clock standups, Dave Hoover talked to us about apprenticeships where he suggests to always be the least knowledgable person in the room. At the time I didn't quite understand why someone would want to be in that position. I mean isn't it better to be the smartest person in the room? He explained that if we only worked at places that didn't challenge us then how could we possibly expect to get better?
+{% pullquote %}
+During one of our 1 o'clock standups, Dave Hoover talked to us about apprenticeships where he suggests to {" work where you will be the dumbest person in the room "}. At the time I didn't quite understand why someone would want to be in that position. I mean isn't it better to be the smartest person in the room? He explained that if we are never challenged then how could we possibly expect to get better? The idea is that in order to become great you must learn from great people.
+{% endpullquote %}
 
-I joined [8th Light](http://www.8thlight.com/) as a student apprentice, in hopes of continuing my adventures in web development by learning how to write <u>good</u> code! 8th Light is a software consulting company who truly cares about the work they do and doesn't rely on "good enough" when writing code. A lot of the principles and good practices that 8th Light follows were taught at DBC (such as good naming conventions, decoupling, managing dependencies, etc) so applying was a natural next step. 
+I joined [8th Light](http://www.8thlight.com/) as a student apprentice, in hopes of continuing my adventures in web development by learning how to write <u>good</u> code! 8th Light is a software consulting company who truly cares about the work they do and prefers to do things the right way the first time instead of monkey patching later on. A lot of the principles and good practices that 8th Light follows were taught at DBC (such as good naming conventions, decoupling, managing dependencies, etc) so applying was a natural next step.
 
 What do I hope to get out of an apprenticeship?  
   * Lots of practice with TDD  
