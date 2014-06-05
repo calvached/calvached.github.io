@@ -4,7 +4,7 @@
   <title><![CDATA[Striving for Adequacy]]></title>
   <link href="http://calvached.github.io/atom.xml" rel="self"/>
   <link href="http://calvached.github.io/"/>
-  <updated>2014-06-05T15:04:26-05:00</updated>
+  <updated>2014-06-05T15:10:50-05:00</updated>
   <id>http://calvached.github.io/</id>
   <author>
     <name><![CDATA[Diana Calvache]]></name>
@@ -12,6 +12,156 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Ruby, Pass by What?]]></title>
+    <link href="http://calvached.github.io/blog/2014/06/02/ruby-pass-by-what/"/>
+    <updated>2014-06-02T10:12:24-05:00</updated>
+    <id>http://calvached.github.io/blog/2014/06/02/ruby-pass-by-what</id>
+    <content type="html"><![CDATA[<p><img src="http://i.imgur.com/3gQVzL0.gif" alt="david-tennant-confused" /></p>
+
+<p>There are two questions that have been bugging me lately. The first, <em>Why do I have to clone a guess in Mastermind?</em> and the second came after I did some research, <em>What is pass by reference vs. pass by value?</em></p>
+
+<p>Let&rsquo;s start with the first question.</p>
+
+<!-- more -->
+
+
+<p>To simplify what I was experiencing here&rsquo;s an example:</p>
+
+<figure class='code'><figcaption><span>Black magic code going on here</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+<span class='line-number'>35</span>
+<span class='line-number'>36</span>
+<span class='line-number'>37</span>
+<span class='line-number'>38</span>
+<span class='line-number'>39</span>
+<span class='line-number'>40</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">class</span> <span class="nc">ExampleClass</span>
+</span><span class='line'>  <span class="k">def</span> <span class="nf">example_method</span>
+</span><span class='line'>    <span class="n">var</span> <span class="o">=</span> <span class="s1">&#39;woohooo&#39;</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="nb">p</span> <span class="n">var</span><span class="o">.</span><span class="n">object_id</span> <span class="c1"># Object Id: 70131019948560</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="n">x</span> <span class="o">=</span> <span class="no">SomeClass</span><span class="o">.</span><span class="n">new</span>
+</span><span class='line'>    <span class="n">x</span><span class="o">.</span><span class="n">some_method</span><span class="p">(</span><span class="n">var</span><span class="p">)</span>
+</span><span class='line'>    <span class="nb">p</span> <span class="n">x</span><span class="o">.</span><span class="n">return_var</span> <span class="c1"># returns &#39;woohooo&#39;</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="n">y</span> <span class="o">=</span> <span class="no">AnotherClass</span><span class="o">.</span><span class="n">new</span>
+</span><span class='line'>    <span class="n">y</span><span class="o">.</span><span class="n">another_method</span><span class="p">(</span><span class="n">var</span><span class="p">)</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="nb">p</span> <span class="n">x</span><span class="o">.</span><span class="n">return_var</span> <span class="c1"># returns &#39;boohooo&#39;, whyyy??</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'><span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">class</span> <span class="nc">SomeClass</span>
+</span><span class='line'>  <span class="k">def</span> <span class="nf">some_method</span><span class="p">(</span><span class="n">var</span><span class="p">)</span>
+</span><span class='line'>    <span class="vi">@new_var</span> <span class="o">=</span> <span class="n">var</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="k">def</span> <span class="nf">return_var</span>
+</span><span class='line'>    <span class="nb">p</span> <span class="vi">@new_var</span><span class="o">.</span><span class="n">object_id</span> <span class="c1"># Object Id: 70131019948560</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="vi">@new_var</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'><span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">class</span> <span class="nc">AnotherClass</span>
+</span><span class='line'>  <span class="k">def</span> <span class="nf">another_method</span><span class="p">(</span><span class="n">var</span><span class="p">)</span>
+</span><span class='line'>    <span class="n">var</span><span class="o">[</span><span class="mi">0</span><span class="o">]</span> <span class="o">=</span> <span class="s1">&#39;b&#39;</span>
+</span><span class='line'>    <span class="nb">p</span> <span class="n">var</span><span class="o">.</span><span class="n">object_id</span> <span class="c1"># Object Id: 70131019948560</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="n">var</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'><span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'><span class="n">j</span> <span class="o">=</span> <span class="no">ExampleClass</span><span class="o">.</span><span class="n">new</span>
+</span><span class='line'><span class="n">j</span><span class="o">.</span><span class="n">example_method</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>So what exactly is going on here? In my ExampleClass I&rsquo;m passing some_method a variable with the value &ldquo;woohooo&rdquo; and I expect it to return the same value (since I&rsquo;m not making any changes), BUT when I call another_method and pass it the same variable it changes the value that&rsquo;s being returned by return_var. What is this sorcery?!<br/>
+<img src="http://i.imgur.com/PezBytD.gif" alt="Witchcraft black magic code" /></p>
+
+<p>I could easily solve the problem by using the .clone method which creates a copy of the variable and be on my way, but that&rsquo;s not how I roll. This leads us to my second question, <em>What is pass by reference vs. pass by value?</em></p>
+
+<p>After consulting with my long-time friend, Google, what seems to be going on is that each time I&rsquo;m passing a variable to a method it&rsquo;s not making a copy of the variable, but rather making a copy of the reference to the same object in memory (which is why the Object Ids are all the same). I was absolutely baffled since I had assumed that Ruby makes object copies each time a variable is passed to a method (Oh and by the way this example doesn&rsquo;t work with Fixnum objects, apparently they have &ldquo;immediate value&rdquo; which means that the actual object is passed and not a reference).</p>
+
+<p>In this example we see something a little bit different.</p>
+
+<figure class='code'><figcaption><span>Slightly less bewildering code</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">def</span> <span class="nf">change</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+</span><span class='line'>  <span class="n">x</span><span class="o">.</span><span class="n">object_id</span> <span class="c1"># Object Id: 70266982826660</span>
+</span><span class='line'>  <span class="n">x</span> <span class="o">=</span> <span class="s1">&#39;10&#39;</span>
+</span><span class='line'>  <span class="n">x</span><span class="o">.</span><span class="n">object_id</span> <span class="c1"># Object Id: 70266982862600</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="n">x</span>
+</span><span class='line'><span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'><span class="n">y</span> <span class="o">=</span> <span class="s1">&#39;3&#39;</span>
+</span><span class='line'><span class="n">y</span><span class="o">.</span><span class="n">object_id</span> <span class="c1"># Object Id: 70266982826660</span>
+</span><span class='line'>
+</span><span class='line'><span class="n">change</span><span class="p">(</span><span class="n">y</span><span class="p">)</span> <span class="c1"># returns &#39;10&#39;</span>
+</span><span class='line'><span class="n">y</span> <span class="c1"># returns &#39;3&#39;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>I&rsquo;m passing a variable to the change method and while inside the method I&rsquo;m assigning it a different value. This method does exactly what I expect it to, it returns a different value, but it leaves the original variable the same. Why? Because the reference is changed (we can see this by looking at the difference in Object Ids) and the return value is actually a completely different object.</p>
+
+<p>In my first example the referenced object value was changed, but in the second example the reference itself was changed. Like I said&hellip;witchcraft!</p>
+
+<p>Here&rsquo;s a really great simple analogy that I found.</p>
+
+<blockquote><p>Say I want to share a web page with you.</p><p>If I tell you the URL, I&#8217;m passing by reference. You can use that URL to see the same web page I can see. If that page is changed, we both see the changes. If you delete the URL, all you&#8217;re doing is destroying your reference to that page - you&#8217;re not deleting the actual page itself.</p><p>If I print out the page and give you the printout, I&#8217;m passing by value. Your page is a disconnected copy of the original. You won&#8217;t see any subsequent changes, and any changes that you make (e.g. scribbling on your printout) will not show up on the original page. If you destroy the printout, you have actually destroyed your copy of the object - but the original web page remains intact.</p><footer><strong>Dylan Beattie</strong> <cite><a href='http://stackoverflow.com/a/430958'>StackOverflow</a></cite></footer></blockquote>
+
+
+<p>In conclusion, Ruby is Pass by Value because a copy of a reference to an object is passed and not the object itself.</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[So, You Want to Be a Mastermind?]]></title>
