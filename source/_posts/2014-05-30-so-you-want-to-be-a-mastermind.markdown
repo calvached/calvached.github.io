@@ -3,7 +3,7 @@ layout: post
 title: "So, you want to be a Mastermind?"
 date: 2014-05-30 11:10:29 -0500
 comments: true
-categories: [mastermind, tdd, rspec]
+categories: [mastermind, TDD, rspec, ruby]
 ---
 ![Mastermind](http://i.imgur.com/ANjI6Vi.png)
 

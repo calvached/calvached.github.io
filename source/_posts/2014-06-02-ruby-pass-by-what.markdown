@@ -17,16 +17,16 @@ class ExampleClass
   def example_method
     var = 'woohooo'
 
-    p var.object_id # Object Id: 70131019948560
+    var.object_id # Object Id: 70131019948560
 
     x = SomeClass.new
     x.some_method(var)
-    p x.return_var # returns 'woohooo'
+    x.return_var # returns 'woohooo'
 
     y = AnotherClass.new
     y.another_method(var)
 
-    p x.return_var # returns 'boohooo', whyyy??
+    x.return_var # returns 'boohooo', whyyy??
   end
 end
 
@@ -36,7 +36,7 @@ class SomeClass
   end
 
   def return_var
-    p @new_var.object_id # Object Id: 70131019948560
+    @new_var.object_id # Object Id: 70131019948560
 
     @new_var
   end
@@ -45,7 +45,7 @@ end
 class AnotherClass
   def another_method(var)
     var[0] = 'b'
-    p var.object_id # Object Id: 70131019948560
+    var.object_id # Object Id: 70131019948560
 
     var
   end
@@ -90,4 +90,4 @@ If I tell you the URL, I'm passing by reference. You can use that URL to see the
 If I print out the page and give you the printout, I'm passing by value. Your page is a disconnected copy of the original. You won't see any subsequent changes, and any changes that you make (e.g. scribbling on your printout) will not show up on the original page. If you destroy the printout, you have actually destroyed your copy of the object - but the original web page remains intact.
 {% endblockquote %}
 
-In conclusion, Ruby is Pass by Value because a copy of a reference to an object is passed and not the object itself.
+TL;DR Ruby is Pass by Value because a copy of a reference to an object is passed and not the object itself.
