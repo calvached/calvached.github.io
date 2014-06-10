@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Mastermind | Striving for Adequacy]]></title>
   <link href="http://calvached.github.io/blog/categories/mastermind/atom.xml" rel="self"/>
   <link href="http://calvached.github.io/"/>
-  <updated>2014-06-05T15:10:50-05:00</updated>
+  <updated>2014-06-10T09:36:04-05:00</updated>
   <id>http://calvached.github.io/</id>
   <author>
     <name><![CDATA[Diana Calvache]]></name>
@@ -112,7 +112,7 @@ I&rsquo;m passing a variable to the change method and while inside the method I&
 <p>Here&rsquo;s a really great simple analogy that I found.<br/>
 <blockquote><p>Say I want to share a web page with you.</p></p><p><p>If I tell you the URL, I&rsquo;m passing by reference. You can use that URL to see the same web page I can see. If that page is changed, we both see the changes. If you delete the URL, all you&rsquo;re doing is destroying your reference to that page &ndash; you&rsquo;re not deleting the actual page itself.</p></p><p><p>If I print out the page and give you the printout, I&rsquo;m passing by value. Your page is a disconnected copy of the original. You won&rsquo;t see any subsequent changes, and any changes that you make (e.g. scribbling on your printout) will not show up on the original page. If you destroy the printout, you have actually destroyed your copy of the object &ndash; but the original web page remains intact.</p><footer><strong>Dylan Beattie <a href="http://stackoverflow.com/a/430958">http://stackoverflow.com/a/430958</a> StackOverflow</strong></footer></blockquote></p>
 
-<p>In conclusion, Ruby is Pass by Value because a copy of a reference to an object is passed and not the object itself.</p>
+<p>TL;DR Ruby is Pass by Value because a copy of a reference to an object is passed and not the object itself.</p>
 ]]></content>
   </entry>
   
