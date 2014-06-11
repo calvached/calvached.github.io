@@ -4,7 +4,7 @@
   <title><![CDATA[Striving for Adequacy]]></title>
   <link href="http://calvached.github.io/atom.xml" rel="self"/>
   <link href="http://calvached.github.io/"/>
-  <updated>2014-06-10T09:36:04-05:00</updated>
+  <updated>2014-06-10T23:04:51-05:00</updated>
   <id>http://calvached.github.io/</id>
   <author>
     <name><![CDATA[Diana Calvache]]></name>
@@ -12,6 +12,39 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Re: Is TDD Dead?]]></title>
+    <link href="http://calvached.github.io/blog/2014/06/10/re-is-tdd-dead/"/>
+    <updated>2014-06-10T11:14:52-05:00</updated>
+    <id>http://calvached.github.io/blog/2014/06/10/re-is-tdd-dead</id>
+    <content type="html"><![CDATA[<!-- title: Test the right thing in the right way -->
+
+
+<p><img src="http://i.imgur.com/N2unFYi.jpg" alt="Zombie TDD" /></p>
+
+<p>After listening to <a href="http://martinfowler.com/articles/is-tdd-dead/">Is TDD Dead?</a> and attending DHH&rsquo;s <a href="http://www.confreaks.com/videos/3315-railsconf-keynote-writing-software">talk</a> during RailsConf I have come to the conclusion that TDD is great as long as you test the right thing in the right way. Here&rsquo;s why.</p>
+
+<!-- more -->
+
+
+<p><strong>What is TDD?</strong><br/>
+<img class="right" src="http://i.imgur.com/FYmJLP9.png" title="Place Kitten #2" >
+TDD (Test-Driven Development) is a software development process in which you write a failing test that defines a desired outcome, write code to make the test pass, refactor and repeat.</p>
+
+<p>Although this seems simple enough, for a TDD beginner (such as myself) it is very easy to begin by testing the wrong things or the right things, but in the wrong way (it is also equally as easy to get flamed for writing bad tests). Theses sorts of tests can lead to false security, loss of time and could be worse than not testing at all. Therefore, good tests will produce good code and poor tests will produce poor code. But there is hope!</p>
+
+<blockquote><p>You don’t learn to write good tests without first writing poor tests. Period.</p><footer><strong>@elight</strong> <cite><a href='https://twitter.com/elight/status/475121094450757633'>Twitter</a></cite></footer></blockquote>
+
+
+<p>A lot of the difficulty in doing TDD has to do with understanding how to design things well. It requires in-depth knowledge of OO design, patterns, SOLID, DRY, etc. Failure to throughly understand these principles will result in poor tests. Another pain point with TDD is that there are also a lot of opinions on how to do TDD, what should and should not be tested, what constitutes a good/bad test, level of abstraction, etc. As a beginner this can be confusing and at times overwhelming because there isn&rsquo;t one right answer (if any at all).</p>
+
+<p>My battle plan for TDD: spiking it out. Thinking through the code by writing it out will help me to visualize where and what to test.</p>
+
+<!-- TDD provides us with guidelines to help us think about design problems.-->
+
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Ruby, Pass by What?]]></title>
@@ -73,16 +106,16 @@
 </span><span class='line'>  <span class="k">def</span> <span class="nf">example_method</span>
 </span><span class='line'>    <span class="n">var</span> <span class="o">=</span> <span class="s1">&#39;woohooo&#39;</span>
 </span><span class='line'>
-</span><span class='line'>    <span class="nb">p</span> <span class="n">var</span><span class="o">.</span><span class="n">object_id</span> <span class="c1"># Object Id: 70131019948560</span>
+</span><span class='line'>    <span class="n">var</span><span class="o">.</span><span class="n">object_id</span> <span class="c1"># Object Id: 70131019948560</span>
 </span><span class='line'>
 </span><span class='line'>    <span class="n">x</span> <span class="o">=</span> <span class="no">SomeClass</span><span class="o">.</span><span class="n">new</span>
 </span><span class='line'>    <span class="n">x</span><span class="o">.</span><span class="n">some_method</span><span class="p">(</span><span class="n">var</span><span class="p">)</span>
-</span><span class='line'>    <span class="nb">p</span> <span class="n">x</span><span class="o">.</span><span class="n">return_var</span> <span class="c1"># returns &#39;woohooo&#39;</span>
+</span><span class='line'>    <span class="n">x</span><span class="o">.</span><span class="n">return_var</span> <span class="c1"># returns &#39;woohooo&#39;</span>
 </span><span class='line'>
 </span><span class='line'>    <span class="n">y</span> <span class="o">=</span> <span class="no">AnotherClass</span><span class="o">.</span><span class="n">new</span>
 </span><span class='line'>    <span class="n">y</span><span class="o">.</span><span class="n">another_method</span><span class="p">(</span><span class="n">var</span><span class="p">)</span>
 </span><span class='line'>
-</span><span class='line'>    <span class="nb">p</span> <span class="n">x</span><span class="o">.</span><span class="n">return_var</span> <span class="c1"># returns &#39;boohooo&#39;, whyyy??</span>
+</span><span class='line'>    <span class="n">x</span><span class="o">.</span><span class="n">return_var</span> <span class="c1"># returns &#39;boohooo&#39;, whyyy??</span>
 </span><span class='line'>  <span class="k">end</span>
 </span><span class='line'><span class="k">end</span>
 </span><span class='line'>
@@ -92,7 +125,7 @@
 </span><span class='line'>  <span class="k">end</span>
 </span><span class='line'>
 </span><span class='line'>  <span class="k">def</span> <span class="nf">return_var</span>
-</span><span class='line'>    <span class="nb">p</span> <span class="vi">@new_var</span><span class="o">.</span><span class="n">object_id</span> <span class="c1"># Object Id: 70131019948560</span>
+</span><span class='line'>    <span class="vi">@new_var</span><span class="o">.</span><span class="n">object_id</span> <span class="c1"># Object Id: 70131019948560</span>
 </span><span class='line'>
 </span><span class='line'>    <span class="vi">@new_var</span>
 </span><span class='line'>  <span class="k">end</span>
@@ -101,7 +134,7 @@
 </span><span class='line'><span class="k">class</span> <span class="nc">AnotherClass</span>
 </span><span class='line'>  <span class="k">def</span> <span class="nf">another_method</span><span class="p">(</span><span class="n">var</span><span class="p">)</span>
 </span><span class='line'>    <span class="n">var</span><span class="o">[</span><span class="mi">0</span><span class="o">]</span> <span class="o">=</span> <span class="s1">&#39;b&#39;</span>
-</span><span class='line'>    <span class="nb">p</span> <span class="n">var</span><span class="o">.</span><span class="n">object_id</span> <span class="c1"># Object Id: 70131019948560</span>
+</span><span class='line'>    <span class="n">var</span><span class="o">.</span><span class="n">object_id</span> <span class="c1"># Object Id: 70131019948560</span>
 </span><span class='line'>
 </span><span class='line'>    <span class="n">var</span>
 </span><span class='line'>  <span class="k">end</span>
@@ -372,8 +405,8 @@ For instance if the CM&rsquo;s pattern was &ldquo;EDEC&rdquo; and the CB guessed
 
 <p>One of the most attractive things about doing an apprenticeship is being given the chance to continue to grow with the guidance of a mentor. A mentor is someone who won&rsquo;t give you the answers, but will nudge you in the right direction and make sure you don&rsquo;t venture too far off from the path to your goal. I think that in order to be successful in any career you must have a mentor available to give advice.</p>
 
-<p><span class='pullquote-right' data-pullquote='work where you will be the dumbest person in the room'>
-During one of our 1 o&#8217;clock standups, Dave Hoover talked to us about apprenticeships where he suggests to work where you will be the dumbest person in the room. At the time I didn&rsquo;t quite understand why someone would want to be in that position. I mean isn&rsquo;t it better to be the smartest person in the room? He explained that if we are never challenged then how could we possibly expect to get better? The idea is that in order to become great you must learn from great people.
+<p><span class='pullquote-right' data-pullquote='work where you will be the least knowledgeable person in the room'>
+During one of our 1 o&#8217;clock standups, Dave Hoover talked to us about apprenticeships where he suggests to work where you will be the least knowledgeable person in the room. At the time I didn&rsquo;t quite understand why someone would want to be in that position. I mean isn&rsquo;t it better to be the smartest person in the room? He explained that if we are never challenged then how could we possibly expect to get better? The idea is that in order to become great you must learn from great people.
 </span></p>
 
 <p>I joined <a href="http://www.8thlight.com/">8th Light</a> as a student apprentice, in hopes of continuing my adventures in web development by learning how to write <u>good</u> code! 8th Light is a software consulting company who truly cares about the work they do and prefers to do things the right way the first time instead of monkey patching later on. A lot of the principles and good practices that 8th Light follows were taught at DBC (such as good naming conventions, decoupling, managing dependencies, etc) so applying was a natural next step.</p>
@@ -415,7 +448,7 @@ Indexes are like a map from one value to a bunch of others. -->
 <p>RailsConf is a HUGE gathering of Ruby on Rails developers anywhere between entry level to senior level. There are various speakers, workshops, and activies throughout the duration of the event. This year it was held right in our own backyard, Chicago! Most of the talks from this year are slowly being uploaded and you can check them out <a href="http://www.confreaks.com/events/railsconf">here</a>.</p>
 
 <p><strong>Opening Keynote</strong><br/>
-To kick off the event, <a href="https://twitter.com/dhh">DHH</a> took the stage with an <a href="http://www.confreaks.com/videos/3315-railsconf-keynote-writing-software">opening keynote</a> where he proposed the use of the term Software Writer instead of Software Engineer. He described reading code as more like reading 17th century French poetry than a hard science (such as physics). You can find some of my notes <a href="http://i.imgur.com/dTOI1qW.jpg">here</a>. Overall it was very exciting to hear from other members of the community that it&rsquo;s ok to start programming late in life and that you don&rsquo;t have to be born with a keyboard in your hands to achieve greatness.<br/>
+To kick off the event, <a href="https://twitter.com/dhh">DHH</a> took the stage with an <a href="http://www.confreaks.com/videos/3315-railsconf-keynote-writing-software">opening keynote</a> where he proposed the use of the term Software Writer instead of Software Engineer. He described reading code as more like reading 17th century French poetry than a hard science (such as physics). He also proposed the death of TDD and compared it to a fad diet. I have a seperate <a href="http://calvached.github.io/blog/2014/06/10/re-is-tdd-dead/">post</a> addressing the TDD controversy. You can find some of my notes for this talk <a href="http://i.imgur.com/dTOI1qW.jpg">here</a>. Overall it was very exciting to hear from other members of the community that it&rsquo;s ok to start programming late in life and that you don&rsquo;t have to be born with a keyboard in your hands to achieve greatness.<br/>
 * Pro-tip: Read a lot of software, write a lot of software, rewrite a lot of code! As developers we should strive to develop an eye for clarity in order to optimize readability in our code.</p>
 
 <p><strong>Domain Driven Design Hexagonal Architecture Rails</strong> <a href="http://www.confreaks.com/videos/3316-railsconf-domain-driven-design-and-hexagonal-architecture-with-rails">+</a><br/>

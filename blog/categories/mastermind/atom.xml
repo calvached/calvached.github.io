@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Mastermind | Striving for Adequacy]]></title>
   <link href="http://calvached.github.io/blog/categories/mastermind/atom.xml" rel="self"/>
   <link href="http://calvached.github.io/"/>
-  <updated>2014-06-10T09:36:04-05:00</updated>
+  <updated>2014-06-10T23:04:51-05:00</updated>
   <id>http://calvached.github.io/</id>
   <author>
     <name><![CDATA[Diana Calvache]]></name>
@@ -34,16 +34,16 @@ class ExampleClass
 
 <pre><code>var = 'woohooo'
 
-p var.object_id # Object Id: 70131019948560
+var.object_id # Object Id: 70131019948560
 
 x = SomeClass.new
 x.some_method(var)
-p x.return_var # returns 'woohooo'
+x.return_var # returns 'woohooo'
 
 y = AnotherClass.new
 y.another_method(var)
 
-p x.return_var # returns 'boohooo', whyyy??
+x.return_var # returns 'boohooo', whyyy??
 </code></pre>
 
 <p>  end
@@ -59,7 +59,7 @@ end</p>
 
 <p>  def return_var</p>
 
-<pre><code>p @new_var.object_id # Object Id: 70131019948560
+<pre><code>@new_var.object_id # Object Id: 70131019948560
 
 @new_var
 </code></pre>
@@ -71,7 +71,7 @@ end</p>
   def another_method(var)</p>
 
 <pre><code>var[0] = 'b'
-p var.object_id # Object Id: 70131019948560
+var.object_id # Object Id: 70131019948560
 
 var
 </code></pre>

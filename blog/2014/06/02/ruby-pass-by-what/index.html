@@ -146,16 +146,16 @@
 </span><span class='line'>  <span class="k">def</span> <span class="nf">example_method</span>
 </span><span class='line'>    <span class="n">var</span> <span class="o">=</span> <span class="s1">&#39;woohooo&#39;</span>
 </span><span class='line'>
-</span><span class='line'>    <span class="nb">p</span> <span class="n">var</span><span class="o">.</span><span class="n">object_id</span> <span class="c1"># Object Id: 70131019948560</span>
+</span><span class='line'>    <span class="n">var</span><span class="o">.</span><span class="n">object_id</span> <span class="c1"># Object Id: 70131019948560</span>
 </span><span class='line'>
 </span><span class='line'>    <span class="n">x</span> <span class="o">=</span> <span class="no">SomeClass</span><span class="o">.</span><span class="n">new</span>
 </span><span class='line'>    <span class="n">x</span><span class="o">.</span><span class="n">some_method</span><span class="p">(</span><span class="n">var</span><span class="p">)</span>
-</span><span class='line'>    <span class="nb">p</span> <span class="n">x</span><span class="o">.</span><span class="n">return_var</span> <span class="c1"># returns &#39;woohooo&#39;</span>
+</span><span class='line'>    <span class="n">x</span><span class="o">.</span><span class="n">return_var</span> <span class="c1"># returns &#39;woohooo&#39;</span>
 </span><span class='line'>
 </span><span class='line'>    <span class="n">y</span> <span class="o">=</span> <span class="no">AnotherClass</span><span class="o">.</span><span class="n">new</span>
 </span><span class='line'>    <span class="n">y</span><span class="o">.</span><span class="n">another_method</span><span class="p">(</span><span class="n">var</span><span class="p">)</span>
 </span><span class='line'>
-</span><span class='line'>    <span class="nb">p</span> <span class="n">x</span><span class="o">.</span><span class="n">return_var</span> <span class="c1"># returns &#39;boohooo&#39;, whyyy??</span>
+</span><span class='line'>    <span class="n">x</span><span class="o">.</span><span class="n">return_var</span> <span class="c1"># returns &#39;boohooo&#39;, whyyy??</span>
 </span><span class='line'>  <span class="k">end</span>
 </span><span class='line'><span class="k">end</span>
 </span><span class='line'>
@@ -165,7 +165,7 @@
 </span><span class='line'>  <span class="k">end</span>
 </span><span class='line'>
 </span><span class='line'>  <span class="k">def</span> <span class="nf">return_var</span>
-</span><span class='line'>    <span class="nb">p</span> <span class="vi">@new_var</span><span class="o">.</span><span class="n">object_id</span> <span class="c1"># Object Id: 70131019948560</span>
+</span><span class='line'>    <span class="vi">@new_var</span><span class="o">.</span><span class="n">object_id</span> <span class="c1"># Object Id: 70131019948560</span>
 </span><span class='line'>
 </span><span class='line'>    <span class="vi">@new_var</span>
 </span><span class='line'>  <span class="k">end</span>
@@ -174,7 +174,7 @@
 </span><span class='line'><span class="k">class</span> <span class="nc">AnotherClass</span>
 </span><span class='line'>  <span class="k">def</span> <span class="nf">another_method</span><span class="p">(</span><span class="n">var</span><span class="p">)</span>
 </span><span class='line'>    <span class="n">var</span><span class="o">[</span><span class="mi">0</span><span class="o">]</span> <span class="o">=</span> <span class="s1">&#39;b&#39;</span>
-</span><span class='line'>    <span class="nb">p</span> <span class="n">var</span><span class="o">.</span><span class="n">object_id</span> <span class="c1"># Object Id: 70131019948560</span>
+</span><span class='line'>    <span class="n">var</span><span class="o">.</span><span class="n">object_id</span> <span class="c1"># Object Id: 70131019948560</span>
 </span><span class='line'>
 </span><span class='line'>    <span class="n">var</span>
 </span><span class='line'>  <span class="k">end</span>
@@ -283,6 +283,8 @@
         <a class="basic-alignment left" href="/blog/2014/05/30/so-you-want-to-be-a-mastermind/" title="Previous Post: So, you want to be a Mastermind?">&laquo; So, you want to be a Mastermind?</a>
       
       
+        <a class="basic-alignment right" href="/blog/2014/06/10/re-is-tdd-dead/" title="Next Post: Re: Is TDD Dead?">Re: Is TDD Dead? &raquo;</a>
+      
     </p>
   </footer>
 </article>
@@ -294,6 +296,10 @@
     <section>
   <h1>Recent Posts</h1>
   <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2014/06/10/re-is-tdd-dead/">Re: Is TDD Dead?</a>
+      </li>
     
       <li class="post">
         <a href="/blog/2014/06/02/ruby-pass-by-what/">Ruby, Pass by What?</a>
@@ -309,10 +315,6 @@
     
       <li class="post">
         <a href="/blog/2014/05/12/railsconf-2014-recap/">RailsConf 2014 Recap</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2014/04/27/the-great-switch/">The Great Switch</a>
       </li>
     
   </ul>

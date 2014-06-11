@@ -5,12 +5,11 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>The Great Switch - Striving for Adequacy</title>
+  <title>Re: Is TDD Dead? - Striving for Adequacy</title>
   <meta name="author" content="Diana Calvache">
 
   
-  <meta name="description" content="Wooo! I finally got Octopress up and running! Any new posts will be written here from now on. You can check out my old posts here.
-I also found this &hellip;">
+  <meta name="description" content="After listening to Is TDD Dead? and attending DHH&rsquo;s talk during RailsConf I have come to the conclusion that TDD is great as long as you test &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -19,7 +18,7 @@ I also found this &hellip;">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://calvached.github.io/blog/2014/04/27/the-great-switch">
+  <link rel="canonical" href="http://calvached.github.io/blog/2014/06/10/re-is-tdd-dead">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <link href="/atom.xml" rel="alternate" title="Striving for Adequacy" type="application/atom+xml">
@@ -69,7 +68,7 @@ I also found this &hellip;">
   
   <header>
     
-      <h1 class="entry-title">The Great Switch</h1>
+      <h1 class="entry-title">Re: Is TDD Dead?</h1>
     
     
       <p class="meta">
@@ -85,36 +84,38 @@ I also found this &hellip;">
   
 
 
-<time datetime="2014-04-27T18:01:39-05:00" pubdate data-updated="true">Apr 27<span>th</span>, 2014</time>
+<time datetime="2014-06-10T11:14:52-05:00" pubdate data-updated="true">Jun 10<span>th</span>, 2014</time>
         
       </p>
     
   </header>
 
 
-<div class="entry-content"><p><img src="http://media.giphy.com/media/auqDHeqoMMMhy/giphy.gif" alt="openmind" /></p>
+<div class="entry-content"><!-- title: Test the right thing in the right way -->
 
-<p>Wooo! I finally got <a href="http://octopress.org/">Octopress</a> up and running! Any new posts will be written here from now on. You can check out my old posts <a href="http://yufinavstheworld.tumblr.com/">here</a>.
-I also found this nifty <a href="https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet">cheatsheet</a> for Markdown!</p>
 
-<p><em>So what&rsquo;s this about a &ldquo;Great Switch&rdquo;?</em></p>
+<p><img src="http://i.imgur.com/N2unFYi.jpg" alt="Zombie TDD" /></p>
+
+<p>After listening to <a href="http://martinfowler.com/articles/is-tdd-dead/">Is TDD Dead?</a> and attending DHH&rsquo;s <a href="http://www.confreaks.com/videos/3315-railsconf-keynote-writing-software">talk</a> during RailsConf I have come to the conclusion that TDD is great as long as you test the right thing in the right way. Here&rsquo;s why.</p>
 
 <!-- more -->
 
 
-<p>I caved and got a Mac. So I went back home for about two weeks and gave my brother my laptop for him to use in college. I took that as an opportunity to get a Mac this time around and try to avoid the hardships of making Windows play nicely with RoR. Although once I got back I realized that I forgot to merge the partition I made for Linux on my Windows system soo&hellip;it now has half as much hard drive space (oops, sorry bro!).</p>
+<p><strong>What is TDD?</strong><br/>
+<img class="right" src="http://i.imgur.com/FYmJLP9.png" title="Place Kitten #2" >
+TDD (Test-Driven Development) is a software development process in which you write a failing test that defines a desired outcome, write code to make the test pass, refactor and repeat.</p>
 
-<p>I also then realized that gaming on a Mac looks like <a href="http://weknowmemes.com/wp-content/uploads/2013/09/gaming-on-a-mac-meme.jpg">this</a> and I proceeded to react <a href="http://www.reactiongifs.com/wp-content/uploads/2013/12/wut.gif">appropriately</a>.</p>
+<p>Although this seems simple enough, for a TDD beginner (such as myself) it is very easy to begin by testing the wrong things or the right things, but in the wrong way (it is also equally as easy to get flamed for writing bad tests). Theses sorts of tests can lead to false security, loss of time and could be worse than not testing at all. Therefore, good tests will produce good code and poor tests will produce poor code. But there is hope!</p>
 
-<p>BUT THERE&rsquo;S A PLUS SIDE! I now learned how to setup my environment on a MAC!</p>
+<blockquote><p>You don’t learn to write good tests without first writing poor tests. Period.</p><footer><strong>@elight</strong> <cite><a href='https://twitter.com/elight/status/475121094450757633'>Twitter</a></cite></footer></blockquote>
 
-<p>Although there were a few bumps along the way. I mysteriously (and accidentally) &ldquo;deleted&rdquo; my .bash_profile in my /bin/bash shell so I had to switch to a different shell to fix it using <a href="http://support.apple.com/kb/TA27005">this</a>. I then had to open the .bash_profile and reset my PATH variable. After that was done I was back in business!</p>
 
-<p><img src="http://www.reactiongifs.com/wp-content/uploads/2013/06/Colbert-High-Five.gif" alt="aww yeah!" /></p>
+<p>A lot of the difficulty in doing TDD has to do with understanding how to design things well. It requires in-depth knowledge of OO design, patterns, SOLID, DRY, etc. Failure to throughly understand these principles will result in poor tests. Another pain point with TDD is that there are also a lot of opinions on how to do TDD, what should and should not be tested, what constitutes a good/bad test, level of abstraction, etc. As a beginner this can be confusing and at times overwhelming because there isn&rsquo;t one right answer (if any at all).</p>
 
-<p><em>So what was I doing that caused this situation?</em> I was trying to setup Sublime to launch from the command line, but was unsuccessful. Time to try it again!</p>
+<p>My battle plan for TDD: spiking it out. Thinking through the code by writing it out will help me to visualize where and what to test.</p>
 
-<p><strong>Current Status:</strong> Stalking people&rsquo;s github profiles :3</p>
+<!-- TDD provides us with guidelines to help us think about design problems.-->
+
 </div>
 
 
@@ -137,12 +138,12 @@ I also found this nifty <a href="https://github.com/adam-p/markdown-here/wiki/Ma
   
 
 
-<time datetime="2014-04-27T18:01:39-05:00" pubdate data-updated="true">Apr 27<span>th</span>, 2014</time>
+<time datetime="2014-06-10T11:14:52-05:00" pubdate data-updated="true">Jun 10<span>th</span>, 2014</time>
       
 
 <span class="categories">
   
-    <a class='category' href='/blog/categories/dot-bash-profile/'>.bash_profile</a>, <a class='category' href='/blog/categories/markdown/'>markdown</a>, <a class='category' href='/blog/categories/octopress/'>octopress</a>
+    <a class='category' href='/blog/categories/dhh/'>DHH</a>, <a class='category' href='/blog/categories/kent-beck/'>Kent Beck</a>, <a class='category' href='/blog/categories/martin-fowler/'>Martin Fowler</a>, <a class='category' href='/blog/categories/tdd/'>TDD</a>, <a class='category' href='/blog/categories/istdddead/'>isTDDDead</a>
   
 </span>
 
@@ -151,7 +152,7 @@ I also found this nifty <a href="https://github.com/adam-p/markdown-here/wiki/Ma
     
       <div class="sharing">
   
-  <a href="//twitter.com/share" class="twitter-share-button" data-url="http://calvached.github.io/blog/2014/04/27/the-great-switch/" data-via="zephynao" data-counturl="http://calvached.github.io/blog/2014/04/27/the-great-switch/" >Tweet</a>
+  <a href="//twitter.com/share" class="twitter-share-button" data-url="http://calvached.github.io/blog/2014/06/10/re-is-tdd-dead/" data-via="zephynao" data-counturl="http://calvached.github.io/blog/2014/06/10/re-is-tdd-dead/" >Tweet</a>
   
   
   
@@ -162,8 +163,8 @@ I also found this nifty <a href="https://github.com/adam-p/markdown-here/wiki/Ma
     
     <p class="meta">
       
+        <a class="basic-alignment left" href="/blog/2014/06/02/ruby-pass-by-what/" title="Previous Post: Ruby, pass by what?">&laquo; Ruby, pass by what?</a>
       
-        <a class="basic-alignment right" href="/blog/2014/05/12/railsconf-2014-recap/" title="Next Post: RailsConf 2014 Recap">RailsConf 2014 Recap &raquo;</a>
       
     </p>
   </footer>
