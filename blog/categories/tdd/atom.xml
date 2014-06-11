@@ -4,7 +4,7 @@
   <title><![CDATA[Category: TDD | Striving for Adequacy]]></title>
   <link href="http://calvached.github.io/blog/categories/tdd/atom.xml" rel="self"/>
   <link href="http://calvached.github.io/"/>
-  <updated>2014-06-10T23:04:51-05:00</updated>
+  <updated>2014-06-11T08:58:17-05:00</updated>
   <id>http://calvached.github.io/</id>
   <author>
     <name><![CDATA[Diana Calvache]]></name>
@@ -18,10 +18,7 @@
     <link href="http://calvached.github.io/blog/2014/06/10/re-is-tdd-dead/"/>
     <updated>2014-06-10T11:14:52-05:00</updated>
     <id>http://calvached.github.io/blog/2014/06/10/re-is-tdd-dead</id>
-    <content type="html"><![CDATA[<!-- title: Test the right thing in the right way -->
-
-
-<p><img src="http://i.imgur.com/N2unFYi.jpg" alt="Zombie TDD" /></p>
+    <content type="html"><![CDATA[<p><img src="http://i.imgur.com/N2unFYi.jpg" alt="Zombie TDD" /></p>
 
 <p>After listening to <a href="http://martinfowler.com/articles/is-tdd-dead/">Is TDD Dead?</a> and attending DHH&rsquo;s <a href="http://www.confreaks.com/videos/3315-railsconf-keynote-writing-software">talk</a> during RailsConf I have come to the conclusion that TDD is great as long as you test the right thing in the right way. Here&rsquo;s why.</p>
 
