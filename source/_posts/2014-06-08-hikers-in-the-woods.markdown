@@ -3,10 +3,9 @@ layout: post
 title: "Hikers in the Woods - An 8th Light Tale"
 date: 2014-06-08 23:25:15 -0500
 comments: true
-categories: [8thlight, apprenticeship, hikers in the woods]
+categories: [tech, life]
 ---
-![Fork in the road](http://i.imgur.com/M5a7I7B.jpg)
-This was shared with me by my mentor, Kelly, a few days before I started my first day as an apprentice.
+This story was shared with me by my mentor, Kelly, a few days before I started my first day as an apprentice.
 
 _An apprenticeship is like two hikers in the woods..._
 <!-- more -->

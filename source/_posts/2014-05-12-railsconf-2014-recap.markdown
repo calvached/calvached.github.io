@@ -3,7 +3,7 @@ layout: post
 title: "RailsConf 2014 Recap"
 date: 2014-05-12 17:24:34 -0500
 comments: true
-categories: [railsconf2014]
+categories: [tech]
 ---
 
 ![railsconf](http://i.imgur.com/JMkR7Lu.gif)

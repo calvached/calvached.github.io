@@ -3,11 +3,8 @@ layout: post
 title: "What it means to #AlwaysBeLearning"
 date: 2014-05-29 11:08:20 -0500
 comments: true
-categories: [8thlight, AlwaysBeLearning, apprenticeship]
+categories: [tech, life]
 ---
-
-![studious cat](http://i.imgur.com/qeOADRe.jpg)
-
 At Dev Bootcamp I learned how to code, how to overcome failure and fix mistakes, how to ask for help when needed, and most importantly how to continue learning on my own or with others.
 
 Having graduated from Dev Bootcamp the only thing I was absolutely certain about was that I wanted to be an apprentice. I wasn't even sure if I wanted to do Front-end or Back-end work. 

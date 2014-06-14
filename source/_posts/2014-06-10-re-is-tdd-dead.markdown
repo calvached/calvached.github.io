@@ -3,14 +3,14 @@ layout: post
 title: "Re: Is TDD Dead?"
 date: 2014-06-10 11:14:52 -0500
 comments: true
-categories: [TDD, DHH, Kent Beck, Martin Fowler, isTDDDead]
+categories: [tech]
 ---
-![Zombie TDD](http://i.imgur.com/N2unFYi.jpg)
-
 After listening to [Is TDD Dead?](http://martinfowler.com/articles/is-tdd-dead/) and attending DHH's [talk](http://www.confreaks.com/videos/3315-railsconf-keynote-writing-software) during RailsConf I have come to the conclusion that TDD is great as long as you test the right thing in the right way. Here's why.
 <!-- more -->
-**What is TDD?**  
-{% img right http://i.imgur.com/FYmJLP9.png Place Kitten #2 %}
+**What is TDD?**
+
+{% img http://i.imgur.com/FYmJLP9.png TDD %}
+
 TDD (Test-Driven Development) is a software development process in which you write a failing test that defines a desired outcome, write code to make the test pass, refactor and repeat.
 
 Although this seems simple enough, for a TDD beginner (such as myself) it is very easy to begin by testing the wrong things or the right things, but in the wrong way (it is also equally as easy to get flamed for writing bad tests). Theses sorts of tests can lead to false security, loss of time and could be worse than not testing at all. Therefore, good tests will produce good code and poor tests will produce poor code. But there is hope!

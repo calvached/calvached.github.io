@@ -3,10 +3,8 @@ layout: post
 title: "The Great Switch"
 date: 2014-04-27 18:01:39 -0500
 comments: true
-categories: [octopress, .bash_profile, markdown]
+categories: [life]
 ---
-
-![openmind](http://media.giphy.com/media/auqDHeqoMMMhy/giphy.gif)
 
 Wooo! I finally got [Octopress](http://octopress.org/) up and running! Any new posts will be written here from now on. You can check out my old posts [here](http://yufinavstheworld.tumblr.com/).
 I also found this nifty [cheatsheet](https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet) for Markdown!

@@ -3,7 +3,7 @@ layout: post
 title: "Ruby, pass by what?"
 date: 2014-06-02 10:12:24 -0500
 comments: true
-categories: [ruby, pass-by-value, variable reference, mastermind, black magic]
+categories: [tech]
 ---
 ![david-tennant-confused](http://i.imgur.com/3gQVzL0.gif)
 
