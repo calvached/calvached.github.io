@@ -3,13 +3,17 @@
 <!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
 <!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
   <title>So, You Want to Be a Mastermind? - Striving for Adequacy</title>
   <meta name="author" content="Diana Calvache">
 
   
-  <meta name="description" content="For the last few days I&rsquo;ve been writing tests for a game I&rsquo;m working on called Mastermind. The rules are simple. There are two players, &hellip;">
+  <meta name="description" content="So, You Want to Be a Mastermind? written May 30th, 2014 in tech For the last few days I&rsquo;ve been writing tests for a game I&rsquo;m working on &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -26,53 +30,22 @@
   <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
   <script>!window.jQuery && document.write(unescape('%3Cscript src="./javascripts/libs/jquery.min.js"%3E%3C/script%3E'))</script>
   <script src="/javascripts/octopress.js" type="text/javascript"></script>
-  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
-<link href="//fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
-<link href="//fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
-
   
 
 </head>
 
-<body   >
-  <header role="banner"><hgroup>
-  <h1><a href="/">Striving for Adequacy</a></h1>
-  
-    <h2>A blog for ALL THE CODES (and more)</h2>
-  
-</hgroup>
+  <body>
+    <a href="/" class="home-icon">
+      <img src="/images/home.png"/>
+    </a>
 
-</header>
-  <nav role="navigation"><ul class="subscription" data-subscription="rss">
-  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
-  
-</ul>
-  
-<form action="https://www.google.com/search" method="get">
-  <fieldset role="search">
-    <input type="hidden" name="q" value="site:calvached.github.io" />
-    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
-  </fieldset>
-</form>
-  
-<ul class="main-navigation">
-  <li><a href="/">Blog</a></li>
-  <li><a href="/blog/archives">Archives</a></li>
-</ul>
-
-</nav>
-  <div id="main">
-    <div id="content">
-      <div>
-<article class="hentry" role="article">
-  
-  <header>
-    
-      <h1 class="entry-title">So, You Want to Be a Mastermind?</h1>
-    
-    
-      <p class="meta">
-        
+    <article role="article" class="full-single-article">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-8 col-md-offset-2">
+        <h1>So, You Want to Be a Mastermind?</h1>
+        <div class="meta">
+          written 
 
 
 
@@ -82,16 +55,22 @@
 
 
   
+
 
 
 <time datetime="2014-05-30T11:10:29-05:00" pubdate data-updated="true">May 30<span>th</span>, 2014</time>
-        
-      </p>
-    
-  </header>
+          
+
+in
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/tech/'>tech</a>
+  
+</span>
 
 
-<div class="entry-content"><p><img src="http://i.imgur.com/ANjI6Vi.png" alt="Mastermind" /></p>
+        </div>
+        <p><img src="http://i.imgur.com/ANjI6Vi.png" alt="Mastermind" /></p>
 
 <p>For the last few days I&rsquo;ve been writing tests for a game I&rsquo;m working on called <strong>Mastermind</strong>.</p>
 
@@ -274,135 +253,62 @@ For instance if the Codemaker&rsquo;s pattern were &ldquo;AFDE&rdquo; and the Co
 For instance if the CM&rsquo;s pattern was &ldquo;EDEC&rdquo; and the CB guessed &ldquo;EDDD&rdquo;. I would expect for the feedback to look something like this &ldquo;oo&rdquo;, but instead I was getting &ldquo;oox&rdquo;. By using the get_unmatched method on not only the CM&rsquo;s pattern, but also the CB&rsquo;s pattern I was able to fix the error I was getting.</p>
 
 <p>Mastermind has actually been really fun to build, tear down, build again and refactor! Implementing tests has made it so much easier to work on error cases.</p>
-</div>
 
-
-  <footer>
-    <p class="meta">
-      
-  
-
-<span class="byline author vcard">Posted by <span class="fn">Diana Calvache</span></span>
-
-      
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2014-05-30T11:10:29-05:00" pubdate data-updated="true">May 30<span>th</span>, 2014</time>
-      
-
-<span class="categories">
-  
-    <a class='category' href='/blog/categories/tdd/'>TDD</a>, <a class='category' href='/blog/categories/mastermind/'>mastermind</a>, <a class='category' href='/blog/categories/rspec/'>rspec</a>, <a class='category' href='/blog/categories/ruby/'>ruby</a>
-  
-</span>
-
-
-    </p>
-    
-      <div class="sharing">
-  
-  <a href="//twitter.com/share" class="twitter-share-button" data-url="http://calvached.github.io/blog/2014/05/30/so-you-want-to-be-a-mastermind/" data-via="zephynao" data-counturl="http://calvached.github.io/blog/2014/05/30/so-you-want-to-be-a-mastermind/" >Tweet</a>
-  
-  
-  
-    <div class="fb-like" data-send="true" data-width="450" data-show-faces="false"></div>
-  
-</div>
-
-    
-    <p class="meta">
-      
-        <a class="basic-alignment left" href="/blog/2014/05/29/what-it-means-to-number-alwaysbelearning/" title="Previous Post: What it means to #AlwaysBeLearning">&laquo; What it means to #AlwaysBeLearning</a>
-      
-      
-        <a class="basic-alignment right" href="/blog/2014/06/02/ruby-pass-by-what/" title="Next Post: Ruby, pass by what?">Ruby, pass by what? &raquo;</a>
-      
-    </p>
-  </footer>
+      </div>
+    </div>
+  </div>
 </article>
 
+<hr class="divider-short"/>
+
+<div class="archive-link">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-8 col-md-offset-2">
+        
+          <a class="pull-left" href="/blog/2014/05/29/what-it-means-to-number-alwaysbelearning/" title="Previous Post: What it means to #AlwaysBeLearning">&laquo; Previous: What it means to #AlwaysBeLearning</a>
+        
+
+        
+          <a class="pull-right" href="/blog/2014/06/02/ruby-pass-by-what/" title="Next Post: Ruby, pass by what?">Next: Ruby, pass by what? &raquo;</a>
+        
+      </div>
+    </div>
+  </div>
 </div>
 
-<aside class="sidebar">
-  
-    <section>
-  <h1>Recent Posts</h1>
-  <ul id="recent_posts">
-    
-      <li class="post">
-        <a href="/blog/2014/06/10/re-is-tdd-dead/">Re: Is TDD Dead?</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2014/06/08/hikers-in-the-woods/">Hikers in the Woods - an 8th Light Tale</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2014/06/02/ruby-pass-by-what/">Ruby, Pass by What?</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2014/05/30/so-you-want-to-be-a-mastermind/">So, You Want to Be a Mastermind?</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2014/05/29/what-it-means-to-number-alwaysbelearning/">What It Means to #AlwaysBeLearning</a>
-      </li>
-    
-  </ul>
-</section>
+    <footer id="footer" class="her-row">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-1">
+  <a href="/"><h4>Home</h4></a>
+</div>
 
-  
-</aside>
+<div class="col-md-2">
+  <div class="social-icon-list">
+    
+    <a href="https://twitter.com/zephynao"><img src="/images/glyphicons_social_31_twitter.png"/></a>
+    
 
+    <a href="https://linkedin.com/in/calvached/"><img src="/images/glyphicons_social_17_linked_in.png"></a>
+    
+    
+    <a href="https://github.com/calvached"><img src="/images/glyphicons_social_21_github.png"/></a>
+    
+
+    
+    <a href="mailto:hello@dianathegeek.com"><img src="/images/glyphicons_social_39_e-mail.png"/></a>
+    
+  </div>
+</div>
+
+<div class="pull-right">
+  <h4>Powered by <a href="http://octopress.org/">Octopress</a>. Designed by <a href="http://AdrianArtiles.com">Adrian Artiles</a>.</h4>
+</div>
 
     </div>
   </div>
-  <footer role="contentinfo"><p>
-  Copyright &copy; 2014 - Diana Calvache -
-  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
-</p>
-
 </footer>
-  
 
-
-
-<div id="fb-root"></div>
-<script>(function(d, s, id) {
-  var js, fjs = d.getElementsByTagName(s)[0];
-  if (d.getElementById(id)) {return;}
-  js = d.createElement(s); js.id = id; js.async = true;
-  js.src = "//connect.facebook.net/en_US/all.js#appId=212934732101925&xfbml=1";
-  fjs.parentNode.insertBefore(js, fjs);
-}(document, 'script', 'facebook-jssdk'));</script>
-
-
-
-
-
-  <script type="text/javascript">
-    (function(){
-      var twitterWidgets = document.createElement('script');
-      twitterWidgets.type = 'text/javascript';
-      twitterWidgets.async = true;
-      twitterWidgets.src = '//platform.twitter.com/widgets.js';
-      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
-    })();
-  </script>
-
-
-
-
-
-</body>
+  </body>
 </html>

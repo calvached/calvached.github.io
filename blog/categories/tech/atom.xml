@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
 
-  <title><![CDATA[Category: Mastermind | Striving for Adequacy]]></title>
-  <link href="http://calvached.github.io/blog/categories/mastermind/atom.xml" rel="self"/>
+  <title><![CDATA[Category: Tech | Striving for Adequacy]]></title>
+  <link href="http://calvached.github.io/blog/categories/tech/atom.xml" rel="self"/>
   <link href="http://calvached.github.io/"/>
-  <updated>2014-06-11T08:58:17-05:00</updated>
+  <updated>2014-06-14T00:29:05-05:00</updated>
   <id>http://calvached.github.io/</id>
   <author>
     <name><![CDATA[Diana Calvache]]></name>
@@ -12,6 +12,62 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Re: Is TDD Dead?]]></title>
+    <link href="http://calvached.github.io/blog/2014/06/10/re-is-tdd-dead/"/>
+    <updated>2014-06-10T11:14:52-05:00</updated>
+    <id>http://calvached.github.io/blog/2014/06/10/re-is-tdd-dead</id>
+    <content type="html"><![CDATA[<p>After listening to <a href="http://martinfowler.com/articles/is-tdd-dead/">Is TDD Dead?</a> and attending DHH&rsquo;s <a href="http://www.confreaks.com/videos/3315-railsconf-keynote-writing-software">talk</a> during RailsConf I have come to the conclusion that TDD is great as long as you test the right thing in the right way. Here&rsquo;s why.</p>
+
+<!-- more -->
+
+
+<p><strong>What is TDD?</strong></p>
+
+<p><img class="<a" src="href="http://i.imgur.com/FYmJLP9.png">http://i.imgur.com/FYmJLP9.png</a>" title="TDD" ></p>
+
+<p>TDD (Test-Driven Development) is a software development process in which you write a failing test that defines a desired outcome, write code to make the test pass, refactor and repeat.</p>
+
+<p>Although this seems simple enough, for a TDD beginner (such as myself) it is very easy to begin by testing the wrong things or the right things, but in the wrong way (it is also equally as easy to get flamed for writing bad tests). Theses sorts of tests can lead to false security, loss of time and could be worse than not testing at all. Therefore, good tests will produce good code and poor tests will produce poor code. But there is hope!</p>
+
+<p><blockquote><p>You don’t learn to write good tests without first writing poor tests. Period.</p><footer><strong>@elight <a href="https://twitter.com/elight/status/475121094450757633">https://twitter.com/elight/status/475121094450757633</a> Twitter</strong></footer></blockquote></p>
+
+<p>A lot of the difficulty in doing TDD has to do with understanding how to design things well. It requires in-depth knowledge of OO design, patterns, SOLID, DRY, etc. Failure to throughly understand these principles will result in poor tests. Another pain point with TDD is that there are also a lot of opinions on how to do TDD, what should and should not be tested, what constitutes a good/bad test, level of abstraction, etc. As a beginner this can be confusing and at times overwhelming because there isn&rsquo;t one right answer (if any at all).</p>
+
+<p>My battle plan for TDD: spiking it out. Thinking through the code by writing it out will help me to visualize where and what to test.</p>
+
+<!-- TDD provides us with guidelines to help us think about design problems.-->
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Hikers in the Woods - an 8th Light Tale]]></title>
+    <link href="http://calvached.github.io/blog/2014/06/08/hikers-in-the-woods/"/>
+    <updated>2014-06-08T23:25:15-05:00</updated>
+    <id>http://calvached.github.io/blog/2014/06/08/hikers-in-the-woods</id>
+    <content type="html"><![CDATA[<p>This story was shared with me by my mentor, Kelly, a few days before I started my first day as an apprentice.</p>
+
+<p><em>An apprenticeship is like two hikers in the woods&hellip;</em></p>
+
+<!-- more -->
+
+
+<p>Imagine you are hiking down a forested trail with your apprentice. Imagine yourself walking beside the apprentice, not out in front. All of a sudden, you stop. Your apprentice stops with you. You both stand in silence. The apprentice is confused, wondering why you&rsquo;ve stopped. Then all of a sudden, a deer crashes out of the forest, onto the trail right in front of you, then scurries off the other direction.</p>
+
+<p>After the deer is gone, you explain to your apprentice what you saw and heard that alerted you to the deer&rsquo;s presence. You show the footprints, the scat, and encourage the apprentice to keep an eye out.</p>
+
+<p>Next imagine you come to a fork in the trail. You are familiar with these woods, you know that one trail leads you back home, and the other add 5 miles to your trip. A teacher would pull out a map, show the apprentice your current location, and show which trail to take. But you are not a teacher, you are a mentor. Instead you ask the apprentice to decide. &ldquo;Which way should we go?&rdquo; Then if the apprentice asks for a map, you provide the map. If the apprentice takes off down the longer path, you continue to walk along beside them.</p>
+
+<p>Imagine your apprentice chose the long way. When you manage to get where you are going, you raise the question. &ldquo;I wonder where that other path went.&rdquo; Then you might pull out the map and show the apprentice how to read it. Not only will the apprentice have gained some knowledge, but they also have 5 extra mile of weariness where the lesson &ldquo;Check your map at every crossroads&rdquo; really sets in.</p>
+
+<p>Through the entire day&rsquo;s hike, you&rsquo;ve kept the apprentice safe. You&rsquo;ve always know exactly where you were and how to get back home. You could at any moment, taken charge and avoided any danger.</p>
+
+<!-- Afterthought: -->
+
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Ruby, Pass by What?]]></title>
@@ -249,6 +305,44 @@ end
 For instance if the CM&rsquo;s pattern was &ldquo;EDEC&rdquo; and the CB guessed &ldquo;EDDD&rdquo;. I would expect for the feedback to look something like this &ldquo;oo&rdquo;, but instead I was getting &ldquo;oox&rdquo;. By using the get_unmatched method on not only the CM&rsquo;s pattern, but also the CB&rsquo;s pattern I was able to fix the error I was getting.</p>
 
 <p>Mastermind has actually been really fun to build, tear down, build again and refactor! Implementing tests has made it so much easier to work on error cases.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[What It Means to #AlwaysBeLearning]]></title>
+    <link href="http://calvached.github.io/blog/2014/05/29/what-it-means-to-number-alwaysbelearning/"/>
+    <updated>2014-05-29T11:08:20-05:00</updated>
+    <id>http://calvached.github.io/blog/2014/05/29/what-it-means-to-number-alwaysbelearning</id>
+    <content type="html"><![CDATA[<p>At Dev Bootcamp I learned how to code, how to overcome failure and fix mistakes, how to ask for help when needed, and most importantly how to continue learning on my own or with others.</p>
+
+<p>Having graduated from Dev Bootcamp the only thing I was absolutely certain about was that I wanted to be an apprentice. I wasn&rsquo;t even sure if I wanted to do Front-end or Back-end work.</p>
+
+<p><em>So what exactly attracted me to the idea of apprenticeship?</em></p>
+
+<!-- more -->
+
+
+<p>One of the most attractive things about doing an apprenticeship is being given the chance to continue to grow with the guidance of a mentor. A mentor is someone who won&rsquo;t give you the answers, but will nudge you in the right direction and make sure you don&rsquo;t venture too far off from the path to your goal. I think that in order to be successful in any career you must have a mentor available to give advice.</p>
+
+<p>Surround your pullquote like this {" text to be quoted "}</p>
+
+<p>I joined <a href="http://www.8thlight.com/">8th Light</a> as a student apprentice, in hopes of continuing my adventures in web development by learning how to write <u>good</u> code! 8th Light is a software consulting company who truly cares about the work they do and prefers to do things the right way the first time instead of monkey patching later on. A lot of the principles and good practices that 8th Light follows were taught at DBC (such as good naming conventions, decoupling, managing dependencies, etc) so applying was a natural next step.</p>
+
+<p>What do I hope to get out of an apprenticeship?<br/>
+  * Lots of practice with TDD<br/>
+  * OOP, is it what I think it is?<br/>
+  * Learn new things!<br/>
+  * Better understanding of what is good code/tests and how to write it <br/>
+  * Learn from great people</p>
+
+<p>In reality #AlwaysBeLearning simply means to always surround yourself with brilliant, inspiring people who will push you to be better than you ever thought you could be.</p>
+
+<!-- Validations in the model might work, but that's not good enough, do them at the database level.
+
+If you let the database do the work for you, instead of Ruby, then you get a lot better performance.
+
+Indexes are like a map from one value to a bunch of others. -->
+
 ]]></content>
   </entry>
   

@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
 
-  <title><![CDATA[Category: 8thlight | Striving for Adequacy]]></title>
-  <link href="http://calvached.github.io/blog/categories/8thlight/atom.xml" rel="self"/>
+  <title><![CDATA[Category: Life | Striving for Adequacy]]></title>
+  <link href="http://calvached.github.io/blog/categories/life/atom.xml" rel="self"/>
   <link href="http://calvached.github.io/"/>
-  <updated>2014-06-11T08:58:17-05:00</updated>
+  <updated>2014-06-14T00:29:05-05:00</updated>
   <id>http://calvached.github.io/</id>
   <author>
     <name><![CDATA[Diana Calvache]]></name>
@@ -18,8 +18,7 @@
     <link href="http://calvached.github.io/blog/2014/06/08/hikers-in-the-woods/"/>
     <updated>2014-06-08T23:25:15-05:00</updated>
     <id>http://calvached.github.io/blog/2014/06/08/hikers-in-the-woods</id>
-    <content type="html"><![CDATA[<p><img src="http://i.imgur.com/M5a7I7B.jpg" alt="Fork in the road" />
-This was shared with me by my mentor, Kelly, a few days before I started my first day as an apprentice.</p>
+    <content type="html"><![CDATA[<p>This story was shared with me by my mentor, Kelly, a few days before I started my first day as an apprentice.</p>
 
 <p><em>An apprenticeship is like two hikers in the woods&hellip;</em></p>
 
@@ -46,9 +45,7 @@ This was shared with me by my mentor, Kelly, a few days before I started my firs
     <link href="http://calvached.github.io/blog/2014/05/29/what-it-means-to-number-alwaysbelearning/"/>
     <updated>2014-05-29T11:08:20-05:00</updated>
     <id>http://calvached.github.io/blog/2014/05/29/what-it-means-to-number-alwaysbelearning</id>
-    <content type="html"><![CDATA[<p><img src="http://i.imgur.com/qeOADRe.jpg" alt="studious cat" /></p>
-
-<p>At Dev Bootcamp I learned how to code, how to overcome failure and fix mistakes, how to ask for help when needed, and most importantly how to continue learning on my own or with others.</p>
+    <content type="html"><![CDATA[<p>At Dev Bootcamp I learned how to code, how to overcome failure and fix mistakes, how to ask for help when needed, and most importantly how to continue learning on my own or with others.</p>
 
 <p>Having graduated from Dev Bootcamp the only thing I was absolutely certain about was that I wanted to be an apprentice. I wasn&rsquo;t even sure if I wanted to do Front-end or Back-end work.</p>
 
@@ -78,6 +75,35 @@ If you let the database do the work for you, instead of Ruby, then you get a lot
 
 Indexes are like a map from one value to a bunch of others. -->
 
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[The Great Switch]]></title>
+    <link href="http://calvached.github.io/blog/2014/04/27/the-great-switch/"/>
+    <updated>2014-04-27T18:01:39-05:00</updated>
+    <id>http://calvached.github.io/blog/2014/04/27/the-great-switch</id>
+    <content type="html"><![CDATA[<p>Wooo! I finally got <a href="http://octopress.org/">Octopress</a> up and running! Any new posts will be written here from now on. You can check out my old posts <a href="http://yufinavstheworld.tumblr.com/">here</a>.
+I also found this nifty <a href="https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet">cheatsheet</a> for Markdown!</p>
+
+<p><em>So what&rsquo;s this about a &ldquo;Great Switch&rdquo;?</em></p>
+
+<!-- more -->
+
+
+<p>I caved and got a Mac. So I went back home for about two weeks and gave my brother my laptop for him to use in college. I took that as an opportunity to get a Mac this time around and try to avoid the hardships of making Windows play nicely with RoR. Although once I got back I realized that I forgot to merge the partition I made for Linux on my Windows system soo&hellip;it now has half as much hard drive space (oops, sorry bro!).</p>
+
+<p>I also then realized that gaming on a Mac looks like <a href="http://weknowmemes.com/wp-content/uploads/2013/09/gaming-on-a-mac-meme.jpg">this</a> and I proceeded to react <a href="http://www.reactiongifs.com/wp-content/uploads/2013/12/wut.gif">appropriately</a>.</p>
+
+<p>BUT THERE&rsquo;S A PLUS SIDE! I now learned how to setup my environment on a MAC!</p>
+
+<p>Although there were a few bumps along the way. I mysteriously (and accidentally) &ldquo;deleted&rdquo; my .bash_profile in my /bin/bash shell so I had to switch to a different shell to fix it using <a href="http://support.apple.com/kb/TA27005">this</a>. I then had to open the .bash_profile and reset my PATH variable. After that was done I was back in business!</p>
+
+<p><img src="http://www.reactiongifs.com/wp-content/uploads/2013/06/Colbert-High-Five.gif" alt="aww yeah!" /></p>
+
+<p><em>So what was I doing that caused this situation?</em> I was trying to setup Sublime to launch from the command line, but was unsuccessful. Time to try it again!</p>
+
+<p><strong>Current Status:</strong> Stalking people&rsquo;s github profiles :3</p>
 ]]></content>
   </entry>
   
