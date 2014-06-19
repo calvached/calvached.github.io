@@ -85,9 +85,9 @@ in
 One way we can combat the evils of Spaghetti Code is to explicitly classify certain method under the Private interface (which basically means &ldquo;Do not touch or else!&rdquo;). The Private interface will contain any methods that are not intended to be used by others, cannot be trusted or depended on, they might also handle implementation details and/or can change for any reason.</p>
 
 <p><strong>Let&rsquo;s explore what Private means in Ruby!</strong><br/>
-If I use the keyword Private in a Class I would expect any method after that keyword (unless I specifically want it Public) to be &ldquo;uncallable&rdquo; from outside of the Class. In Ruby this is not true (not sure if this applies to other languages as well). What Private means in Ruby is that a method cannot be called with an explicit receiver.</p>
+If I use the method Private in a Class I would expect any method after it (unless I specifically want it Public) to be &ldquo;uncallable&rdquo; from outside of the Class. In Ruby this is not true (not sure if this applies to other languages as well). What Private means in Ruby is that a method cannot be called with an explicit receiver.</p>
 
-<p>For example, this will throw an error because I have an explicit receiver calling the Private method (I will also get an error if I call the private method directly).</p>
+<p>For example, this will throw an error because I have an explicit receiver calling private_method_here (I will also get an error if I call private_method_here directly).</p>
 
 <figure class='code'><figcaption><span>Explicit Receiver example</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
@@ -118,7 +118,7 @@ If I use the keyword Private in a Class I would expect any method after that key
 </span></code></pre></td></tr></table></div></figure>
 
 
-<p>However, if I call the Private method with an implicit receiver then no error is thrown!</p>
+<p>However, if I call private_method_here with an implicit receiver then no error is thrown!</p>
 
 <figure class='code'><figcaption><span>Implicit Receiver example</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
@@ -149,7 +149,7 @@ If I use the keyword Private in a Class I would expect any method after that key
 </span></code></pre></td></tr></table></div></figure>
 
 
-<p>There are also a few other ways to gain access to a private method.</p>
+<p>There are also a few other ways to gain access to private_method_here.</p>
 
 <figure class='code'><figcaption><span>Private isn&#8217;t quite so private lol</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>

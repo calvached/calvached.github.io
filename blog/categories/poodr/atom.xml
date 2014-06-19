@@ -4,7 +4,7 @@
   <title><![CDATA[Category: POODR | Striving for Adequacy]]></title>
   <link href="http://calvached.github.io/blog/categories/poodr/atom.xml" rel="self"/>
   <link href="http://calvached.github.io/"/>
-  <updated>2014-06-19T11:15:12-05:00</updated>
+  <updated>2014-06-19T11:22:16-05:00</updated>
   <id>http://calvached.github.io/</id>
   <author>
     <name><![CDATA[Diana Calvache]]></name>
@@ -33,9 +33,9 @@
 One way we can combat the evils of Spaghetti Code is to explicitly classify certain method under the Private interface (which basically means &ldquo;Do not touch or else!&rdquo;). The Private interface will contain any methods that are not intended to be used by others, cannot be trusted or depended on, they might also handle implementation details and/or can change for any reason.</p>
 
 <p><strong>Let&rsquo;s explore what Private means in Ruby!</strong><br/>
-If I use the keyword Private in a Class I would expect any method after that keyword (unless I specifically want it Public) to be &ldquo;uncallable&rdquo; from outside of the Class. In Ruby this is not true (not sure if this applies to other languages as well). What Private means in Ruby is that a method cannot be called with an explicit receiver.</p>
+If I use the method Private in a Class I would expect any method after it (unless I specifically want it Public) to be &ldquo;uncallable&rdquo; from outside of the Class. In Ruby this is not true (not sure if this applies to other languages as well). What Private means in Ruby is that a method cannot be called with an explicit receiver.</p>
 
-<p>For example, this will throw an error because I have an explicit receiver calling the Private method (I will also get an error if I call the private method directly).<br/>
+<p>For example, this will throw an error because I have an explicit receiver calling private_method_here (I will also get an error if I call private_method_here directly).<br/>
 ``` ruby Explicit Receiver example
 class ExampleClass
   def example_method</p>
@@ -57,7 +57,7 @@ end</p>
 <p>example = Example.new
 example.example_method # NoMethodError: private method `private_method_here' called for #&lt;Example:0x007f8cb6019420>
 <code>
-However, if I call the Private method with an implicit receiver then no error is thrown!  
+However, if I call private_method_here with an implicit receiver then no error is thrown!  
 </code> ruby Implicit Receiver example
 class ExampleClass
   def example_method</p>
@@ -79,7 +79,7 @@ end</p>
 <p>example = Example.new
 example.example_method # &ldquo;You&rsquo;re not suppose to mess with me!&rdquo;
 <code>
-There are also a few other ways to gain access to a private method.
+There are also a few other ways to gain access to private_method_here.
 </code> ruby Private isn&rsquo;t quite so private lol
 class ExampleClass
   private
