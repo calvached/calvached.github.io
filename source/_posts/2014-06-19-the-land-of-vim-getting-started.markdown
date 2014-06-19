@@ -20,6 +20,7 @@ There are also various mini-games/tutorials that can help you get used to text n
 [Vim Golf](http://vimgolf.com/)  
 [Interactive Vim Tutorial](http://www.openvim.com/tutorial.html)  
 [Video Tutorials](http://derekwyatt.org/vim/tutorials/)
+[Vim Cheat Sheet](http://www.fprintf.net/vimCheatSheet.html)
 
 The real learning (for me anyway) came when I put this new found knowledge to use by writing code. I learned the navigation fairly quickly, but things like copy/paste, switching between windows/tabs, opening a new window horizontally/vertically, were all things that I had to google a few times before committing it to muscle memory. I learn new commands as I find a use for them rather than trying to memorize a bunch of different commands all at once.
 
