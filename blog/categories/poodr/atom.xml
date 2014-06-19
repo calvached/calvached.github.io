@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: POODR | Striving for Adequacy]]></title>
+  <link href="http://calvached.github.io/blog/categories/poodr/atom.xml" rel="self"/>
+  <link href="http://calvached.github.io/"/>
+  <updated>2014-06-19T11:13:04-05:00</updated>
+  <id>http://calvached.github.io/</id>
+  <author>
+    <name><![CDATA[Diana Calvache]]></name>
+    <email><![CDATA[hello@dianathegeek.com]]></email>
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Exploring the Lands of Public and Private Interfaces]]></title>
+    <link href="http://calvached.github.io/blog/2014/06/15/exploring-the-lands-of-public-and-private-interfaces/"/>
+    <updated>2014-06-15T15:44:22-05:00</updated>
+    <id>http://calvached.github.io/blog/2014/06/15/exploring-the-lands-of-public-and-private-interfaces</id>
+    <content type="html"><![CDATA[<p>Let&rsquo;s talk about interfaces (and possibly spaghetti)!!</p>
+
+<p>Interface can mean a bunch of things in different contexts, but in this post I&rsquo;ll be referring to it as anything that is contained within a Class.</p>
+
+<!-- more -->
+
+
+<p>Lately, I&rsquo;ve been reading Sandy Metz&rsquo;s book, Practical Object Oriented Design in Ruby (affectionately called &ldquo;POODR&rdquo;) and I came across an interesting chapter about designing flexible interfaces. Although I have been using Public and Private methods in my code, I never really looked into &ldquo;why&rdquo; there should be a distinction between methods in a Class (at the time I also didn&rsquo;t know what was meant by &ldquo;interface&rdquo;).</p>
+
+<p>All Classes implement methods that are meant to be used by others (usually more general methods) and methods only designed to be used inside the Class. The methods that are intended to be used by others are part of what&rsquo;s called the Public interface. These methods reveal just enough information about the Class to be useful, they should be unsurprising and reveal the intentions of the Class they belong to. If a Class reveals too much of itself, consequently, it will end up knowing too much of it&rsquo;s neighbors. This leads to a highly <a href="http://en.wikipedia.org/wiki/Coupling_(computer_programming">coupled design</a> (in other words: <a href="http://en.wikipedia.org/wiki/Spaghetti_code">Spaghetti Code</a>).</p>
+
+<p><strong>So how can we avoid the terrors of Spaghetti Code??</strong><br/>
+One way we can combat the evils of Spaghetti Code is to explicitly classify certain method under the Private interface (which basically means &ldquo;Do not touch or else!&rdquo;). The Private interface will contain any methods that are not intended to be used by others, cannot be trusted or depended on, they might also handle implementation details and/or can change for any reason.</p>
+
+<p><strong>Let&rsquo;s explore what Private means in Ruby!</strong><br/>
+If I use the keyword Private in a Class I would expect any method after that keyword (unless I specifically want it Public) to be &ldquo;uncallable&rdquo; from outside of the Class. In Ruby this is not true (not sure if this applies to other languages as well). What Private means in Ruby is that a method cannot be called with an explicit receiver.</p>
+
+<p>For example, this will throw an error because I have an explicit receiver calling the Private method (I will also get an error if I call the private method directly).<br/>
+``` ruby Explicit Receiver example
+class ExampleClass
+  def example_method</p>
+
+<pre><code>self.private_method_here
+</code></pre>
+
+<p>  end</p>
+
+<p>  private
+  def private_method_here</p>
+
+<pre><code>"You're not suppose to mess with me!"
+</code></pre>
+
+<p>  end
+end</p>
+
+<p>example = Example.new
+example.example_method # NoMethodError: private method `private_method_here' called for #&lt;Example:0x007f8cb6019420>
+<code>
+However, if I call the Private method with an implicit receiver then no error is thrown!  
+</code> ruby Implicit Receiver example
+class ExampleClass
+  def example_method</p>
+
+<pre><code>private_method_here
+</code></pre>
+
+<p>  end</p>
+
+<p>  private
+  def private_method_here</p>
+
+<pre><code>"You're not suppose to mess with me!"
+</code></pre>
+
+<p>  end
+end</p>
+
+<p>example = Example.new
+example.example_method # &ldquo;You&rsquo;re not suppose to mess with me!&rdquo;
+<code>
+There are also a few other ways to gain access to a private method.
+</code> ruby Private isn&rsquo;t quite so private lol
+class ExampleClass
+  private
+  def private_method_here</p>
+
+<pre><code>'Hello outer World'
+</code></pre>
+
+<p>  end
+end</p>
+
+<p>example = ExampleClass.new
+example.instance_eval{ private_method_here } # &ldquo;Hello outer World&rdquo;
+example.send :private_method_here # &ldquo;Hello outer World&rdquo;
+```
+It seems that Private in Ruby acts more like a suggestion rather than being strictly enforced.</p>
+]]></content>
+  </entry>
+  
+</feed>
