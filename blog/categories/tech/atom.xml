@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Tech | Striving for Adequacy]]></title>
   <link href="http://calvached.github.io/blog/categories/tech/atom.xml" rel="self"/>
   <link href="http://calvached.github.io/"/>
-  <updated>2014-06-19T11:22:16-05:00</updated>
+  <updated>2014-06-19T11:27:00-05:00</updated>
   <id>http://calvached.github.io/</id>
   <author>
     <name><![CDATA[Diana Calvache]]></name>
@@ -33,7 +33,7 @@
 One way we can combat the evils of Spaghetti Code is to explicitly classify certain method under the Private interface (which basically means &ldquo;Do not touch or else!&rdquo;). The Private interface will contain any methods that are not intended to be used by others, cannot be trusted or depended on, they might also handle implementation details and/or can change for any reason.</p>
 
 <p><strong>Let&rsquo;s explore what Private means in Ruby!</strong><br/>
-If I use the method Private in a Class I would expect any method after it (unless I specifically want it Public) to be &ldquo;uncallable&rdquo; from outside of the Class. In Ruby this is not true (not sure if this applies to other languages as well). What Private means in Ruby is that a method cannot be called with an explicit receiver.</p>
+If I use the method <a href="http://ruby-doc.org/core-2.0.0/Module.html#method-i-private">Private</a> in a Class I would expect any method after it (unless I specifically want it <a href="http://ruby-doc.org/core-2.0.0/Module.html#method-i-public">Public</a>) to be &ldquo;uncallable&rdquo; from outside of the Class. In Ruby this is not true (not sure if this applies to other languages as well). What Private means in Ruby is that a method cannot be called with an explicit receiver.</p>
 
 <p>For example, this will throw an error because I have an explicit receiver calling private_method_here (I will also get an error if I call private_method_here directly).<br/>
 ``` ruby Explicit Receiver example
