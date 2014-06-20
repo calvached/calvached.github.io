@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
 
-  <title><![CDATA[Category: Life | Striving for Adequacy]]></title>
+  <title><![CDATA[Category: life | Striving for Adequacy]]></title>
   <link href="http://calvached.github.io/blog/categories/life/atom.xml" rel="self"/>
   <link href="http://calvached.github.io/"/>
-  <updated>2014-06-19T20:53:11-05:00</updated>
+  <updated>2014-06-20T10:44:13-05:00</updated>
   <id>http://calvached.github.io/</id>
   <author>
     <name><![CDATA[Diana Calvache]]></name>
@@ -14,7 +14,7 @@
 
   
   <entry>
-    <title type="html"><![CDATA[Hikers in the Woods - an 8th Light Tale]]></title>
+    <title type="html"><![CDATA[Hikers in the Woods - An 8th Light Tale]]></title>
     <link href="http://calvached.github.io/blog/2014/06/08/hikers-in-the-woods/"/>
     <updated>2014-06-08T23:25:15-05:00</updated>
     <id>http://calvached.github.io/blog/2014/06/08/hikers-in-the-woods</id>
@@ -41,7 +41,7 @@
   </entry>
   
   <entry>
-    <title type="html"><![CDATA[What It Means to #AlwaysBeLearning]]></title>
+    <title type="html"><![CDATA[What it means to #AlwaysBeLearning]]></title>
     <link href="http://calvached.github.io/blog/2014/05/29/what-it-means-to-number-alwaysbelearning/"/>
     <updated>2014-05-29T11:08:20-05:00</updated>
     <id>http://calvached.github.io/blog/2014/05/29/what-it-means-to-number-alwaysbelearning</id>

@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
 
-  <title><![CDATA[Category: Vim | Striving for Adequacy]]></title>
+  <title><![CDATA[Category: vim | Striving for Adequacy]]></title>
   <link href="http://calvached.github.io/blog/categories/vim/atom.xml" rel="self"/>
   <link href="http://calvached.github.io/"/>
-  <updated>2014-06-19T20:53:11-05:00</updated>
+  <updated>2014-06-20T10:44:13-05:00</updated>
   <id>http://calvached.github.io/</id>
   <author>
     <name><![CDATA[Diana Calvache]]></name>
@@ -14,7 +14,7 @@
 
   
   <entry>
-    <title type="html"><![CDATA[The Land of Vim Part 1: Getting Started]]></title>
+    <title type="html"><![CDATA[The Land of Vim Part 1: getting started]]></title>
     <link href="http://calvached.github.io/blog/2014/06/19/the-land-of-vim-getting-started/"/>
     <updated>2014-06-19T11:57:55-05:00</updated>
     <id>http://calvached.github.io/blog/2014/06/19/the-land-of-vim-getting-started</id>
@@ -35,7 +35,7 @@
 <a href="http://vim-adventures.com/">Vim Adventures</a><br/>
 <a href="http://vimgolf.com/">Vim Golf</a><br/>
 <a href="http://www.openvim.com/tutorial.html">Interactive Vim Tutorial</a><br/>
-<a href="http://derekwyatt.org/vim/tutorials/">Video Tutorials</a>
+<a href="http://derekwyatt.org/vim/tutorials/">Video Tutorials</a><br/>
 <a href="http://www.fprintf.net/vimCheatSheet.html">Vim Cheat Sheet</a></p>
 
 <p>The real learning (for me anyway) came when I put this new found knowledge to use by writing code. I learned the navigation fairly quickly, but things like copy/paste, switching between windows/tabs, opening a new window horizontally/vertically, were all things that I had to google a few times before committing it to muscle memory. I learn new commands as I find a use for them rather than trying to memorize a bunch of different commands all at once.</p>

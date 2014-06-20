@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
 
-  <title><![CDATA[Category: Tech | Striving for Adequacy]]></title>
+  <title><![CDATA[Category: tech | Striving for Adequacy]]></title>
   <link href="http://calvached.github.io/blog/categories/tech/atom.xml" rel="self"/>
   <link href="http://calvached.github.io/"/>
-  <updated>2014-06-19T20:53:11-05:00</updated>
+  <updated>2014-06-20T10:44:13-05:00</updated>
   <id>http://calvached.github.io/</id>
   <author>
     <name><![CDATA[Diana Calvache]]></name>
@@ -14,7 +14,7 @@
 
   
   <entry>
-    <title type="html"><![CDATA[The Land of Vim Part 1: Getting Started]]></title>
+    <title type="html"><![CDATA[The Land of Vim Part 1: getting started]]></title>
     <link href="http://calvached.github.io/blog/2014/06/19/the-land-of-vim-getting-started/"/>
     <updated>2014-06-19T11:57:55-05:00</updated>
     <id>http://calvached.github.io/blog/2014/06/19/the-land-of-vim-getting-started</id>
@@ -35,7 +35,7 @@
 <a href="http://vim-adventures.com/">Vim Adventures</a><br/>
 <a href="http://vimgolf.com/">Vim Golf</a><br/>
 <a href="http://www.openvim.com/tutorial.html">Interactive Vim Tutorial</a><br/>
-<a href="http://derekwyatt.org/vim/tutorials/">Video Tutorials</a>
+<a href="http://derekwyatt.org/vim/tutorials/">Video Tutorials</a><br/>
 <a href="http://www.fprintf.net/vimCheatSheet.html">Vim Cheat Sheet</a></p>
 
 <p>The real learning (for me anyway) came when I put this new found knowledge to use by writing code. I learned the navigation fairly quickly, but things like copy/paste, switching between windows/tabs, opening a new window horizontally/vertically, were all things that I had to google a few times before committing it to muscle memory. I learn new commands as I find a use for them rather than trying to memorize a bunch of different commands all at once.</p>
@@ -43,7 +43,7 @@
   </entry>
   
   <entry>
-    <title type="html"><![CDATA[Exploring the Lands of Public and Private Interfaces]]></title>
+    <title type="html"><![CDATA[Exploring the lands of Public and Private interfaces]]></title>
     <link href="http://calvached.github.io/blog/2014/06/15/exploring-the-lands-of-public-and-private-interfaces/"/>
     <updated>2014-06-15T15:44:22-05:00</updated>
     <id>http://calvached.github.io/blog/2014/06/15/exploring-the-lands-of-public-and-private-interfaces</id>
@@ -158,7 +158,7 @@ It seems that Private in Ruby acts more like a suggestion rather than being stri
   </entry>
   
   <entry>
-    <title type="html"><![CDATA[Hikers in the Woods - an 8th Light Tale]]></title>
+    <title type="html"><![CDATA[Hikers in the Woods - An 8th Light Tale]]></title>
     <link href="http://calvached.github.io/blog/2014/06/08/hikers-in-the-woods/"/>
     <updated>2014-06-08T23:25:15-05:00</updated>
     <id>http://calvached.github.io/blog/2014/06/08/hikers-in-the-woods</id>
@@ -185,7 +185,7 @@ It seems that Private in Ruby acts more like a suggestion rather than being stri
   </entry>
   
   <entry>
-    <title type="html"><![CDATA[Ruby, Pass by What?]]></title>
+    <title type="html"><![CDATA[Ruby, pass by what?]]></title>
     <link href="http://calvached.github.io/blog/2014/06/02/ruby-pass-by-what/"/>
     <updated>2014-06-02T10:12:24-05:00</updated>
     <id>http://calvached.github.io/blog/2014/06/02/ruby-pass-by-what</id>
