@@ -4,7 +4,7 @@
   <title><![CDATA[Striving for Adequacy]]></title>
   <link href="http://calvached.github.io/atom.xml" rel="self"/>
   <link href="http://calvached.github.io/"/>
-  <updated>2014-06-19T20:22:35-05:00</updated>
+  <updated>2014-06-19T20:53:11-05:00</updated>
   <id>http://calvached.github.io/</id>
   <author>
     <name><![CDATA[Diana Calvache]]></name>
@@ -20,7 +20,7 @@
     <id>http://calvached.github.io/blog/2014/06/19/the-land-of-vim-getting-started</id>
     <content type="html"><![CDATA[<p>Vim is intimidating, there I said it, but it doesn&rsquo;t have to be!</p>
 
-<p>There were primarily three reasons why I chose to switch over, the first being that a large amount of experienced developers use Vim and it would make it infinitely easier to pair program if I at least knew some basic commands, the second was recognizing the difference in productivity in keybinding vs clicking (I have World of Warcraft to thank for that), the third and last was that Vim made me uncomfortable and I wanted to fix that.</p>
+<p>There were primarily three reasons why I chose to switch over, the first being that a large amount of experienced developers use Vim and it would make it infinitely easier to pair program if I at least knew some basic commands, the second was recognizing the difference in productivity in keybinding vs clicking (I have World of Warcraft to thank for that), the third and last was that Vim made me uncomfortable and I wanted to change that.</p>
 
 <p>Here&rsquo;s what I did to get started.</p>
 
