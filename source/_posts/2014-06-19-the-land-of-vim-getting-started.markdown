@@ -7,7 +7,7 @@ categories: [tech, vim]
 ---
 Vim is intimidating, there I said it, but it doesn't have to be!
 
-There were primarily three reasons why I chose to switch over, the first being that a large amount of experienced developers use Vim and it would make it infinitely easier to pair program if I at least knew some basic commands, the second was recognizing the difference in productivity in keybinding vs clicking (I have World of Warcraft to thank for that), the third and last was that Vim made me uncomfortable and I wanted to fix that.
+There were primarily three reasons why I chose to switch over, the first being that a large amount of experienced developers use Vim and it would make it infinitely easier to pair program if I at least knew some basic commands, the second was recognizing the difference in productivity in keybinding vs clicking (I have World of Warcraft to thank for that), the third and last was that Vim made me uncomfortable and I wanted to change that.
 
 Here's what I did to get started.
 <!-- more -->
