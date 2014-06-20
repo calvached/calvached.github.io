@@ -4,7 +4,7 @@
   <title><![CDATA[Striving for Adequacy]]></title>
   <link href="http://calvached.github.io/atom.xml" rel="self"/>
   <link href="http://calvached.github.io/"/>
-  <updated>2014-06-19T20:18:37-05:00</updated>
+  <updated>2014-06-19T20:22:35-05:00</updated>
   <id>http://calvached.github.io/</id>
   <author>
     <name><![CDATA[Diana Calvache]]></name>
@@ -12,17 +12,6 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
-  
-  <entry>
-    <title type="html"><![CDATA[The Land of Vim Part 2: Customization]]></title>
-    <link href="http://calvached.github.io/blog/2014/06/19/the-land-of-vim-customization/"/>
-    <updated>2014-06-19T15:29:40-05:00</updated>
-    <id>http://calvached.github.io/blog/2014/06/19/the-land-of-vim-customization</id>
-    <content type="html"><![CDATA[<p> The Land of Vim (customization) part 2
- 39 nerdtree
- 40 monokai color scheme</p>
-]]></content>
-  </entry>
   
   <entry>
     <title type="html"><![CDATA[The Land of Vim Part 1: Getting Started]]></title>
