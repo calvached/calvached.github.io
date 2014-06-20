@@ -1,0 +1,695 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Striving for Adequacy]]></title>
+  <link href="http://calvached.github.io/atom.xml" rel="self"/>
+  <link href="http://calvached.github.io/"/>
+  <updated>2014-06-19T20:53:11-05:00</updated>
+  <id>http://calvached.github.io/</id>
+  <author>
+    <name><![CDATA[Diana Calvache]]></name>
+    <email><![CDATA[hello@dianathegeek.com]]></email>
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[The Land of Vim Part 1: Getting Started]]></title>
+    <link href="http://calvached.github.io/blog/2014/06/19/the-land-of-vim-getting-started/"/>
+    <updated>2014-06-19T11:57:55-05:00</updated>
+    <id>http://calvached.github.io/blog/2014/06/19/the-land-of-vim-getting-started</id>
+    <content type="html"><![CDATA[<p>Vim is intimidating, there I said it, but it doesn&rsquo;t have to be!</p>
+
+<p>There were primarily three reasons why I chose to switch over, the first being that a large amount of experienced developers use Vim and it would make it infinitely easier to pair program if I at least knew some basic commands, the second was recognizing the difference in productivity in keybinding vs clicking (I have World of Warcraft to thank for that), the third and last was that Vim made me uncomfortable and I wanted to change that.</p>
+
+<p>Here&rsquo;s what I did to get started.</p>
+
+<!-- more -->
+
+
+<p>Vim is installed by default on all Unix based systems, but there is a <a href="http://www.vim.org/download.php#pc">downloadable</a> version for Windows as well. I first came into contact with Vim while on a Linux machine and briefly freaked out because I couldn&rsquo;t figure out how to exit it, then I downloaded the Windows version where I played around with it for a couple hours, but I didn&rsquo;t actually start seriously using/learning Vim until I got my Mac. So most of this advice will be geared towards Mac users (Linux users might benefit as well).</p>
+
+<p>On the command line if you type <code>vimtutor</code> this will bring up a really handy tutorial which will go over the basic commands and can be completed in approximately 30 minutes.</p>
+
+<p>There are also various mini-games/tutorials that can help you get used to text navigation and basic commands, the ones I used were:<br/>
+<a href="http://vim-adventures.com/">Vim Adventures</a><br/>
+<a href="http://vimgolf.com/">Vim Golf</a><br/>
+<a href="http://www.openvim.com/tutorial.html">Interactive Vim Tutorial</a><br/>
+<a href="http://derekwyatt.org/vim/tutorials/">Video Tutorials</a>
+<a href="http://www.fprintf.net/vimCheatSheet.html">Vim Cheat Sheet</a></p>
+
+<p>The real learning (for me anyway) came when I put this new found knowledge to use by writing code. I learned the navigation fairly quickly, but things like copy/paste, switching between windows/tabs, opening a new window horizontally/vertically, were all things that I had to google a few times before committing it to muscle memory. I learn new commands as I find a use for them rather than trying to memorize a bunch of different commands all at once.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Exploring the Lands of Public and Private Interfaces]]></title>
+    <link href="http://calvached.github.io/blog/2014/06/15/exploring-the-lands-of-public-and-private-interfaces/"/>
+    <updated>2014-06-15T15:44:22-05:00</updated>
+    <id>http://calvached.github.io/blog/2014/06/15/exploring-the-lands-of-public-and-private-interfaces</id>
+    <content type="html"><![CDATA[<p>Let&rsquo;s talk about interfaces (and possibly spaghetti)!!</p>
+
+<p>Interface can mean a bunch of things in different contexts, but in this post I&rsquo;ll be referring to it as anything that is contained within a Class.</p>
+
+<!-- more -->
+
+
+<p>Lately, I&rsquo;ve been reading Sandy Metz&rsquo;s book, Practical Object Oriented Design in Ruby (affectionately called &ldquo;POODR&rdquo;) and I came across an interesting chapter about designing flexible interfaces. Although I have been using Public and Private methods in my code, I never really looked into &ldquo;why&rdquo; there should be a distinction between methods in a Class (at the time I also didn&rsquo;t know what was meant by &ldquo;interface&rdquo;).</p>
+
+<p>All Classes implement methods that are meant to be used by others (usually more general methods) and methods only designed to be used inside the Class. The methods that are intended to be used by others are part of what&rsquo;s called the Public interface. These methods reveal just enough information about the Class to be useful, they should be unsurprising, dependable and reveal the intentions of the Class they belong to. If a Class reveals too much of itself, consequently, it will end up knowing too much of it&rsquo;s neighbors. This leads to a highly <a href="http://en.wikipedia.org/wiki/Coupling_(computer_programming">coupled design</a> (in other words: <a href="http://en.wikipedia.org/wiki/Spaghetti_code">Spaghetti Code</a>).</p>
+
+<p><strong>So how can we avoid the terrors of Spaghetti Code??</strong><br/>
+One way we can combat the evils of Spaghetti Code is to explicitly classify certain method under the Private interface (which basically means &ldquo;Do not touch or else!&rdquo;). The Private interface will contain any methods that are not intended to be used by others, cannot be trusted or depended on, they might also handle implementation details and/or can change for any reason.</p>
+
+<p><strong>Let&rsquo;s explore what Private means in Ruby!</strong><br/>
+If I use the method <a href="http://ruby-doc.org/core-2.0.0/Module.html#method-i-private">Private</a> in a Class I would expect any method after it (unless I specifically want it <a href="http://ruby-doc.org/core-2.0.0/Module.html#method-i-public">Public</a>) to be &ldquo;uncallable&rdquo; from outside of the Class. In Ruby this is not true (not sure if this applies to other languages as well). What Private means in Ruby is that a method cannot be called with an explicit receiver.</p>
+
+<p>For example, this will throw an error because I have an explicit receiver calling private_method_here (I will also get an error if I call private_method_here directly).</p>
+
+<figure class='code'><figcaption><span>Explicit Receiver example</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">class</span> <span class="nc">ExampleClass</span>
+</span><span class='line'>  <span class="k">def</span> <span class="nf">example_method</span>
+</span><span class='line'>    <span class="nb">self</span><span class="o">.</span><span class="n">private_method_here</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="kp">private</span>
+</span><span class='line'>  <span class="k">def</span> <span class="nf">private_method_here</span>
+</span><span class='line'>    <span class="s2">&quot;You&#39;re not suppose to mess with me!&quot;</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'><span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'><span class="n">example</span> <span class="o">=</span> <span class="no">Example</span><span class="o">.</span><span class="n">new</span>
+</span><span class='line'><span class="n">example</span><span class="o">.</span><span class="n">example_method</span> <span class="c1"># NoMethodError: private method `private_method_here&#39; called for #&lt;Example:0x007f8cb6019420&gt;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>However, if I call private_method_here with an implicit receiver then no error is thrown!</p>
+
+<figure class='code'><figcaption><span>Implicit Receiver example</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">class</span> <span class="nc">ExampleClass</span>
+</span><span class='line'>  <span class="k">def</span> <span class="nf">example_method</span>
+</span><span class='line'>    <span class="n">private_method_here</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="kp">private</span>
+</span><span class='line'>  <span class="k">def</span> <span class="nf">private_method_here</span>
+</span><span class='line'>    <span class="s2">&quot;You&#39;re not suppose to mess with me!&quot;</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'><span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'><span class="n">example</span> <span class="o">=</span> <span class="no">Example</span><span class="o">.</span><span class="n">new</span>
+</span><span class='line'><span class="n">example</span><span class="o">.</span><span class="n">example_method</span> <span class="c1"># &quot;You&#39;re not suppose to mess with me!&quot;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>There are also a few other ways to gain access to private_method_here.</p>
+
+<figure class='code'><figcaption><span>Private isn&#8217;t quite so private lol</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">class</span> <span class="nc">ExampleClass</span>
+</span><span class='line'>  <span class="kp">private</span>
+</span><span class='line'>  <span class="k">def</span> <span class="nf">private_method_here</span>
+</span><span class='line'>    <span class="s1">&#39;Hello outer World&#39;</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'><span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'><span class="n">example</span> <span class="o">=</span> <span class="no">ExampleClass</span><span class="o">.</span><span class="n">new</span>
+</span><span class='line'><span class="n">example</span><span class="o">.</span><span class="n">instance_eval</span><span class="p">{</span> <span class="n">private_method_here</span> <span class="p">}</span> <span class="c1"># &quot;Hello outer World&quot;</span>
+</span><span class='line'><span class="n">example</span><span class="o">.</span><span class="n">send</span> <span class="ss">:private_method_here</span> <span class="c1"># &quot;Hello outer World&quot;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>It seems that Private in Ruby acts more like a suggestion rather than being strictly enforced.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Re: Is TDD Dead?]]></title>
+    <link href="http://calvached.github.io/blog/2014/06/10/re-is-tdd-dead/"/>
+    <updated>2014-06-10T11:14:52-05:00</updated>
+    <id>http://calvached.github.io/blog/2014/06/10/re-is-tdd-dead</id>
+    <content type="html"><![CDATA[<p>After listening to <a href="http://martinfowler.com/articles/is-tdd-dead/">Is TDD Dead?</a> and attending DHH&rsquo;s <a href="http://www.confreaks.com/videos/3315-railsconf-keynote-writing-software">talk</a> during RailsConf I have come to the conclusion that TDD is great as long as you test the right thing in the right way. Here&rsquo;s why.</p>
+
+<!-- more -->
+
+
+<p><strong>What is TDD?</strong></p>
+
+<p><img src="http://i.imgur.com/FYmJLP9.png" title="TDD" ></p>
+
+<p>TDD (Test-Driven Development) is a software development process in which you write a failing test that defines a desired outcome, write code to make the test pass, refactor and repeat.</p>
+
+<p>Although this seems simple enough, for a TDD beginner (such as myself) it is very easy to begin by testing the wrong things or the right things, but in the wrong way (it is also equally as easy to get flamed for writing bad tests). Theses sorts of tests can lead to false security, loss of time and could be worse than not testing at all. Therefore, good tests will produce good code and poor tests will produce poor code. But there is hope!</p>
+
+<blockquote><p>You don’t learn to write good tests without first writing poor tests. Period.</p><footer><strong>@elight</strong> <cite><a href='https://twitter.com/elight/status/475121094450757633'>Twitter</a></cite></footer></blockquote>
+
+
+<p>A lot of the difficulty in doing TDD has to do with understanding how to design things well. It requires in-depth knowledge of OO design, patterns, SOLID, DRY, etc. Failure to throughly understand these principles will result in poor tests. Another pain point with TDD is that there are also a lot of opinions on how to do TDD, what should and should not be tested, what constitutes a good/bad test, level of abstraction, etc. As a beginner this can be confusing and at times overwhelming because there isn&rsquo;t one right answer (if any at all).</p>
+
+<p>My battle plan for TDD: spiking it out. Thinking through the code by writing it out will help me to visualize where and what to test.</p>
+
+<!-- TDD provides us with guidelines to help us think about design problems.-->
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Hikers in the Woods - an 8th Light Tale]]></title>
+    <link href="http://calvached.github.io/blog/2014/06/08/hikers-in-the-woods/"/>
+    <updated>2014-06-08T23:25:15-05:00</updated>
+    <id>http://calvached.github.io/blog/2014/06/08/hikers-in-the-woods</id>
+    <content type="html"><![CDATA[<p>This story was shared with me by my mentor, Kelly, a few days before I started my first day as an apprentice.</p>
+
+<p><em>An apprenticeship is like two hikers in the woods&hellip;</em></p>
+
+<!-- more -->
+
+
+<p>Imagine you are hiking down a forested trail with your apprentice. Imagine yourself walking beside the apprentice, not out in front. All of a sudden, you stop. Your apprentice stops with you. You both stand in silence. The apprentice is confused, wondering why you&rsquo;ve stopped. Then all of a sudden, a deer crashes out of the forest, onto the trail right in front of you, then scurries off the other direction.</p>
+
+<p>After the deer is gone, you explain to your apprentice what you saw and heard that alerted you to the deer&rsquo;s presence. You show the footprints, the scat, and encourage the apprentice to keep an eye out.</p>
+
+<p>Next imagine you come to a fork in the trail. You are familiar with these woods, you know that one trail leads you back home, and the other add 5 miles to your trip. A teacher would pull out a map, show the apprentice your current location, and show which trail to take. But you are not a teacher, you are a mentor. Instead you ask the apprentice to decide. &ldquo;Which way should we go?&rdquo; Then if the apprentice asks for a map, you provide the map. If the apprentice takes off down the longer path, you continue to walk along beside them.</p>
+
+<p>Imagine your apprentice chose the long way. When you manage to get where you are going, you raise the question. &ldquo;I wonder where that other path went.&rdquo; Then you might pull out the map and show the apprentice how to read it. Not only will the apprentice have gained some knowledge, but they also have 5 extra mile of weariness where the lesson &ldquo;Check your map at every crossroads&rdquo; really sets in.</p>
+
+<p>Through the entire day&rsquo;s hike, you&rsquo;ve kept the apprentice safe. You&rsquo;ve always know exactly where you were and how to get back home. You could at any moment, taken charge and avoided any danger.</p>
+
+<!-- Afterthought: -->
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Ruby, Pass by What?]]></title>
+    <link href="http://calvached.github.io/blog/2014/06/02/ruby-pass-by-what/"/>
+    <updated>2014-06-02T10:12:24-05:00</updated>
+    <id>http://calvached.github.io/blog/2014/06/02/ruby-pass-by-what</id>
+    <content type="html"><![CDATA[<p><img src="http://i.imgur.com/3gQVzL0.gif" alt="david-tennant-confused" /></p>
+
+<p>There are two questions that have been bugging me lately. The first, <em>Why do I have to clone a guess in Mastermind?</em> and the second came after I did some research, <em>What is pass by reference vs. pass by value?</em></p>
+
+<p>Let&rsquo;s start with the first question.</p>
+
+<!-- more -->
+
+
+<p>To simplify what I was experiencing here&rsquo;s an example:</p>
+
+<figure class='code'><figcaption><span>Black magic code going on here</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+<span class='line-number'>35</span>
+<span class='line-number'>36</span>
+<span class='line-number'>37</span>
+<span class='line-number'>38</span>
+<span class='line-number'>39</span>
+<span class='line-number'>40</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">class</span> <span class="nc">ExampleClass</span>
+</span><span class='line'>  <span class="k">def</span> <span class="nf">example_method</span>
+</span><span class='line'>    <span class="n">var</span> <span class="o">=</span> <span class="s1">&#39;woohooo&#39;</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="n">var</span><span class="o">.</span><span class="n">object_id</span> <span class="c1"># Object Id: 70131019948560</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="n">x</span> <span class="o">=</span> <span class="no">SomeClass</span><span class="o">.</span><span class="n">new</span>
+</span><span class='line'>    <span class="n">x</span><span class="o">.</span><span class="n">some_method</span><span class="p">(</span><span class="n">var</span><span class="p">)</span>
+</span><span class='line'>    <span class="n">x</span><span class="o">.</span><span class="n">return_var</span> <span class="c1"># returns &#39;woohooo&#39;</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="n">y</span> <span class="o">=</span> <span class="no">AnotherClass</span><span class="o">.</span><span class="n">new</span>
+</span><span class='line'>    <span class="n">y</span><span class="o">.</span><span class="n">another_method</span><span class="p">(</span><span class="n">var</span><span class="p">)</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="n">x</span><span class="o">.</span><span class="n">return_var</span> <span class="c1"># returns &#39;boohooo&#39;, whyyy??</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'><span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">class</span> <span class="nc">SomeClass</span>
+</span><span class='line'>  <span class="k">def</span> <span class="nf">some_method</span><span class="p">(</span><span class="n">var</span><span class="p">)</span>
+</span><span class='line'>    <span class="vi">@new_var</span> <span class="o">=</span> <span class="n">var</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="k">def</span> <span class="nf">return_var</span>
+</span><span class='line'>    <span class="vi">@new_var</span><span class="o">.</span><span class="n">object_id</span> <span class="c1"># Object Id: 70131019948560</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="vi">@new_var</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'><span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">class</span> <span class="nc">AnotherClass</span>
+</span><span class='line'>  <span class="k">def</span> <span class="nf">another_method</span><span class="p">(</span><span class="n">var</span><span class="p">)</span>
+</span><span class='line'>    <span class="n">var</span><span class="o">[</span><span class="mi">0</span><span class="o">]</span> <span class="o">=</span> <span class="s1">&#39;b&#39;</span>
+</span><span class='line'>    <span class="n">var</span><span class="o">.</span><span class="n">object_id</span> <span class="c1"># Object Id: 70131019948560</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="n">var</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'><span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'><span class="n">j</span> <span class="o">=</span> <span class="no">ExampleClass</span><span class="o">.</span><span class="n">new</span>
+</span><span class='line'><span class="n">j</span><span class="o">.</span><span class="n">example_method</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>So what exactly is going on here? In my ExampleClass I&rsquo;m passing some_method a variable with the value &ldquo;woohooo&rdquo; and I expect it to return the same value (since I&rsquo;m not making any changes), BUT when I call another_method and pass it the same variable it changes the value that&rsquo;s being returned by return_var. What is this sorcery?!<br/>
+<img src="http://i.imgur.com/PezBytD.gif" alt="Witchcraft black magic code" /></p>
+
+<p>I could easily solve the problem by using the .clone method which creates a copy of the variable and be on my way, but that&rsquo;s not how I roll. This leads us to my second question, <em>What is pass by reference vs. pass by value?</em></p>
+
+<p>After consulting with my long-time friend, Google, what seems to be going on is that each time I&rsquo;m passing a variable to a method it&rsquo;s not making a copy of the variable, but rather making a copy of the reference to the same object in memory (which is why the Object Ids are all the same). I was absolutely baffled since I had assumed that Ruby makes object copies each time a variable is passed to a method (Oh and by the way this example doesn&rsquo;t work with Fixnum objects, apparently they have &ldquo;immediate value&rdquo; which means that the actual object is passed and not a reference).</p>
+
+<p>In this example we see something a little bit different.</p>
+
+<figure class='code'><figcaption><span>Slightly less bewildering code</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">def</span> <span class="nf">change</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+</span><span class='line'>  <span class="n">x</span><span class="o">.</span><span class="n">object_id</span> <span class="c1"># Object Id: 70266982826660</span>
+</span><span class='line'>  <span class="n">x</span> <span class="o">=</span> <span class="s1">&#39;10&#39;</span>
+</span><span class='line'>  <span class="n">x</span><span class="o">.</span><span class="n">object_id</span> <span class="c1"># Object Id: 70266982862600</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="n">x</span>
+</span><span class='line'><span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'><span class="n">y</span> <span class="o">=</span> <span class="s1">&#39;3&#39;</span>
+</span><span class='line'><span class="n">y</span><span class="o">.</span><span class="n">object_id</span> <span class="c1"># Object Id: 70266982826660</span>
+</span><span class='line'>
+</span><span class='line'><span class="n">change</span><span class="p">(</span><span class="n">y</span><span class="p">)</span> <span class="c1"># returns &#39;10&#39;</span>
+</span><span class='line'><span class="n">y</span> <span class="c1"># returns &#39;3&#39;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>I&rsquo;m passing a variable to the change method and while inside the method I&rsquo;m assigning it a different value. This method does exactly what I expect it to, it returns a different value, but it leaves the original variable the same. Why? Because the reference is changed (we can see this by looking at the difference in Object Ids) and the return value is actually a completely different object.</p>
+
+<p>In my first example the referenced object value was changed, but in the second example the reference itself was changed. Like I said&hellip;witchcraft!</p>
+
+<p>Here&rsquo;s a really great simple analogy that I found.</p>
+
+<blockquote><p>Say I want to share a web page with you.</p><p>If I tell you the URL, I&#8217;m passing by reference. You can use that URL to see the same web page I can see. If that page is changed, we both see the changes. If you delete the URL, all you&#8217;re doing is destroying your reference to that page - you&#8217;re not deleting the actual page itself.</p><p>If I print out the page and give you the printout, I&#8217;m passing by value. Your page is a disconnected copy of the original. You won&#8217;t see any subsequent changes, and any changes that you make (e.g. scribbling on your printout) will not show up on the original page. If you destroy the printout, you have actually destroyed your copy of the object - but the original web page remains intact.</p><footer><strong>Dylan Beattie</strong> <cite><a href='http://stackoverflow.com/a/430958'>StackOverflow</a></cite></footer></blockquote>
+
+
+<p>TL;DR Ruby is Pass by Value because a copy of a reference to an object is passed and not the object itself.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[So, You Want to Be a Mastermind?]]></title>
+    <link href="http://calvached.github.io/blog/2014/05/30/so-you-want-to-be-a-mastermind/"/>
+    <updated>2014-05-30T11:10:29-05:00</updated>
+    <id>http://calvached.github.io/blog/2014/05/30/so-you-want-to-be-a-mastermind</id>
+    <content type="html"><![CDATA[<p><img src="http://i.imgur.com/ANjI6Vi.png" alt="Mastermind" /></p>
+
+<p>For the last few days I&rsquo;ve been writing tests for a game I&rsquo;m working on called <strong>Mastermind</strong>.</p>
+
+<!-- more -->
+
+
+<p>The rules are simple. There are two players, the Codemaker (AI) and the Codebreaker (human player). The Codemaker is in charge of creating a four letter pattern from a given set of six letters (A-F). The Codebreaker&rsquo;s job is to correctly guess the pattern in the least number of tries (max of 10 tries). After each attempt the Codemaker gives the Codebreaker feedback by indicating how many letters are correct and in the right position by returning a &lsquo;o&rsquo; for each exact match. Letters that are in the wrong position, but exist in the pattern will return an &lsquo;x&rsquo;.<br/>
+For instance if the Codemaker&rsquo;s pattern were &ldquo;AFDE&rdquo; and the Codebreaker&rsquo;s guess were &ldquo;ADFE&rdquo; then the returned feedback will look like this: &ldquo;ooxx&rdquo;.</p>
+
+<p>There were two particular pieces of logic that were giving me trouble. The first had to do with the logic behind finding letters that matched the CM&rsquo;s pattern in the correct position.</p>
+
+<figure class='code'><figcaption><span>Find matching letters with the correct position</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">def</span> <span class="nf">letter_with_position_match</span><span class="p">(</span><span class="n">user_guess</span><span class="p">)</span>
+</span><span class='line'>  <span class="vi">@indexes</span> <span class="o">=</span> <span class="o">[]</span>
+</span><span class='line'>  <span class="n">counter</span> <span class="o">=</span> <span class="o">[]</span>
+</span><span class='line'>  <span class="n">user_guess</span><span class="o">.</span><span class="n">each_with_index</span> <span class="k">do</span> <span class="o">|</span><span class="n">cb_letter</span><span class="p">,</span> <span class="n">cb_i</span><span class="o">|</span>
+</span><span class='line'>          <span class="k">if</span> <span class="vi">@unsolved_pattern</span><span class="o">.</span><span class="n">include?</span><span class="p">(</span><span class="n">cb_letter</span><span class="p">)</span>
+</span><span class='line'>              <span class="vi">@unsolved_pattern</span><span class="o">.</span><span class="n">each_with_index</span> <span class="k">do</span> <span class="o">|</span><span class="n">cm_letter</span><span class="p">,</span> <span class="n">cm_i</span><span class="o">|</span>
+</span><span class='line'>                <span class="k">if</span> <span class="n">cb_letter</span> <span class="o">==</span> <span class="n">cm_letter</span> <span class="o">&amp;&amp;</span> <span class="n">cb_i</span> <span class="o">==</span> <span class="n">cm_i</span>
+</span><span class='line'>                  <span class="vi">@indexes</span> <span class="o">&lt;&lt;</span> <span class="n">cm_i</span>
+</span><span class='line'>                  <span class="n">counter</span> <span class="o">&lt;&lt;</span> <span class="n">cb_letter</span>
+</span><span class='line'>                <span class="k">end</span>
+</span><span class='line'>              <span class="k">end</span>
+</span><span class='line'>          <span class="k">end</span>
+</span><span class='line'>      <span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="n">counter</span><span class="o">.</span><span class="n">length</span>
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>I came up with a working algorithm by iterating through the CB&rsquo;s pattern and the CM&rsquo;s pattern, taking each individual letter and index from both, and comparing them. If a letter matched then it&rsquo;s index also had to match. At this point I also decided that I needed to hold on to those indexes so that I would know which letters haven&rsquo;t been matched yet.</p>
+
+<p>Although this code works, it definitely doesn&rsquo;t look very readable and it&rsquo;s plagued with repetition. After sitting down with my mentor, Kelly, we decided to take this a different route and begin with TDD (test driven development) instead. With TDD you first write a test, then write the code to pass the test, and repeat. With practice, TDD serves as a guideline in writing clean and simple code.</p>
+
+<p>We started with simple tests like the ones below.</p>
+
+<figure class='code'><figcaption><span>codemaker_spec.rb</span><a href='https://github.com/calvached/mastermind/blob/master/spec/codemaker_spec.rb'>Source Article</a></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">describe</span> <span class="no">CodeMaker</span> <span class="k">do</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="n">context</span> <span class="s2">&quot;position matches&quot;</span> <span class="k">do</span>
+</span><span class='line'>    <span class="n">it</span> <span class="s2">&quot;returns 4 if the guess matches pattern exactly&quot;</span> <span class="k">do</span>
+</span><span class='line'>      <span class="n">codemaker</span> <span class="o">=</span> <span class="no">CodeMaker</span><span class="o">.</span><span class="n">new</span>
+</span><span class='line'>      <span class="n">codemaker</span><span class="o">.</span><span class="n">unsolved_pattern</span> <span class="o">=</span> <span class="o">[</span><span class="s2">&quot;A&quot;</span><span class="p">,</span> <span class="s2">&quot;B&quot;</span><span class="p">,</span> <span class="s2">&quot;E&quot;</span><span class="p">,</span> <span class="s2">&quot;E&quot;</span><span class="o">]</span>
+</span><span class='line'>      <span class="n">expect</span><span class="p">(</span><span class="n">codemaker</span><span class="o">.</span><span class="n">feedback</span><span class="p">(</span><span class="o">[</span><span class="s2">&quot;A&quot;</span><span class="p">,</span> <span class="s2">&quot;B&quot;</span><span class="p">,</span> <span class="s2">&quot;E&quot;</span><span class="p">,</span> <span class="s2">&quot;E&quot;</span><span class="o">]</span><span class="p">))</span><span class="o">.</span><span class="n">to</span> <span class="n">eq</span><span class="p">(</span><span class="o">[</span><span class="s2">&quot;o&quot;</span><span class="p">,</span> <span class="s2">&quot;o&quot;</span><span class="p">,</span> <span class="s2">&quot;o&quot;</span><span class="p">,</span> <span class="s2">&quot;o&quot;</span><span class="o">]</span><span class="p">)</span>
+</span><span class='line'>    <span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="n">it</span> <span class="s2">&quot;returns 0 if the guess has no letters in the same position as the pattern&quot;</span> <span class="k">do</span>
+</span><span class='line'>      <span class="n">codemaker</span> <span class="o">=</span> <span class="no">CodeMaker</span><span class="o">.</span><span class="n">new</span>
+</span><span class='line'>      <span class="n">codemaker</span><span class="o">.</span><span class="n">unsolved_pattern</span> <span class="o">=</span> <span class="o">[</span><span class="s2">&quot;A&quot;</span><span class="p">,</span> <span class="s2">&quot;B&quot;</span><span class="p">,</span> <span class="s2">&quot;C&quot;</span><span class="p">,</span> <span class="s2">&quot;D&quot;</span><span class="o">]</span>
+</span><span class='line'>      <span class="n">expect</span><span class="p">(</span><span class="n">codemaker</span><span class="o">.</span><span class="n">feedback</span><span class="p">(</span><span class="o">[</span><span class="s2">&quot;F&quot;</span><span class="p">,</span> <span class="s2">&quot;F&quot;</span><span class="p">,</span> <span class="s2">&quot;F&quot;</span><span class="p">,</span> <span class="s2">&quot;F&quot;</span><span class="o">]</span><span class="p">))</span><span class="o">.</span><span class="n">to</span> <span class="n">eq</span><span class="p">(</span><span class="o">[]</span><span class="p">)</span>
+</span><span class='line'>    <span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="n">it</span> <span class="s2">&quot;returns 3 if the guess has 3 letters in the same position as the pattern&quot;</span> <span class="k">do</span>
+</span><span class='line'>      <span class="n">codemaker</span> <span class="o">=</span> <span class="no">CodeMaker</span><span class="o">.</span><span class="n">new</span>
+</span><span class='line'>      <span class="n">codemaker</span><span class="o">.</span><span class="n">unsolved_pattern</span> <span class="o">=</span> <span class="o">[</span><span class="s2">&quot;A&quot;</span><span class="p">,</span> <span class="s2">&quot;B&quot;</span><span class="p">,</span> <span class="s2">&quot;C&quot;</span><span class="p">,</span> <span class="s2">&quot;D&quot;</span><span class="o">]</span>
+</span><span class='line'>      <span class="n">expect</span><span class="p">(</span><span class="n">codemaker</span><span class="o">.</span><span class="n">feedback</span><span class="p">(</span><span class="o">[</span><span class="s2">&quot;A&quot;</span><span class="p">,</span> <span class="s2">&quot;B&quot;</span><span class="p">,</span> <span class="s2">&quot;C&quot;</span><span class="p">,</span> <span class="s2">&quot;F&quot;</span><span class="o">]</span><span class="p">))</span><span class="o">.</span><span class="n">to</span> <span class="n">eq</span><span class="p">(</span><span class="o">[</span><span class="s2">&quot;o&quot;</span><span class="p">,</span> <span class="s2">&quot;o&quot;</span><span class="p">,</span> <span class="s2">&quot;o&quot;</span><span class="o">]</span><span class="p">)</span>
+</span><span class='line'>    <span class="k">end</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Each test only tests one small feature. Every new test we wrote became more specific and addressed the next feature that we needed to cover. Eventually our tests looked like <a href="https://github.com/calvached/mastermind/blob/master/spec/codemaker_spec.rb">this</a>.</p>
+
+<p>As a result we were able to improve my icky icky method from before into something more decent and readable.</p>
+
+<figure class='code'><figcaption><span>codemaker.rb</span><a href='https://github.com/calvached/mastermind/blob/master/lib/codemaker.rb'>Source Article</a></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">def</span> <span class="nf">exact_feedback</span>
+</span><span class='line'>      <span class="vi">@matches_indexes</span> <span class="o">=</span> <span class="o">[]</span>
+</span><span class='line'>      <span class="n">results</span> <span class="o">=</span> <span class="o">[]</span>
+</span><span class='line'>
+</span><span class='line'>      <span class="vi">@guess</span><span class="o">.</span><span class="n">each_with_index</span> <span class="k">do</span> <span class="o">|</span><span class="n">letter</span><span class="p">,</span> <span class="n">i</span><span class="o">|</span>
+</span><span class='line'>          <span class="k">if</span> <span class="vi">@unsolved_pattern</span><span class="o">[</span><span class="n">i</span><span class="o">]</span> <span class="o">==</span> <span class="n">letter</span>
+</span><span class='line'>              <span class="n">results</span> <span class="o">&lt;&lt;</span> <span class="s1">&#39;o&#39;</span>
+</span><span class='line'>              <span class="vi">@matches_indexes</span> <span class="o">&lt;&lt;</span> <span class="n">i</span>
+</span><span class='line'>          <span class="k">end</span>
+</span><span class='line'>      <span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'>      <span class="n">results</span>
+</span><span class='line'>  <span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>The second bump in the road I ran into was in iterating through the CB&rsquo;s guess and checking whether they guessed any letters correctly even if in the wrong position. The problem here was that I didn&rsquo;t want to iterate through letters that were already matched in my first method (which is why I saved the indexes from the first matches).</p>
+
+<figure class='code'><figcaption><span>codemaker.rb</span><a href='https://github.com/calvached/mastermind/blob/master/lib/codemaker.rb'>Source Article</a></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">def</span> <span class="nf">get_unmatched</span><span class="p">(</span><span class="n">sequence</span><span class="p">,</span> <span class="n">matched_placeholder</span><span class="p">)</span>
+</span><span class='line'>      <span class="n">new_sequence</span> <span class="o">=</span> <span class="n">sequence</span><span class="o">.</span><span class="n">clone</span>
+</span><span class='line'>
+</span><span class='line'>      <span class="vi">@matches_indexes</span><span class="o">.</span><span class="n">each</span> <span class="k">do</span> <span class="o">|</span><span class="n">position</span><span class="o">|</span>
+</span><span class='line'>          <span class="n">new_sequence</span><span class="o">[</span><span class="n">position</span><span class="o">]</span> <span class="o">=</span> <span class="n">matched_placeholder</span>
+</span><span class='line'>      <span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'>      <span class="n">new_sequence</span>
+</span><span class='line'>  <span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>To find the unmatched letters I first had to clone (or duplicate) the pattern so that my original pattern will stay intact. Using the new cloned pattern I replaced all the letters at every index location with a symbol then returned the new cloned pattern.</p>
+
+<figure class='code'><figcaption><span>codemaker.rb</span><a href='https://github.com/calvached/mastermind/blob/master/lib/codemaker.rb'>Source Article</a></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">def</span> <span class="nf">letter_feedback</span>
+</span><span class='line'>      <span class="n">results</span> <span class="o">=</span> <span class="o">[]</span>
+</span><span class='line'>
+</span><span class='line'>      <span class="n">get_unmatched</span><span class="p">(</span><span class="vi">@guess</span><span class="p">,</span> <span class="s1">&#39;+&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">uniq</span><span class="o">.</span><span class="n">each</span> <span class="k">do</span> <span class="o">|</span><span class="n">letter</span><span class="o">|</span>
+</span><span class='line'>        <span class="n">results</span> <span class="o">&lt;&lt;</span> <span class="s1">&#39;x&#39;</span> <span class="k">if</span> <span class="n">get_unmatched</span><span class="p">(</span><span class="vi">@unsolved_pattern</span><span class="p">,</span> <span class="s1">&#39;-&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">include?</span><span class="p">(</span><span class="n">letter</span><span class="p">)</span>
+</span><span class='line'>      <span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'>      <span class="n">results</span>
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Skipping the already matched letters was only part of the problem, the second part involved duplicate letters in the CM&rsquo;s and the CB&rsquo;s patterns. I created an algorithm where I thought I solved the problem by using the .uniq method, but what I didn&rsquo;t take into account was that the CB&rsquo;s pattern also had to be modified for letters that were already matched.<br/>
+For instance if the CM&rsquo;s pattern was &ldquo;EDEC&rdquo; and the CB guessed &ldquo;EDDD&rdquo;. I would expect for the feedback to look something like this &ldquo;oo&rdquo;, but instead I was getting &ldquo;oox&rdquo;. By using the get_unmatched method on not only the CM&rsquo;s pattern, but also the CB&rsquo;s pattern I was able to fix the error I was getting.</p>
+
+<p>Mastermind has actually been really fun to build, tear down, build again and refactor! Implementing tests has made it so much easier to work on error cases.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[What It Means to #AlwaysBeLearning]]></title>
+    <link href="http://calvached.github.io/blog/2014/05/29/what-it-means-to-number-alwaysbelearning/"/>
+    <updated>2014-05-29T11:08:20-05:00</updated>
+    <id>http://calvached.github.io/blog/2014/05/29/what-it-means-to-number-alwaysbelearning</id>
+    <content type="html"><![CDATA[<p>At Dev Bootcamp I learned how to code, how to overcome failure and fix mistakes, how to ask for help when needed, and most importantly how to continue learning on my own or with others.</p>
+
+<p>Having graduated from Dev Bootcamp the only thing I was absolutely certain about was that I wanted to be an apprentice. I wasn&rsquo;t even sure if I wanted to do Front-end or Back-end work.</p>
+
+<p><em>So what exactly attracted me to the idea of apprenticeship?</em></p>
+
+<!-- more -->
+
+
+<p>One of the most attractive things about doing an apprenticeship is being given the chance to continue to grow with the guidance of a mentor. A mentor is someone who won&rsquo;t give you the answers, but will nudge you in the right direction and make sure you don&rsquo;t venture too far off from the path to your goal. I think that in order to be successful in any career you must have a mentor available to give advice.</p>
+
+<p><span class='pullquote-right' data-pullquote='work where you will be the least knowledgeable person in the room'>
+During one of our 1 o&#8217;clock standups, Dave Hoover talked to us about apprenticeships where he suggests to work where you will be the least knowledgeable person in the room. At the time I didn&rsquo;t quite understand why someone would want to be in that position. I mean isn&rsquo;t it better to be the smartest person in the room? He explained that if we are never challenged then how could we possibly expect to get better? The idea is that in order to become great you must learn from great people.
+</span></p>
+
+<p>I joined <a href="http://www.8thlight.com/">8th Light</a> as a student apprentice, in hopes of continuing my adventures in web development by learning how to write <u>good</u> code! 8th Light is a software consulting company who truly cares about the work they do and prefers to do things the right way the first time instead of monkey patching later on. A lot of the principles and good practices that 8th Light follows were taught at DBC (such as good naming conventions, decoupling, managing dependencies, etc) so applying was a natural next step.</p>
+
+<p>What do I hope to get out of an apprenticeship?<br/>
+  * Lots of practice with TDD<br/>
+  * OOP, is it what I think it is?<br/>
+  * Learn new things!<br/>
+  * Better understanding of what is good code/tests and how to write it <br/>
+  * Learn from great people</p>
+
+<p>In reality #AlwaysBeLearning simply means to always surround yourself with brilliant, inspiring people who will push you to be better than you ever thought you could be.</p>
+
+<!-- Validations in the model might work, but that's not good enough, do them at the database level.
+
+If you let the database do the work for you, instead of Ruby, then you get a lot better performance.
+
+Indexes are like a map from one value to a bunch of others. -->
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[RailsConf 2014 Recap]]></title>
+    <link href="http://calvached.github.io/blog/2014/05/12/railsconf-2014-recap/"/>
+    <updated>2014-05-12T17:24:34-05:00</updated>
+    <id>http://calvached.github.io/blog/2014/05/12/railsconf-2014-recap</id>
+    <content type="html"><![CDATA[<p><img src="http://i.imgur.com/JMkR7Lu.gif" alt="railsconf" /></p>
+
+<p>Rails is ten years old! -puts on party hat-</p>
+
+<p>I had the wonderful opportunity to attend RailsConf this year! I learned so much from all the talks I attended, even the ones that were <em>waaay</em> over my head.</p>
+
+<p><em>So what exactly IS RailsConf?</em></p>
+
+<!-- more -->
+
+
+<p>RailsConf is a HUGE gathering of Ruby on Rails developers anywhere between entry level to senior level. There are various speakers, workshops, and activies throughout the duration of the event. This year it was held right in our own backyard, Chicago! Most of the talks from this year are slowly being uploaded and you can check them out <a href="http://www.confreaks.com/events/railsconf">here</a>.</p>
+
+<p><strong>Opening Keynote</strong><br/>
+To kick off the event, <a href="https://twitter.com/dhh">DHH</a> took the stage with an <a href="http://www.confreaks.com/videos/3315-railsconf-keynote-writing-software">opening keynote</a> where he proposed the use of the term Software Writer instead of Software Engineer. He described reading code as more like reading 17th century French poetry than a hard science (such as physics). He also proposed the death of TDD and compared it to a fad diet. I have a seperate <a href="http://calvached.github.io/blog/2014/06/10/re-is-tdd-dead/">post</a> addressing the TDD controversy. You can find some of my notes for this talk <a href="http://i.imgur.com/dTOI1qW.jpg">here</a>. Overall it was very exciting to hear from other members of the community that it&rsquo;s ok to start programming late in life and that you don&rsquo;t have to be born with a keyboard in your hands to achieve greatness.<br/>
+* Pro-tip: Read a lot of software, write a lot of software, rewrite a lot of code! As developers we should strive to develop an eye for clarity in order to optimize readability in our code.</p>
+
+<p><strong>Domain Driven Design Hexagonal Architecture Rails</strong> <a href="http://www.confreaks.com/videos/3316-railsconf-domain-driven-design-and-hexagonal-architecture-with-rails">+</a><br/>
+[Coming soon]</p>
+
+<p><strong>Make an Event of it!</strong><br/>
+[Coming soon]</p>
+
+<p><strong>Concerns, Decorators, Presenters, Service Objects, Helpers, Help Me Decide!</strong> <a href="http://www.confreaks.com/videos/3329-railsconf-concerns-decorators-presenters-service-objects-helpers-help-me-decide">+</a><br/>
+[Coming soon]</p>
+
+<p><strong>Advanced Arel. When Activerecord just isn&rsquo;t enough</strong> <a href="http://www.confreaks.com/videos/3332-railsconf-advanced-arel-when-activerecord-just-isn-t-enough">+</a><br/>
+[Coming soon]</p>
+
+<p><strong>Deploying Rails is easier than it looks</strong> <a href="http://www.confreaks.com/videos/3339-railsconf-deploying-rails-is-easier-than-it-looks">+</a><br/>
+[Coming soon]</p>
+
+<p><strong>Web applications with Ruby (not Rails)</strong> <a href="http://www.confreaks.com/videos/3348-railsconf-web-applications-with-ruby-not-rails">+</a><br/>
+This was one of the few talks I went to that mostly involved live coding and it was wonderful to see from start to finish how <a href="https://twitter.com/dabit">David</a> launched a web app with no Rails!</p>
+
+<p><strong>All the little things</strong><br/>
+[Coming soon]</p>
+
+<p><strong>Elements of Design: A Developer’s Primer</strong><br/>
+[Coming soon]</p>
+
+<p><strong>How They Work Better Together: Lean UX, Agile Development and User-Centered Design</strong><br/>
+[Coming soon]</p>
+
+<p><strong>Discovering User Interactions</strong><br/>
+This particular talk didn&rsquo;t actually involve code, rails, or anything related to software. It was centered around objects and interfaces that we interact with everyday, such as microwaves, coffeemakers, and purchasing tickets for a monorail ride. <a href="https://twitter.com/camerondaigle">Cameron</a> talked about how poorly designed microwaves are, in that there isn&rsquo;t a universal interface or list of commands. Most microwaves give people too many options (some of those aren&rsquo;t even used at all!) and in order to access certain options a user much first find the &ldquo;secret&rdquo; sequence of commands. Once the &ldquo;secret&rdquo; is identified you can safely assume that it will be absolutely useless for any other microwave in existence. This was definitely one of my favorite talks that I attended because it pointed out the importance of UI and UX in the real world. Hilariously enough, he also pointed out the design flaws of a $100 coffeemaker he uses at work vs. the $30 coffeemaker he has at home. Here&rsquo;s some <a href="http://i.imgur.com/9WgKIsz.jpg">notes</a> from the talk!<br/>
+* Pro-tip: Keep it simple! Good design solves the right problem and instead of trying to fix all the knobs ask yourself &ldquo;Why are there so many knobs?&rdquo;</p>
+
+<p><strong>Tales from the Crypt</strong><br/>
+I didn&rsquo;t take notes for this talk because I was having so much fun watching the skit! <a href="https://twitter.com/abedra">Aaron</a>, <a href="https://twitter.com/presidentbeef">Justin</a>, and <a href="https://twitter.com/mkonda">Matt</a> did a great job demonstrating security errors/breeches that could happen while in production (such as <a href="http://rails-sqli.org/">SQL injection</a>) because of silly mistakes, miscommunication, and sheer laziness. Justin also briefly talked about his work on <a href="http://brakemanscanner.org/">Brakeman</a>, which can detect security issues in your Rails app. <br/>
+* Pro-tip: Real World applications will have many vulnerabilities so don&rsquo;t depend on Rails entirely for security.<br/>
+Resources for further info/learning:<br/>
+<a href="http://guides.rubyonrails.org/security.html">Rails Security Guide</a><br/>
+<a href="https://www.owasp.org/index.php/Ruby_on_Rails_Cheatsheet">Rails Cheatsheet</a><br/>
+<a href="https://github.com/rubysec/bundler-audit">Bundler Audit</a><br/>
+<a href="https://github.com/repsheet/repsheet">Repsheet</a></p>
+
+<p><strong>Improve Performance Quick and Cheap: Optimize Memory and Upgrade to Ruby 2.1</strong>
+[Coming soon]</p>
+
+<p><strong>Closing Keynote</strong><br/>
+[Coming soon]</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[The Great Switch]]></title>
+    <link href="http://calvached.github.io/blog/2014/04/27/the-great-switch/"/>
+    <updated>2014-04-27T18:01:39-05:00</updated>
+    <id>http://calvached.github.io/blog/2014/04/27/the-great-switch</id>
+    <content type="html"><![CDATA[<p>Wooo! I finally got <a href="http://octopress.org/">Octopress</a> up and running! Any new posts will be written here from now on. You can check out my old posts <a href="http://yufinavstheworld.tumblr.com/">here</a>.
+I also found this nifty <a href="https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet">cheatsheet</a> for Markdown!</p>
+
+<p><em>So what&rsquo;s this about a &ldquo;Great Switch&rdquo;?</em></p>
+
+<!-- more -->
+
+
+<p>I caved and got a Mac. So I went back home for about two weeks and gave my brother my laptop for him to use in college. I took that as an opportunity to get a Mac this time around and try to avoid the hardships of making Windows play nicely with RoR. Although once I got back I realized that I forgot to merge the partition I made for Linux on my Windows system soo&hellip;it now has half as much hard drive space (oops, sorry bro!).</p>
+
+<p>I also then realized that gaming on a Mac looks like <a href="http://weknowmemes.com/wp-content/uploads/2013/09/gaming-on-a-mac-meme.jpg">this</a> and I proceeded to react <a href="http://www.reactiongifs.com/wp-content/uploads/2013/12/wut.gif">appropriately</a>.</p>
+
+<p>BUT THERE&rsquo;S A PLUS SIDE! I now learned how to setup my environment on a MAC!</p>
+
+<p>Although there were a few bumps along the way. I mysteriously (and accidentally) &ldquo;deleted&rdquo; my .bash_profile in my /bin/bash shell so I had to switch to a different shell to fix it using <a href="http://support.apple.com/kb/TA27005">this</a>. I then had to open the .bash_profile and reset my PATH variable. After that was done I was back in business!</p>
+
+<p><img src="http://www.reactiongifs.com/wp-content/uploads/2013/06/Colbert-High-Five.gif" alt="aww yeah!" /></p>
+
+<p><em>So what was I doing that caused this situation?</em> I was trying to setup Sublime to launch from the command line, but was unsuccessful. Time to try it again!</p>
+
+<p><strong>Current Status:</strong> Stalking people&rsquo;s github profiles :3</p>
+]]></content>
+  </entry>
+  
+</feed>

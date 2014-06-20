@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: Life | Striving for Adequacy]]></title>
+  <link href="http://calvached.github.io/blog/categories/life/atom.xml" rel="self"/>
+  <link href="http://calvached.github.io/"/>
+  <updated>2014-06-19T20:53:11-05:00</updated>
+  <id>http://calvached.github.io/</id>
+  <author>
+    <name><![CDATA[Diana Calvache]]></name>
+    <email><![CDATA[hello@dianathegeek.com]]></email>
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Hikers in the Woods - an 8th Light Tale]]></title>
+    <link href="http://calvached.github.io/blog/2014/06/08/hikers-in-the-woods/"/>
+    <updated>2014-06-08T23:25:15-05:00</updated>
+    <id>http://calvached.github.io/blog/2014/06/08/hikers-in-the-woods</id>
+    <content type="html"><![CDATA[<p>This story was shared with me by my mentor, Kelly, a few days before I started my first day as an apprentice.</p>
+
+<p><em>An apprenticeship is like two hikers in the woods&hellip;</em></p>
+
+<!-- more -->
+
+
+<p>Imagine you are hiking down a forested trail with your apprentice. Imagine yourself walking beside the apprentice, not out in front. All of a sudden, you stop. Your apprentice stops with you. You both stand in silence. The apprentice is confused, wondering why you&rsquo;ve stopped. Then all of a sudden, a deer crashes out of the forest, onto the trail right in front of you, then scurries off the other direction.</p>
+
+<p>After the deer is gone, you explain to your apprentice what you saw and heard that alerted you to the deer&rsquo;s presence. You show the footprints, the scat, and encourage the apprentice to keep an eye out.</p>
+
+<p>Next imagine you come to a fork in the trail. You are familiar with these woods, you know that one trail leads you back home, and the other add 5 miles to your trip. A teacher would pull out a map, show the apprentice your current location, and show which trail to take. But you are not a teacher, you are a mentor. Instead you ask the apprentice to decide. &ldquo;Which way should we go?&rdquo; Then if the apprentice asks for a map, you provide the map. If the apprentice takes off down the longer path, you continue to walk along beside them.</p>
+
+<p>Imagine your apprentice chose the long way. When you manage to get where you are going, you raise the question. &ldquo;I wonder where that other path went.&rdquo; Then you might pull out the map and show the apprentice how to read it. Not only will the apprentice have gained some knowledge, but they also have 5 extra mile of weariness where the lesson &ldquo;Check your map at every crossroads&rdquo; really sets in.</p>
+
+<p>Through the entire day&rsquo;s hike, you&rsquo;ve kept the apprentice safe. You&rsquo;ve always know exactly where you were and how to get back home. You could at any moment, taken charge and avoided any danger.</p>
+
+<!-- Afterthought: -->
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[What It Means to #AlwaysBeLearning]]></title>
+    <link href="http://calvached.github.io/blog/2014/05/29/what-it-means-to-number-alwaysbelearning/"/>
+    <updated>2014-05-29T11:08:20-05:00</updated>
+    <id>http://calvached.github.io/blog/2014/05/29/what-it-means-to-number-alwaysbelearning</id>
+    <content type="html"><![CDATA[<p>At Dev Bootcamp I learned how to code, how to overcome failure and fix mistakes, how to ask for help when needed, and most importantly how to continue learning on my own or with others.</p>
+
+<p>Having graduated from Dev Bootcamp the only thing I was absolutely certain about was that I wanted to be an apprentice. I wasn&rsquo;t even sure if I wanted to do Front-end or Back-end work.</p>
+
+<p><em>So what exactly attracted me to the idea of apprenticeship?</em></p>
+
+<!-- more -->
+
+
+<p>One of the most attractive things about doing an apprenticeship is being given the chance to continue to grow with the guidance of a mentor. A mentor is someone who won&rsquo;t give you the answers, but will nudge you in the right direction and make sure you don&rsquo;t venture too far off from the path to your goal. I think that in order to be successful in any career you must have a mentor available to give advice.</p>
+
+<p>Surround your pullquote like this {" text to be quoted "}</p>
+
+<p>I joined <a href="http://www.8thlight.com/">8th Light</a> as a student apprentice, in hopes of continuing my adventures in web development by learning how to write <u>good</u> code! 8th Light is a software consulting company who truly cares about the work they do and prefers to do things the right way the first time instead of monkey patching later on. A lot of the principles and good practices that 8th Light follows were taught at DBC (such as good naming conventions, decoupling, managing dependencies, etc) so applying was a natural next step.</p>
+
+<p>What do I hope to get out of an apprenticeship?<br/>
+  * Lots of practice with TDD<br/>
+  * OOP, is it what I think it is?<br/>
+  * Learn new things!<br/>
+  * Better understanding of what is good code/tests and how to write it <br/>
+  * Learn from great people</p>
+
+<p>In reality #AlwaysBeLearning simply means to always surround yourself with brilliant, inspiring people who will push you to be better than you ever thought you could be.</p>
+
+<!-- Validations in the model might work, but that's not good enough, do them at the database level.
+
+If you let the database do the work for you, instead of Ruby, then you get a lot better performance.
+
+Indexes are like a map from one value to a bunch of others. -->
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[The Great Switch]]></title>
+    <link href="http://calvached.github.io/blog/2014/04/27/the-great-switch/"/>
+    <updated>2014-04-27T18:01:39-05:00</updated>
+    <id>http://calvached.github.io/blog/2014/04/27/the-great-switch</id>
+    <content type="html"><![CDATA[<p>Wooo! I finally got <a href="http://octopress.org/">Octopress</a> up and running! Any new posts will be written here from now on. You can check out my old posts <a href="http://yufinavstheworld.tumblr.com/">here</a>.
+I also found this nifty <a href="https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet">cheatsheet</a> for Markdown!</p>
+
+<p><em>So what&rsquo;s this about a &ldquo;Great Switch&rdquo;?</em></p>
+
+<!-- more -->
+
+
+<p>I caved and got a Mac. So I went back home for about two weeks and gave my brother my laptop for him to use in college. I took that as an opportunity to get a Mac this time around and try to avoid the hardships of making Windows play nicely with RoR. Although once I got back I realized that I forgot to merge the partition I made for Linux on my Windows system soo&hellip;it now has half as much hard drive space (oops, sorry bro!).</p>
+
+<p>I also then realized that gaming on a Mac looks like <a href="http://weknowmemes.com/wp-content/uploads/2013/09/gaming-on-a-mac-meme.jpg">this</a> and I proceeded to react <a href="http://www.reactiongifs.com/wp-content/uploads/2013/12/wut.gif">appropriately</a>.</p>
+
+<p>BUT THERE&rsquo;S A PLUS SIDE! I now learned how to setup my environment on a MAC!</p>
+
+<p>Although there were a few bumps along the way. I mysteriously (and accidentally) &ldquo;deleted&rdquo; my .bash_profile in my /bin/bash shell so I had to switch to a different shell to fix it using <a href="http://support.apple.com/kb/TA27005">this</a>. I then had to open the .bash_profile and reset my PATH variable. After that was done I was back in business!</p>
+
+<p><img src="http://www.reactiongifs.com/wp-content/uploads/2013/06/Colbert-High-Five.gif" alt="aww yeah!" /></p>
+
+<p><em>So what was I doing that caused this situation?</em> I was trying to setup Sublime to launch from the command line, but was unsuccessful. Time to try it again!</p>
+
+<p><strong>Current Status:</strong> Stalking people&rsquo;s github profiles :3</p>
+]]></content>
+  </entry>
+  
+</feed>

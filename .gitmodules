@@ -1,3 +1,6 @@
 [submodule ".themes/constant-cockles"]
 	path = .themes/constant-cockles
 	url = git://github.com/octothemes/constant-cockles.git
+[submodule ".themes/budget-bumbago"]
+	path = .themes/budget-bumbago
+	url = git://github.com/octothemes/budget-bumbago.git

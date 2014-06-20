@@ -1,0 +1,314 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>So, You Want to Be a Mastermind? - Striving for Adequacy</title>
+  <meta name="author" content="Diana Calvache">
+
+  
+  <meta name="description" content="So, You Want to Be a Mastermind? written May 30th, 2014 in tech For the last few days I&rsquo;ve been writing tests for a game I&rsquo;m working on &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://calvached.github.io/blog/2014/05/30/so-you-want-to-be-a-mastermind">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href="/atom.xml" rel="alternate" title="Striving for Adequacy" type="application/atom+xml">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <script>!window.jQuery && document.write(unescape('%3Cscript src="./javascripts/libs/jquery.min.js"%3E%3C/script%3E'))</script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  
+
+</head>
+
+  <body>
+    <a href="/" class="home-icon">
+      <img src="/images/home.png"/>
+    </a>
+
+    <article role="article" class="full-single-article">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-8 col-md-offset-2">
+        <h1>So, You Want to Be a Mastermind?</h1>
+        <div class="meta">
+          written 
+
+
+
+
+
+
+
+
+  
+
+
+
+<time datetime="2014-05-30T11:10:29-05:00" pubdate data-updated="true">May 30<span>th</span>, 2014</time>
+          
+
+in
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/tech/'>tech</a>
+  
+</span>
+
+
+        </div>
+        <p><img src="http://i.imgur.com/ANjI6Vi.png" alt="Mastermind" /></p>
+
+<p>For the last few days I&rsquo;ve been writing tests for a game I&rsquo;m working on called <strong>Mastermind</strong>.</p>
+
+<!-- more -->
+
+
+<p>The rules are simple. There are two players, the Codemaker (AI) and the Codebreaker (human player). The Codemaker is in charge of creating a four letter pattern from a given set of six letters (A-F). The Codebreaker&rsquo;s job is to correctly guess the pattern in the least number of tries (max of 10 tries). After each attempt the Codemaker gives the Codebreaker feedback by indicating how many letters are correct and in the right position by returning a &lsquo;o&rsquo; for each exact match. Letters that are in the wrong position, but exist in the pattern will return an &lsquo;x&rsquo;.<br/>
+For instance if the Codemaker&rsquo;s pattern were &ldquo;AFDE&rdquo; and the Codebreaker&rsquo;s guess were &ldquo;ADFE&rdquo; then the returned feedback will look like this: &ldquo;ooxx&rdquo;.</p>
+
+<p>There were two particular pieces of logic that were giving me trouble. The first had to do with the logic behind finding letters that matched the CM&rsquo;s pattern in the correct position.</p>
+
+<figure class='code'><figcaption><span>Find matching letters with the correct position</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">def</span> <span class="nf">letter_with_position_match</span><span class="p">(</span><span class="n">user_guess</span><span class="p">)</span>
+</span><span class='line'>  <span class="vi">@indexes</span> <span class="o">=</span> <span class="o">[]</span>
+</span><span class='line'>  <span class="n">counter</span> <span class="o">=</span> <span class="o">[]</span>
+</span><span class='line'>  <span class="n">user_guess</span><span class="o">.</span><span class="n">each_with_index</span> <span class="k">do</span> <span class="o">|</span><span class="n">cb_letter</span><span class="p">,</span> <span class="n">cb_i</span><span class="o">|</span>
+</span><span class='line'>          <span class="k">if</span> <span class="vi">@unsolved_pattern</span><span class="o">.</span><span class="n">include?</span><span class="p">(</span><span class="n">cb_letter</span><span class="p">)</span>
+</span><span class='line'>              <span class="vi">@unsolved_pattern</span><span class="o">.</span><span class="n">each_with_index</span> <span class="k">do</span> <span class="o">|</span><span class="n">cm_letter</span><span class="p">,</span> <span class="n">cm_i</span><span class="o">|</span>
+</span><span class='line'>                <span class="k">if</span> <span class="n">cb_letter</span> <span class="o">==</span> <span class="n">cm_letter</span> <span class="o">&amp;&amp;</span> <span class="n">cb_i</span> <span class="o">==</span> <span class="n">cm_i</span>
+</span><span class='line'>                  <span class="vi">@indexes</span> <span class="o">&lt;&lt;</span> <span class="n">cm_i</span>
+</span><span class='line'>                  <span class="n">counter</span> <span class="o">&lt;&lt;</span> <span class="n">cb_letter</span>
+</span><span class='line'>                <span class="k">end</span>
+</span><span class='line'>              <span class="k">end</span>
+</span><span class='line'>          <span class="k">end</span>
+</span><span class='line'>      <span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="n">counter</span><span class="o">.</span><span class="n">length</span>
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>I came up with a working algorithm by iterating through the CB&rsquo;s pattern and the CM&rsquo;s pattern, taking each individual letter and index from both, and comparing them. If a letter matched then it&rsquo;s index also had to match. At this point I also decided that I needed to hold on to those indexes so that I would know which letters haven&rsquo;t been matched yet.</p>
+
+<p>Although this code works, it definitely doesn&rsquo;t look very readable and it&rsquo;s plagued with repetition. After sitting down with my mentor, Kelly, we decided to take this a different route and begin with TDD (test driven development) instead. With TDD you first write a test, then write the code to pass the test, and repeat. With practice, TDD serves as a guideline in writing clean and simple code.</p>
+
+<p>We started with simple tests like the ones below.</p>
+
+<figure class='code'><figcaption><span>codemaker_spec.rb</span><a href='https://github.com/calvached/mastermind/blob/master/spec/codemaker_spec.rb'>Source Article</a></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">describe</span> <span class="no">CodeMaker</span> <span class="k">do</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="n">context</span> <span class="s2">&quot;position matches&quot;</span> <span class="k">do</span>
+</span><span class='line'>    <span class="n">it</span> <span class="s2">&quot;returns 4 if the guess matches pattern exactly&quot;</span> <span class="k">do</span>
+</span><span class='line'>      <span class="n">codemaker</span> <span class="o">=</span> <span class="no">CodeMaker</span><span class="o">.</span><span class="n">new</span>
+</span><span class='line'>      <span class="n">codemaker</span><span class="o">.</span><span class="n">unsolved_pattern</span> <span class="o">=</span> <span class="o">[</span><span class="s2">&quot;A&quot;</span><span class="p">,</span> <span class="s2">&quot;B&quot;</span><span class="p">,</span> <span class="s2">&quot;E&quot;</span><span class="p">,</span> <span class="s2">&quot;E&quot;</span><span class="o">]</span>
+</span><span class='line'>      <span class="n">expect</span><span class="p">(</span><span class="n">codemaker</span><span class="o">.</span><span class="n">feedback</span><span class="p">(</span><span class="o">[</span><span class="s2">&quot;A&quot;</span><span class="p">,</span> <span class="s2">&quot;B&quot;</span><span class="p">,</span> <span class="s2">&quot;E&quot;</span><span class="p">,</span> <span class="s2">&quot;E&quot;</span><span class="o">]</span><span class="p">))</span><span class="o">.</span><span class="n">to</span> <span class="n">eq</span><span class="p">(</span><span class="o">[</span><span class="s2">&quot;o&quot;</span><span class="p">,</span> <span class="s2">&quot;o&quot;</span><span class="p">,</span> <span class="s2">&quot;o&quot;</span><span class="p">,</span> <span class="s2">&quot;o&quot;</span><span class="o">]</span><span class="p">)</span>
+</span><span class='line'>    <span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="n">it</span> <span class="s2">&quot;returns 0 if the guess has no letters in the same position as the pattern&quot;</span> <span class="k">do</span>
+</span><span class='line'>      <span class="n">codemaker</span> <span class="o">=</span> <span class="no">CodeMaker</span><span class="o">.</span><span class="n">new</span>
+</span><span class='line'>      <span class="n">codemaker</span><span class="o">.</span><span class="n">unsolved_pattern</span> <span class="o">=</span> <span class="o">[</span><span class="s2">&quot;A&quot;</span><span class="p">,</span> <span class="s2">&quot;B&quot;</span><span class="p">,</span> <span class="s2">&quot;C&quot;</span><span class="p">,</span> <span class="s2">&quot;D&quot;</span><span class="o">]</span>
+</span><span class='line'>      <span class="n">expect</span><span class="p">(</span><span class="n">codemaker</span><span class="o">.</span><span class="n">feedback</span><span class="p">(</span><span class="o">[</span><span class="s2">&quot;F&quot;</span><span class="p">,</span> <span class="s2">&quot;F&quot;</span><span class="p">,</span> <span class="s2">&quot;F&quot;</span><span class="p">,</span> <span class="s2">&quot;F&quot;</span><span class="o">]</span><span class="p">))</span><span class="o">.</span><span class="n">to</span> <span class="n">eq</span><span class="p">(</span><span class="o">[]</span><span class="p">)</span>
+</span><span class='line'>    <span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="n">it</span> <span class="s2">&quot;returns 3 if the guess has 3 letters in the same position as the pattern&quot;</span> <span class="k">do</span>
+</span><span class='line'>      <span class="n">codemaker</span> <span class="o">=</span> <span class="no">CodeMaker</span><span class="o">.</span><span class="n">new</span>
+</span><span class='line'>      <span class="n">codemaker</span><span class="o">.</span><span class="n">unsolved_pattern</span> <span class="o">=</span> <span class="o">[</span><span class="s2">&quot;A&quot;</span><span class="p">,</span> <span class="s2">&quot;B&quot;</span><span class="p">,</span> <span class="s2">&quot;C&quot;</span><span class="p">,</span> <span class="s2">&quot;D&quot;</span><span class="o">]</span>
+</span><span class='line'>      <span class="n">expect</span><span class="p">(</span><span class="n">codemaker</span><span class="o">.</span><span class="n">feedback</span><span class="p">(</span><span class="o">[</span><span class="s2">&quot;A&quot;</span><span class="p">,</span> <span class="s2">&quot;B&quot;</span><span class="p">,</span> <span class="s2">&quot;C&quot;</span><span class="p">,</span> <span class="s2">&quot;F&quot;</span><span class="o">]</span><span class="p">))</span><span class="o">.</span><span class="n">to</span> <span class="n">eq</span><span class="p">(</span><span class="o">[</span><span class="s2">&quot;o&quot;</span><span class="p">,</span> <span class="s2">&quot;o&quot;</span><span class="p">,</span> <span class="s2">&quot;o&quot;</span><span class="o">]</span><span class="p">)</span>
+</span><span class='line'>    <span class="k">end</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Each test only tests one small feature. Every new test we wrote became more specific and addressed the next feature that we needed to cover. Eventually our tests looked like <a href="https://github.com/calvached/mastermind/blob/master/spec/codemaker_spec.rb">this</a>.</p>
+
+<p>As a result we were able to improve my icky icky method from before into something more decent and readable.</p>
+
+<figure class='code'><figcaption><span>codemaker.rb</span><a href='https://github.com/calvached/mastermind/blob/master/lib/codemaker.rb'>Source Article</a></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">def</span> <span class="nf">exact_feedback</span>
+</span><span class='line'>      <span class="vi">@matches_indexes</span> <span class="o">=</span> <span class="o">[]</span>
+</span><span class='line'>      <span class="n">results</span> <span class="o">=</span> <span class="o">[]</span>
+</span><span class='line'>
+</span><span class='line'>      <span class="vi">@guess</span><span class="o">.</span><span class="n">each_with_index</span> <span class="k">do</span> <span class="o">|</span><span class="n">letter</span><span class="p">,</span> <span class="n">i</span><span class="o">|</span>
+</span><span class='line'>          <span class="k">if</span> <span class="vi">@unsolved_pattern</span><span class="o">[</span><span class="n">i</span><span class="o">]</span> <span class="o">==</span> <span class="n">letter</span>
+</span><span class='line'>              <span class="n">results</span> <span class="o">&lt;&lt;</span> <span class="s1">&#39;o&#39;</span>
+</span><span class='line'>              <span class="vi">@matches_indexes</span> <span class="o">&lt;&lt;</span> <span class="n">i</span>
+</span><span class='line'>          <span class="k">end</span>
+</span><span class='line'>      <span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'>      <span class="n">results</span>
+</span><span class='line'>  <span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>The second bump in the road I ran into was in iterating through the CB&rsquo;s guess and checking whether they guessed any letters correctly even if in the wrong position. The problem here was that I didn&rsquo;t want to iterate through letters that were already matched in my first method (which is why I saved the indexes from the first matches).</p>
+
+<figure class='code'><figcaption><span>codemaker.rb</span><a href='https://github.com/calvached/mastermind/blob/master/lib/codemaker.rb'>Source Article</a></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">def</span> <span class="nf">get_unmatched</span><span class="p">(</span><span class="n">sequence</span><span class="p">,</span> <span class="n">matched_placeholder</span><span class="p">)</span>
+</span><span class='line'>      <span class="n">new_sequence</span> <span class="o">=</span> <span class="n">sequence</span><span class="o">.</span><span class="n">clone</span>
+</span><span class='line'>
+</span><span class='line'>      <span class="vi">@matches_indexes</span><span class="o">.</span><span class="n">each</span> <span class="k">do</span> <span class="o">|</span><span class="n">position</span><span class="o">|</span>
+</span><span class='line'>          <span class="n">new_sequence</span><span class="o">[</span><span class="n">position</span><span class="o">]</span> <span class="o">=</span> <span class="n">matched_placeholder</span>
+</span><span class='line'>      <span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'>      <span class="n">new_sequence</span>
+</span><span class='line'>  <span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>To find the unmatched letters I first had to clone (or duplicate) the pattern so that my original pattern will stay intact. Using the new cloned pattern I replaced all the letters at every index location with a symbol then returned the new cloned pattern.</p>
+
+<figure class='code'><figcaption><span>codemaker.rb</span><a href='https://github.com/calvached/mastermind/blob/master/lib/codemaker.rb'>Source Article</a></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">def</span> <span class="nf">letter_feedback</span>
+</span><span class='line'>      <span class="n">results</span> <span class="o">=</span> <span class="o">[]</span>
+</span><span class='line'>
+</span><span class='line'>      <span class="n">get_unmatched</span><span class="p">(</span><span class="vi">@guess</span><span class="p">,</span> <span class="s1">&#39;+&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">uniq</span><span class="o">.</span><span class="n">each</span> <span class="k">do</span> <span class="o">|</span><span class="n">letter</span><span class="o">|</span>
+</span><span class='line'>        <span class="n">results</span> <span class="o">&lt;&lt;</span> <span class="s1">&#39;x&#39;</span> <span class="k">if</span> <span class="n">get_unmatched</span><span class="p">(</span><span class="vi">@unsolved_pattern</span><span class="p">,</span> <span class="s1">&#39;-&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">include?</span><span class="p">(</span><span class="n">letter</span><span class="p">)</span>
+</span><span class='line'>      <span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'>      <span class="n">results</span>
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Skipping the already matched letters was only part of the problem, the second part involved duplicate letters in the CM&rsquo;s and the CB&rsquo;s patterns. I created an algorithm where I thought I solved the problem by using the .uniq method, but what I didn&rsquo;t take into account was that the CB&rsquo;s pattern also had to be modified for letters that were already matched.<br/>
+For instance if the CM&rsquo;s pattern was &ldquo;EDEC&rdquo; and the CB guessed &ldquo;EDDD&rdquo;. I would expect for the feedback to look something like this &ldquo;oo&rdquo;, but instead I was getting &ldquo;oox&rdquo;. By using the get_unmatched method on not only the CM&rsquo;s pattern, but also the CB&rsquo;s pattern I was able to fix the error I was getting.</p>
+
+<p>Mastermind has actually been really fun to build, tear down, build again and refactor! Implementing tests has made it so much easier to work on error cases.</p>
+
+      </div>
+    </div>
+  </div>
+</article>
+
+<hr class="divider-short"/>
+
+<div class="archive-link">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-8 col-md-offset-2">
+        
+          <a class="pull-left" href="/blog/2014/05/29/what-it-means-to-number-alwaysbelearning/" title="Previous Post: What it means to #AlwaysBeLearning">&laquo; Previous: What it means to #AlwaysBeLearning</a>
+        
+
+        
+          <a class="pull-right" href="/blog/2014/06/02/ruby-pass-by-what/" title="Next Post: Ruby, pass by what?">Next: Ruby, pass by what? &raquo;</a>
+        
+      </div>
+    </div>
+  </div>
+</div>
+
+    <footer id="footer" class="her-row">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-1">
+  <a href="/"><h4>Home</h4></a>
+</div>
+
+<div class="col-md-2">
+  <div class="social-icon-list">
+    
+    <a href="https://twitter.com/zephynao"><img src="/images/glyphicons_social_31_twitter.png"/></a>
+    
+
+    <a href="https://linkedin.com/in/calvached/"><img src="/images/glyphicons_social_17_linked_in.png"></a>
+    
+    
+    <a href="https://github.com/calvached"><img src="/images/glyphicons_social_21_github.png"/></a>
+    
+
+    
+    <a href="mailto:hello@dianathegeek.com"><img src="/images/glyphicons_social_39_e-mail.png"/></a>
+    
+  </div>
+</div>
+
+<div class="pull-right">
+  <h4>Powered by <a href="http://octopress.org/">Octopress</a>. Designed by <a href="http://AdrianArtiles.com">Adrian Artiles</a>.</h4>
+</div>
+
+    </div>
+  </div>
+</footer>
+
+  </body>
+</html>
