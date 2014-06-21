@@ -141,8 +141,8 @@ example.example_method <span class="comment"># &quot;You're not suppose to mess 
 <span class="keyword">end</span>
 
 example = <span class="constant">ExampleClass</span>.new
-example.instance_eval{ private_method_here } <span class="comment"># &quot;Hello outer World&quot;</span>
-example.send <span class="symbol">:private_method_here</span> <span class="comment"># &quot;Hello outer World&quot;</span>
+example.instance_eval{ private_method_here } <span class="comment"># &quot;Hello Outside World&quot;</span>
+example.send <span class="symbol">:private_method_here</span> <span class="comment"># &quot;Hello Outside World&quot;</span>
 </pre></div>
 </div>
  </figure></notextile></div>

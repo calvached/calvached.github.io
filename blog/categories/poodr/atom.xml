@@ -4,7 +4,7 @@
   <title><![CDATA[Category: POODR | Striving for Adequacy]]></title>
   <link href="http://calvached.github.io/blog/categories/poodr/atom.xml" rel="self"/>
   <link href="http://calvached.github.io/"/>
-  <updated>2014-06-21T16:15:46-05:00</updated>
+  <updated>2014-06-21T16:37:47-05:00</updated>
   <id>http://calvached.github.io/</id>
   <author>
     <name><![CDATA[Diana Calvache]]></name>
@@ -89,8 +89,8 @@ example.example_method <span class="comment"># “You’re not suppose to mess w
 <span class="keyword">end</span>&lt;<span class="regexp"><span class="delimiter">/</span><span class="content">p&gt;
 
 &lt;p&gt;example = ExampleClass.new
-example.instance_eval{ private_method_here } # “Hello outer World”
-example.send :private_method_here # “Hello outer World”
+example.instance_eval{ private_method_here } # “Hello Outside World”
+example.send :private_method_here # “Hello Outside World”
 </span></span></pre></div>
 </div>
  </figure></notextile></div></p>

@@ -4,7 +4,7 @@
   <title><![CDATA[Striving for Adequacy]]></title>
   <link href="http://calvached.github.io/atom.xml" rel="self"/>
   <link href="http://calvached.github.io/"/>
-  <updated>2014-06-21T16:15:46-05:00</updated>
+  <updated>2014-06-21T16:37:47-05:00</updated>
   <id>http://calvached.github.io/</id>
   <author>
     <name><![CDATA[Diana Calvache]]></name>
@@ -116,8 +116,8 @@ example.example_method <span class="comment"># &quot;You're not suppose to mess 
 <span class="keyword">end</span>
 
 example = <span class="constant">ExampleClass</span>.new
-example.instance_eval{ private_method_here } <span class="comment"># &quot;Hello outer World&quot;</span>
-example.send <span class="symbol">:private_method_here</span> <span class="comment"># &quot;Hello outer World&quot;</span>
+example.instance_eval{ private_method_here } <span class="comment"># &quot;Hello Outside World&quot;</span>
+example.send <span class="symbol">:private_method_here</span> <span class="comment"># &quot;Hello Outside World&quot;</span>
 </pre></div>
 </div>
  </figure></notextile></div>
