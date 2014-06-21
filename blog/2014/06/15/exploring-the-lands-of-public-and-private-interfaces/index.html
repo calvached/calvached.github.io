@@ -13,7 +13,7 @@
   <meta name="author" content="Diana Calvache">
 
   
-  <meta name="description" content="Exploring the Lands of Public and Private Interfaces written Jun 15th, 2014 in POODR, tech Let&rsquo;s talk about interfaces (and possibly spaghetti &hellip;">
+  <meta name="description" content="Exploring the Lands of Public and Private Interfaces written Jun 15th, 2014 in POODR, tech Let’s talk about interfaces (and possibly spaghetti)!! &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -70,109 +70,82 @@ in
 
 
         </div>
-        <p>Let&rsquo;s talk about interfaces (and possibly spaghetti)!!</p>
+        <p>Let’s talk about interfaces (and possibly spaghetti)!!</p>
 
-<p>Interface can mean a bunch of things in different contexts, but in this post I&rsquo;ll be referring to it as anything that is contained within a Class.</p>
-
+<p>Interface can mean a bunch of things in different contexts, but in this post I’ll be referring to it as anything that is contained within a Class.
 <!-- more -->
+Lately, I’ve been reading Sandy Metz’s book, Practical Object Oriented Design in Ruby (affectionately called “POODR”) and I came across an interesting chapter about designing flexible interfaces. Although I have been using Public and Private methods in my code, I never really looked into “why” there should be a distinction between methods in a Class (at the time I also didn’t know what was meant by “interface”).</p>
 
+<p>All Classes implement methods that are meant to be used by others (usually more general methods) and methods only designed to be used inside the Class. The methods that are intended to be used by others are part of what’s called the Public interface. These methods reveal just enough information about the Class to be useful, they should be unsurprising, dependable and reveal the intentions of the Class they belong to. If a Class reveals too much of itself, consequently, it will end up knowing too much of it’s neighbors. This leads to a highly [coupled design](http://en.wikipedia.org/wiki/Coupling_(computer_programming) (in other words: <a href="http://en.wikipedia.org/wiki/Spaghetti_code">Spaghetti Code</a>).</p>
 
-<p>Lately, I&rsquo;ve been reading Sandy Metz&rsquo;s book, Practical Object Oriented Design in Ruby (affectionately called &ldquo;POODR&rdquo;) and I came across an interesting chapter about designing flexible interfaces. Although I have been using Public and Private methods in my code, I never really looked into &ldquo;why&rdquo; there should be a distinction between methods in a Class (at the time I also didn&rsquo;t know what was meant by &ldquo;interface&rdquo;).</p>
+<p><strong>So how can we avoid the terrors of Spaghetti Code??</strong><br />
+One way we can combat the evils of Spaghetti Code is to explicitly classify certain method under the Private interface (which basically means “Do not touch or else!”). The Private interface will contain any methods that are not intended to be used by others, cannot be trusted or depended on, they might also handle implementation details and/or can change for any reason.</p>
 
-<p>All Classes implement methods that are meant to be used by others (usually more general methods) and methods only designed to be used inside the Class. The methods that are intended to be used by others are part of what&rsquo;s called the Public interface. These methods reveal just enough information about the Class to be useful, they should be unsurprising, dependable and reveal the intentions of the Class they belong to. If a Class reveals too much of itself, consequently, it will end up knowing too much of it&rsquo;s neighbors. This leads to a highly <a href="http://en.wikipedia.org/wiki/Coupling_(computer_programming">coupled design</a> (in other words: <a href="http://en.wikipedia.org/wiki/Spaghetti_code">Spaghetti Code</a>).</p>
+<p><strong>Let’s explore what Private means in Ruby!</strong><br />
+If I use the method <a href="http://ruby-doc.org/core-2.0.0/Module.html#method-i-private">Private</a> in a Class I would expect any method after it (unless I specifically want it <a href="http://ruby-doc.org/core-2.0.0/Module.html#method-i-public">Public</a>) to be “uncallable” from outside of the Class. In Ruby this is not true (not sure if this applies to other languages as well). What Private means in Ruby is that a method cannot be called with an explicit receiver.</p>
 
-<p><strong>So how can we avoid the terrors of Spaghetti Code??</strong><br/>
-One way we can combat the evils of Spaghetti Code is to explicitly classify certain method under the Private interface (which basically means &ldquo;Do not touch or else!&rdquo;). The Private interface will contain any methods that are not intended to be used by others, cannot be trusted or depended on, they might also handle implementation details and/or can change for any reason.</p>
+<p>For example, this will throw an error because I have an explicit receiver calling private_method_here (I will also get an error if I call private_method_here directly).  </p>
 
-<p><strong>Let&rsquo;s explore what Private means in Ruby!</strong><br/>
-If I use the method <a href="http://ruby-doc.org/core-2.0.0/Module.html#method-i-private">Private</a> in a Class I would expect any method after it (unless I specifically want it <a href="http://ruby-doc.org/core-2.0.0/Module.html#method-i-public">Public</a>) to be &ldquo;uncallable&rdquo; from outside of the Class. In Ruby this is not true (not sure if this applies to other languages as well). What Private means in Ruby is that a method cannot be called with an explicit receiver.</p>
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption class="code-header" style="margin-bottom:-5px;"><span>Explicit Receiver </span></figcaption>
+ <div class="CodeRay">
+  <div class="code"><pre>
+<span class="keyword">class</span> <span class="class">ExampleClass</span>
+  <span class="keyword">def</span> <span class="function">example_method</span>
+    <span class="predefined-constant">self</span>.private_method_here
+  <span class="keyword">end</span>
 
-<p>For example, this will throw an error because I have an explicit receiver calling private_method_here (I will also get an error if I call private_method_here directly).</p>
+private
+  <span class="keyword">def</span> <span class="function">private_method_here</span>
+    <span class="string"><span class="delimiter">&quot;</span><span class="content">You're not suppose to mess with me!</span><span class="delimiter">&quot;</span></span>
+  <span class="keyword">end</span>
+<span class="keyword">end</span>
 
-<figure class='code'><figcaption><span>Explicit Receiver example</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">class</span> <span class="nc">ExampleClass</span>
-</span><span class='line'>  <span class="k">def</span> <span class="nf">example_method</span>
-</span><span class='line'>    <span class="nb">self</span><span class="o">.</span><span class="n">private_method_here</span>
-</span><span class='line'>  <span class="k">end</span>
-</span><span class='line'>
-</span><span class='line'>  <span class="kp">private</span>
-</span><span class='line'>  <span class="k">def</span> <span class="nf">private_method_here</span>
-</span><span class='line'>    <span class="s2">&quot;You&#39;re not suppose to mess with me!&quot;</span>
-</span><span class='line'>  <span class="k">end</span>
-</span><span class='line'><span class="k">end</span>
-</span><span class='line'>
-</span><span class='line'><span class="n">example</span> <span class="o">=</span> <span class="no">Example</span><span class="o">.</span><span class="n">new</span>
-</span><span class='line'><span class="n">example</span><span class="o">.</span><span class="n">example_method</span> <span class="c1"># NoMethodError: private method `private_method_here&#39; called for #&lt;Example:0x007f8cb6019420&gt;</span>
-</span></code></pre></td></tr></table></div></figure>
-
+example = <span class="constant">Example</span>.new
+example.example_method <span class="comment"># NoMethodError: private method `private_method_here' called for #&lt;Example:0x007f8cb6019420&gt;</span>
+</pre></div>
+</div>
+ </figure></notextile></div>
 
 <p>However, if I call private_method_here with an implicit receiver then no error is thrown!</p>
 
-<figure class='code'><figcaption><span>Implicit Receiver example</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">class</span> <span class="nc">ExampleClass</span>
-</span><span class='line'>  <span class="k">def</span> <span class="nf">example_method</span>
-</span><span class='line'>    <span class="n">private_method_here</span>
-</span><span class='line'>  <span class="k">end</span>
-</span><span class='line'>
-</span><span class='line'>  <span class="kp">private</span>
-</span><span class='line'>  <span class="k">def</span> <span class="nf">private_method_here</span>
-</span><span class='line'>    <span class="s2">&quot;You&#39;re not suppose to mess with me!&quot;</span>
-</span><span class='line'>  <span class="k">end</span>
-</span><span class='line'><span class="k">end</span>
-</span><span class='line'>
-</span><span class='line'><span class="n">example</span> <span class="o">=</span> <span class="no">Example</span><span class="o">.</span><span class="n">new</span>
-</span><span class='line'><span class="n">example</span><span class="o">.</span><span class="n">example_method</span> <span class="c1"># &quot;You&#39;re not suppose to mess with me!&quot;</span>
-</span></code></pre></td></tr></table></div></figure>
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption class="code-header" style="margin-bottom:-5px;"><span>Implicit Receiver </span></figcaption>
+ <div class="CodeRay">
+  <div class="code"><pre>
+<span class="keyword">class</span> <span class="class">ExampleClass</span>
+  <span class="keyword">def</span> <span class="function">example_method</span>
+    private_method_here
+  <span class="keyword">end</span>
 
+  private
+  <span class="keyword">def</span> <span class="function">private_method_here</span>
+    <span class="string"><span class="delimiter">&quot;</span><span class="content">You're not suppose to mess with me!</span><span class="delimiter">&quot;</span></span>
+  <span class="keyword">end</span>
+<span class="keyword">end</span>
+
+example = <span class="constant">Example</span>.new
+example.example_method <span class="comment"># &quot;You're not suppose to mess with me!&quot;</span>
+</pre></div>
+</div>
+ </figure></notextile></div>
 
 <p>There are also a few other ways to gain access to private_method_here.</p>
 
-<figure class='code'><figcaption><span>Private isn&#8217;t quite so private lol</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">class</span> <span class="nc">ExampleClass</span>
-</span><span class='line'>  <span class="kp">private</span>
-</span><span class='line'>  <span class="k">def</span> <span class="nf">private_method_here</span>
-</span><span class='line'>    <span class="s1">&#39;Hello outer World&#39;</span>
-</span><span class='line'>  <span class="k">end</span>
-</span><span class='line'><span class="k">end</span>
-</span><span class='line'>
-</span><span class='line'><span class="n">example</span> <span class="o">=</span> <span class="no">ExampleClass</span><span class="o">.</span><span class="n">new</span>
-</span><span class='line'><span class="n">example</span><span class="o">.</span><span class="n">instance_eval</span><span class="p">{</span> <span class="n">private_method_here</span> <span class="p">}</span> <span class="c1"># &quot;Hello outer World&quot;</span>
-</span><span class='line'><span class="n">example</span><span class="o">.</span><span class="n">send</span> <span class="ss">:private_method_here</span> <span class="c1"># &quot;Hello outer World&quot;</span>
-</span></code></pre></td></tr></table></div></figure>
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption class="code-header" style="margin-bottom:-5px;"><span>Private isn&#8217;t quite so private lol </span></figcaption>
+ <div class="CodeRay">
+  <div class="code"><pre>
+<span class="keyword">class</span> <span class="class">ExampleClass</span>
+  private
+  <span class="keyword">def</span> <span class="function">private_method_here</span>
+    <span class="string"><span class="delimiter">'</span><span class="content">Hello Outside World</span><span class="delimiter">'</span></span>
+  <span class="keyword">end</span>
+<span class="keyword">end</span>
 
+example = <span class="constant">ExampleClass</span>.new
+example.instance_eval{ private_method_here } <span class="comment"># &quot;Hello outer World&quot;</span>
+example.send <span class="symbol">:private_method_here</span> <span class="comment"># &quot;Hello outer World&quot;</span>
+</pre></div>
+</div>
+ </figure></notextile></div>
 
 <p>It seems that Private in Ruby acts more like a suggestion rather than being strictly enforced.</p>
 
