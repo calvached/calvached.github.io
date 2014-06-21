@@ -21,13 +21,14 @@ __Let's explore what Private means in Ruby!__
 If I use the method [Private](http://ruby-doc.org/core-2.0.0/Module.html#method-i-private) in a Class I would expect any method after it (unless I specifically want it [Public](http://ruby-doc.org/core-2.0.0/Module.html#method-i-public)) to be "uncallable" from outside of the Class. In Ruby this is not true (not sure if this applies to other languages as well). What Private means in Ruby is that a method cannot be called with an explicit receiver.
 
 For example, this will throw an error because I have an explicit receiver calling private_method_here (I will also get an error if I call private_method_here directly).  
-``` ruby Explicit Receiver example
+
+{% coderay Explicit Receiver lang:ruby %}
 class ExampleClass
   def example_method
     self.private_method_here
   end
 
-  private
+private
   def private_method_here
     "You're not suppose to mess with me!"
   end
@@ -35,9 +36,11 @@ end
 
 example = Example.new
 example.example_method # NoMethodError: private method `private_method_here' called for #<Example:0x007f8cb6019420>
-```
-However, if I call private_method_here with an implicit receiver then no error is thrown!  
-``` ruby Implicit Receiver example
+{% endcoderay %}
+
+However, if I call private_method_here with an implicit receiver then no error is thrown!
+
+{% coderay Implicit Receiver lang:ruby %}
 class ExampleClass
   def example_method
     private_method_here
@@ -51,18 +54,21 @@ end
 
 example = Example.new
 example.example_method # "You're not suppose to mess with me!"
-```
+{% endcoderay %}
+
 There are also a few other ways to gain access to private_method_here.
-``` ruby Private isn't quite so private lol
+
+{% coderay Private isn't quite so private lol lang:ruby %}
 class ExampleClass
   private
   def private_method_here
-    'Hello outer World'
+    'Hello Outside World'
   end
 end
 
 example = ExampleClass.new
-example.instance_eval{ private_method_here } # "Hello outer World"
-example.send :private_method_here # "Hello outer World"
-```
+example.instance_eval{ private_method_here } # "Hello Outside World"
+example.send :private_method_here # "Hello Outside World"
+{% endcoderay %}
+
 It seems that Private in Ruby acts more like a suggestion rather than being strictly enforced.

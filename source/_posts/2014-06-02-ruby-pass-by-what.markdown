@@ -12,7 +12,8 @@ There are two questions that have been bugging me lately. The first, _Why do I h
 Let's start with the first question.
 <!-- more -->
 To simplify what I was experiencing here's an example:  
-``` ruby Black magic code going on here
+
+{% coderay Black magic code going on here lang:ruby %}
 class ExampleClass
   def example_method
     var = 'woohooo'
@@ -53,8 +54,10 @@ end
 
 j = ExampleClass.new
 j.example_method
-```
-So what exactly is going on here? In my ExampleClass I'm passing some_method a variable with the value "woohooo" and I expect it to return the same value (since I'm not making any changes), BUT when I call another_method and pass it the same variable it changes the value that's being returned by return_var. What is this sorcery?!  
+{% endcoderay %}
+
+So what exactly is going on here? In my ExampleClass I'm passing some_method a variable with the value "woohooo" and I expect it to return the same value (since I'm not making any changes), BUT when I call another_method and pass it the same variable it changes the value that's being returned by return_var. What is this sorcery?!
+
 ![Witchcraft black magic code](http://i.imgur.com/PezBytD.gif)
 
 I could easily solve the problem by using the .clone method which creates a copy of the variable and be on my way, but that's not how I roll. This leads us to my second question, _What is pass by reference vs. pass by value?_
@@ -62,7 +65,8 @@ I could easily solve the problem by using the .clone method which creates a copy
 After consulting with my long-time friend, Google, what seems to be going on is that each time I'm passing a variable to a method it's not making a copy of the variable, but rather making a copy of the reference to the same object in memory (which is why the Object Ids are all the same). I was absolutely baffled since I had assumed that Ruby makes object copies each time a variable is passed to a method (Oh and by the way this example doesn't work with Fixnum objects, apparently they have "immediate value" which means that the actual object is passed and not a reference).
 
 In this example we see something a little bit different.  
-``` ruby Slightly less bewildering code
+
+{% coderay Slightly less bewildering code lang:ruby %}
 def change(x)
   x.object_id # Object Id: 70266982826660
   x = '10' 
@@ -76,7 +80,8 @@ y.object_id # Object Id: 70266982826660
 
 change(y) # returns '10'
 y # returns '3'
-```
+{% endcoderay %}
+
 I'm passing a variable to the change method and while inside the method I'm assigning it a different value. This method does exactly what I expect it to, it returns a different value, but it leaves the original variable the same. Why? Because the reference is changed (we can see this by looking at the difference in Object Ids) and the return value is actually a completely different object.
 
 In my first example the referenced object value was changed, but in the second example the reference itself was changed. Like I said...witchcraft!

@@ -14,24 +14,25 @@ For instance if the Codemaker's pattern were "AFDE" and the Codebreaker's guess 
 
 There were two particular pieces of logic that were giving me trouble. The first had to do with the logic behind finding letters that matched the CM's pattern in the correct position. 
 
-``` ruby Find matching letters with the correct position
+{% coderay Find matching letters with the correct position lang:ruby %}
 def letter_with_position_match(user_guess)
-	@indexes = []
-	counter = []
-	user_guess.each_with_index do |cb_letter, cb_i|
-			if @unsolved_pattern.include?(cb_letter)
-				@unsolved_pattern.each_with_index do |cm_letter, cm_i|
-				  if cb_letter == cm_letter && cb_i == cm_i
-				  	@indexes << cm_i
-				  	counter << cb_letter 
-				  end
-				end
-			end
-		end
+  @indexes = []
+  counter = []
 
-	counter.length
+  user_guess.each_with_index do |cb_letter, cb_i|
+    if @unsolved_pattern.include?(cb_letter)
+      @unsolved_pattern.each_with_index do |cm_letter, cm_i|
+        if cb_letter == cm_letter && cb_i == cm_i
+          @indexes << cm_i
+          counter << cb_letter 
+        end
+      end
+    end
+  end
+
+  counter.length
 end
-```
+{% endcoderay %}
 
 I came up with a working algorithm by iterating through the CB's pattern and the CM's pattern, taking each individual letter and index from both, and comparing them. If a letter matched then it's index also had to match. At this point I also decided that I needed to hold on to those indexes so that I would know which letters haven't been matched yet. 
 
@@ -39,7 +40,7 @@ Although this code works, it definitely doesn't look very readable and it's plag
 
 We started with simple tests like the ones below.
 
-``` ruby codemaker_spec.rb https://github.com/calvached/mastermind/blob/master/spec/codemaker_spec.rb Source Article
+{% coderay codemaker_spec.rb lang:ruby https://github.com/calvached/mastermind/blob/master/spec/codemaker_spec.rb Source %}
 describe CodeMaker do
 
   context "position matches" do
@@ -62,54 +63,55 @@ describe CodeMaker do
     end
   end
 end
-```
+{% endcoderay %}
+
 Each test only tests one small feature. Every new test we wrote became more specific and addressed the next feature that we needed to cover. Eventually our tests looked like [this](https://github.com/calvached/mastermind/blob/master/spec/codemaker_spec.rb).
 
 As a result we were able to improve my icky icky method from before into something more decent and readable.
 
-``` ruby codemaker.rb https://github.com/calvached/mastermind/blob/master/lib/codemaker.rb Source Article
+{% coderay codemaker.rb lang:ruby https://github.com/calvached/mastermind/blob/master/lib/codemaker.rb Source %}
 def exact_feedback
-		@matches_indexes = []
-		results = []
+  @matches_indexes = []
+  results = []
 
-		@guess.each_with_index do |letter, i|
-			if @unsolved_pattern[i] == letter
-				results << 'o' 
-				@matches_indexes << i
-			end
-		end
+  @guess.each_with_index do |letter, i|
+    if @unsolved_pattern[i] == letter
+      results << 'o'
+      @matches_indexes << i
+    end
+  end
 
-		results
-	end
-```
+  results
+end
+{% endcoderay %}
 
 The second bump in the road I ran into was in iterating through the CB's guess and checking whether they guessed any letters correctly even if in the wrong position. The problem here was that I didn't want to iterate through letters that were already matched in my first method (which is why I saved the indexes from the first matches).
 
-``` ruby codemaker.rb https://github.com/calvached/mastermind/blob/master/lib/codemaker.rb Source Article
+{% coderay codemaker.rb lang:ruby https://github.com/calvached/mastermind/blob/master/lib/codemaker.rb Source %}
 def get_unmatched(sequence, matched_placeholder)
-  	new_sequence = sequence.clone
+  new_sequence = sequence.clone
 
-  	@matches_indexes.each do |position|
-  		new_sequence[position] = matched_placeholder
-  	end
-
-  	new_sequence
+  @matches_indexes.each do |position|
+    new_sequence[position] = matched_placeholder
   end
-```
+
+  new_sequence
+end
+{% endcoderay %}
 
 To find the unmatched letters I first had to clone (or duplicate) the pattern so that my original pattern will stay intact. Using the new cloned pattern I replaced all the letters at every index location with a symbol then returned the new cloned pattern. 
 
-``` ruby codemaker.rb https://github.com/calvached/mastermind/blob/master/lib/codemaker.rb Source Article
+{% coderay codemaker.rb lang:ruby https://github.com/calvached/mastermind/blob/master/lib/codemaker.rb Source %}
 def letter_feedback
-  	results = []
+  results = []
 
-  	get_unmatched(@guess, '+').uniq.each do |letter|
-  	  results << 'x' if get_unmatched(@unsolved_pattern, '-').include?(letter)
-  	end
+  get_unmatched(@guess, '+').uniq.each do |letter|
+    results << 'x' if get_unmatched(@unsolved_pattern, '-').include?(letter)
+  end
 
-		results
+  results
 end
-```
+{% endcoderay %}
 
 Skipping the already matched letters was only part of the problem, the second part involved duplicate letters in the CM's and the CB's patterns. I created an algorithm where I thought I solved the problem by using the .uniq method, but what I didn't take into account was that the CB's pattern also had to be modified for letters that were already matched.  
 For instance if the CM's pattern was "EDEC" and the CB guessed "EDDD". I would expect for the feedback to look something like this "oo", but instead I was getting "oox". By using the get_unmatched method on not only the CM's pattern, but also the CB's pattern I was able to fix the error I was getting.
