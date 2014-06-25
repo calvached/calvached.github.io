@@ -4,7 +4,7 @@
   <title><![CDATA[Category: POODR | Striving for Adequacy]]></title>
   <link href="http://calvached.github.io/blog/categories/poodr/atom.xml" rel="self"/>
   <link href="http://calvached.github.io/"/>
-  <updated>2014-06-21T16:37:47-05:00</updated>
+  <updated>2014-06-25T10:21:55-05:00</updated>
   <id>http://calvached.github.io/</id>
   <author>
     <name><![CDATA[Diana Calvache]]></name>
@@ -24,7 +24,7 @@
 <!-- more -->
 Lately, I’ve been reading Sandy Metz’s book, Practical Object Oriented Design in Ruby (affectionately called “POODR”) and I came across an interesting chapter about designing flexible interfaces. Although I have been using Public and Private methods in my code, I never really looked into “why” there should be a distinction between methods in a Class (at the time I also didn’t know what was meant by “interface”).</p>
 
-<p>All Classes implement methods that are meant to be used by others (usually more general methods) and methods only designed to be used inside the Class. The methods that are intended to be used by others are part of what’s called the Public interface. These methods reveal just enough information about the Class to be useful, they should be unsurprising, dependable and reveal the intentions of the Class they belong to. If a Class reveals too much of itself, consequently, it will end up knowing too much of it’s neighbors. This leads to a highly [coupled design](http://en.wikipedia.org/wiki/Coupling_(computer_programming) (in other words: <a href="http://en.wikipedia.org/wiki/Spaghetti_code">Spaghetti Code</a>).</p>
+<p>All Classes implement methods that are meant to be used by others (usually more general methods) and methods only designed to be used inside the Class. The methods that are intended to be used by others are part of what’s called the Public interface. These methods reveal just enough information about the Class to be useful, they should be unsurprising, dependable and reveal the intentions of the Class they belong to. If a Class reveals too much of itself, consequently, it will end up knowing too much of it’s neighbors. This leads to a highly <a href="http://en.wikipedia.org/wiki/Coupling_(computer_programming)">coupled design</a> (in other words: <a href="http://en.wikipedia.org/wiki/Spaghetti_code">Spaghetti Code</a>).</p>
 
 <p><strong>So how can we avoid the terrors of Spaghetti Code??</strong><br />
 One way we can combat the evils of Spaghetti Code is to explicitly classify certain method under the Private interface (which basically means “Do not touch or else!”). The Private interface will contain any methods that are not intended to be used by others, cannot be trusted or depended on, they might also handle implementation details and/or can change for any reason.</p>
