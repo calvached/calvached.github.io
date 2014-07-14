@@ -1,0 +1,237 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Dissecting and Demystifying: Reduce/Inject - Striving for Adequacy</title>
+  <meta name="author" content="Diana Calvache">
+
+  
+  <meta name="description" content="Dissecting and Demystifying: Reduce/Inject written Jun 23rd, 2014 in D&D, reduce, tech Reduce (a.k.a. Inject) is an enumerable method that recently &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://calvached.github.io/blog/2014/06/23/dissecting-and-demystifying-reduce-slash-inject">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href="/atom.xml" rel="alternate" title="Striving for Adequacy" type="application/atom+xml">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <script>!window.jQuery && document.write(unescape('%3Cscript src="./javascripts/libs/jquery.min.js"%3E%3C/script%3E'))</script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  
+
+</head>
+
+  <body>
+    <a href="/" class="home-icon">
+      <img src="/images/home.png"/>
+    </a>
+
+    <article role="article" class="full-single-article">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-8 col-md-offset-2">
+        <h1>Dissecting and Demystifying: Reduce/Inject</h1>
+        <div class="meta">
+          written 
+
+
+
+
+
+
+
+
+  
+
+
+
+<time datetime="2014-06-23T16:30:29-05:00" pubdate data-updated="true">Jun 23<span>rd</span>, 2014</time>
+          
+
+in
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/d-and-d/'>D&D</a>, <a class='category' href='/blog/categories/reduce/'>reduce</a>, <a class='category' href='/blog/categories/tech/'>tech</a>
+  
+</span>
+
+
+        </div>
+        <p><a href="http://www.ruby-doc.org/core-2.1.0/Enumerable.html#method-i-reduce">Reduce</a> (a.k.a. Inject) is an enumerable method that recently made a whole lot of sense to me, so I figured that it was time to do a deep dive into how <code>reduce</code> works and what it can do for us using Blocks and Symbols.
+<!-- more --></p>
+
+<h3 id="block">Block</h3>
+<p><code>reduce</code> takes three arguments: a collection, an initial value, and a function. If an initial value isn’t given then it defaults to the first value in the collection.</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption class="code-header" style="margin-bottom:-5px;"><span>Integer as initial value </span></figcaption>
+ <div class="CodeRay">
+  <div class="code"><pre>
+<span class="keyword">def</span> <span class="function">add_numbers</span>
+  (<span class="integer">1</span>..<span class="integer">10</span>).reduce(<span class="integer">0</span>) { |sum, value| sum + value }
+<span class="keyword">end</span>
+
+<span class="keyword">def</span> <span class="function">add_more_numbers</span>
+  (<span class="integer">1</span>..<span class="integer">10</span>).reduce { |sum, value| sum + value }
+<span class="keyword">end</span>
+
+
+add_numbers <span class="comment"># returns 55</span>
+add_more_numbers <span class="comment"># returns 55</span>
+</pre></div>
+</div>
+ </figure></notextile></div>
+
+<p>In <code>add_numbers</code> the arguments are as follows:<br />
+<strong>Collection</strong>: 1, 2, 3, 4, 5, 6, 7, 8, 9, 10<br />
+<strong>Initial Value</strong>: 0<br />
+<strong>Function</strong>: Add each element from the collection to the initial value and return a total.</p>
+
+<p><code>reduce</code> initializes the variable “sum” with the value of 0 and keeps a running total of each return value. In other words, a number from the collection is added each time to the initial value and the total sum becomes the new sum for the next value waiting to be added.</p>
+
+<p>Let’s see what this example looks like using <code>each</code> instead:</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption class="code-header" style="margin-bottom:-5px;"><span>Using an each method </span></figcaption>
+ <div class="CodeRay">
+  <div class="code"><pre>
+<span class="keyword">def</span> <span class="function">add_numbers</span>
+  sum = <span class="integer">0</span>
+
+  (<span class="integer">1</span>..<span class="integer">10</span>).each { |value| sum += value }
+  sum
+<span class="keyword">end</span>
+
+add_numbers <span class="comment"># returns 55</span>
+</pre></div>
+</div>
+ </figure></notextile></div>
+
+<p><code>reduce</code> is like an <code>each</code> with superpowers!</p>
+
+<p>Our initial value can also be an array or a hash.</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption class="code-header" style="margin-bottom:-5px;"><span>Array as an initial value </span></figcaption>
+ <div class="CodeRay">
+  <div class="code"><pre>
+<span class="keyword">def</span> <span class="function">even_numbers</span>
+  (<span class="integer">1</span>..<span class="integer">10</span>).reduce([]) <span class="keyword">do</span> |even_arr, value|
+    value.even? ? even_arr &lt;&lt; value : even_arr
+  <span class="keyword">end</span>
+<span class="keyword">end</span>
+
+even_numbers <span class="comment"># returns [2, 4, 6, 8, 10]</span>
+
+<span class="comment"># SIDE NOTE: There must always be a return value or else the accumulator will be returned as &quot;nil&quot;</span>
+</pre></div>
+</div>
+ </figure></notextile></div>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption class="code-header" style="margin-bottom:-5px;"><span>Hash as an initial value </span></figcaption>
+ <div class="CodeRay">
+  <div class="code"><pre>
+<span class="keyword">def</span> <span class="function">change_structure</span>(data)
+  data.reduce({}) <span class="keyword">do</span> |results_hash, element|
+    results_hash[element[<span class="integer">0</span>]] = element[<span class="integer">1</span>]
+    results_hash
+  <span class="keyword">end</span>
+<span class="keyword">end</span>
+
+user_info = [[<span class="string"><span class="delimiter">'</span><span class="content">username</span><span class="delimiter">'</span></span>, <span class="string"><span class="delimiter">'</span><span class="content">carlsagan</span><span class="delimiter">'</span></span>], [<span class="string"><span class="delimiter">'</span><span class="content">password</span><span class="delimiter">'</span></span>,<span class="string"><span class="delimiter">'</span><span class="content">palebluedot</span><span class="delimiter">'</span></span>]]
+change_structure(user_info) <span class="comment"># returns {&quot;username&quot;=&gt;&quot;carlsagan&quot;, &quot;password&quot;=&gt;&quot;palebluedot&quot;}</span>
+</pre></div>
+</div>
+ </figure></notextile></div>
+
+<h3 id="symbol">Symbol</h3>
+<p><code>reduce</code> also accepts a symbol, which makes addition and multiplication very easy and simple to read.</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"> <div class="CodeRay">
+  <div class="code"><pre>
+(<span class="integer">1</span>..<span class="integer">10</span>).reduce(<span class="symbol">:+</span>) <span class="comment"># returns 55</span>
+(<span class="integer">1</span>..<span class="integer">10</span>).reduce(<span class="integer">1</span>, <span class="symbol">:+</span>) <span class="comment"># returns 56</span>
+</pre></div>
+</div>
+ </figure></notextile></div>
+
+<p>The <code>:</code> tells Ruby that we are going to give it a symbol, which in our case is a <code>+</code> (this is the name of the addition method, you can also give it a <code>*</code> for the multiplication method). By passing in a symbol we can apply a method to each one of the values in the collection.</p>
+
+<p>The operator methods can be broken down as follows:</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"> <div class="CodeRay">
+  <div class="code"><pre>
+<span class="integer">10</span>.+( <span class="integer">2</span> ) <span class="comment"># returns 12</span>
+<span class="integer">10</span>.*( <span class="integer">2</span> ) <span class="comment"># returns 20</span>
+<span class="integer">10</span>.-( <span class="integer">2</span> ) <span class="comment"># returns 8</span>
+<span class="integer">10</span>./( <span class="integer">2</span> ) <span class="comment"># returns 5</span>
+</pre></div>
+</div>
+ </figure></notextile></div>
+
+
+      </div>
+    </div>
+  </div>
+</article>
+
+<hr class="divider-short"/>
+
+<div class="archive-link">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-8 col-md-offset-2">
+        
+          <a class="pull-left" href="/blog/2014/06/19/the-land-of-vim-getting-started/" title="Previous Post: The Land of Vim Part 1: getting started">&laquo; Previous: The Land of Vim Part 1: getting started</a>
+        
+
+        
+      </div>
+    </div>
+  </div>
+</div>
+
+    <footer id="footer" class="her-row">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-1">
+  <a href="/"><h4>Home</h4></a>
+</div>
+
+<div class="col-md-2">
+  <div class="social-icon-list">
+    
+    <a href="https://twitter.com/zephynao"><img src="/images/glyphicons_social_31_twitter.png"/></a>
+    
+    <a href="https://linkedin.com/in/calvached/"><img src="/images/glyphicons_social_17_linked_in.png"></a>
+    
+    <a href="https://github.com/calvached"><img src="/images/glyphicons_social_21_github.png"/></a>
+    
+
+    
+    <a href="mailto:hello@dianathegeek.com"><img src="/images/glyphicons_social_39_e-mail.png"/></a>
+    
+  </div>
+</div>
+
+<div class="pull-right">
+  <h4>Powered by <a href="http://octopress.org/">Octopress</a>. Designed by <a href="http://AdrianArtiles.com">Adrian Artiles</a>.</h4>
+</div>
+
+
+    </div>
+  </div>
+</footer>
+
+  </body>
+</html>

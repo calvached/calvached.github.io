@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: D&D | Striving for Adequacy]]></title>
+  <link href="http://calvached.github.io/blog/categories/d-and-d/atom.xml" rel="self"/>
+  <link href="http://calvached.github.io/"/>
+  <updated>2014-07-14T14:32:25-05:00</updated>
+  <id>http://calvached.github.io/</id>
+  <author>
+    <name><![CDATA[Diana Calvache]]></name>
+    <email><![CDATA[hello@dianathegeek.com]]></email>
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Dissecting and Demystifying: Reduce/Inject]]></title>
+    <link href="http://calvached.github.io/blog/2014/06/23/dissecting-and-demystifying-reduce-slash-inject/"/>
+    <updated>2014-06-23T16:30:29-05:00</updated>
+    <id>http://calvached.github.io/blog/2014/06/23/dissecting-and-demystifying-reduce-slash-inject</id>
+    <content type="html"><![CDATA[<p><a href="http://www.ruby-doc.org/core-2.1.0/Enumerable.html#method-i-reduce">Reduce</a> (a.k.a. Inject) is an enumerable method that recently made a whole lot of sense to me, so I figured that it was time to do a deep dive into how <code>reduce</code> works and what it can do for us using Blocks and Symbols.
+<!-- more --></p>
+
+<h3 id="block">Block</h3>
+<p><code>reduce</code> takes three arguments: a collection, an initial value, and a function. If an initial value isn’t given then it defaults to the first value in the collection.
+<div class='bogus-wrapper'><notextile><figure class='code'><figcaption class='code-header' style='margin-bottom:-5px;'><span>Integer as initial value </span></figcaption>
+ <div class="CodeRay">
+  <div class="code"><pre>
+<span class="keyword">def</span> <span class="function">add_numbers</span>
+  (<span class="integer">1</span>..<span class="integer">10</span>).reduce(<span class="integer">0</span>) { |sum, value| sum + value }
+<span class="keyword">end</span>&lt;<span class="regexp"><span class="delimiter">/</span><span class="content">p&gt;
+
+&lt;p&gt;def add_more_numbers
+  (1..10).reduce { |sum, value| sum + value }
+end&lt;</span><span class="delimiter">/</span></span>p&gt;
+
+&lt;p&gt;add_numbers <span class="comment"># returns 55</span>
+add_more_numbers <span class="comment"># returns 55</span>
+</pre></div>
+</div>
+ </figure></notextile></div>
+In <code>add_numbers</code> the arguments are as follows:<br />
+<strong>Collection</strong>: 1, 2, 3, 4, 5, 6, 7, 8, 9, 10<br />
+<strong>Initial Value</strong>: 0<br />
+<strong>Function</strong>: Add each element from the collection to the initial value and return a total.</p>
+
+<p><code>reduce</code> initializes the variable “sum” with the value of 0 and keeps a running total of each return value. In other words, a number from the collection is added each time to the initial value and the total sum becomes the new sum for the next value waiting to be added.</p>
+
+<p>Let’s see what this example looks like using <code>each</code> instead:
+<div class='bogus-wrapper'><notextile><figure class='code'><figcaption class='code-header' style='margin-bottom:-5px;'><span>Using an each method </span></figcaption>
+ <div class="CodeRay">
+  <div class="code"><pre>
+<span class="keyword">def</span> <span class="function">add_numbers</span>
+  sum = <span class="integer">0</span>&lt;<span class="regexp"><span class="delimiter">/</span><span class="content">p&gt;
+
+&lt;p&gt;(1..10).each { |value| sum += value }
+  sum
+end&lt;</span><span class="delimiter">/</span></span>p&gt;
+
+&lt;p&gt;add_numbers <span class="comment"># returns 55</span>
+</pre></div>
+</div>
+ </figure></notextile></div>
+ <code>reduce</code> is like an <code>each</code> with superpowers!</p>
+
+<p>Our initial value can also be an array or a hash.</p>
+
+<p><div class='bogus-wrapper'><notextile><figure class='code'><figcaption class='code-header' style='margin-bottom:-5px;'><span>Array as an initial value </span></figcaption>
+ <div class="CodeRay">
+  <div class="code"><pre>
+<span class="keyword">def</span> <span class="function">even_numbers</span>
+  (<span class="integer">1</span>..<span class="integer">10</span>).reduce([]) <span class="keyword">do</span> |even_arr, value|
+    value.even? ? even_arr « value : even_arr
+  <span class="keyword">end</span>
+<span class="keyword">end</span>&lt;<span class="regexp"><span class="delimiter">/</span><span class="content">p&gt;
+
+&lt;p&gt;even_numbers # returns [2, 4, 6, 8, 10]&lt;</span><span class="delimiter">/</span></span>p&gt;
+
+&lt;h1 id=<span class="string"><span class="delimiter">&quot;</span><span class="content">side-note-there-must-always-be-a-return-value-or-else-the-accumulator-will-be-returned-as-nil</span><span class="delimiter">&quot;</span></span>&gt;<span class="constant">SIDE</span> <span class="key">NOTE</span>: <span class="constant">There</span> must always be a <span class="keyword">return</span> value <span class="keyword">or</span> <span class="keyword">else</span> the accumulator will be returned as “nil”&lt;<span class="regexp"><span class="delimiter">/</span><span class="content">h1&gt;
+&lt;p&gt;</span></span></pre></div>
+</div>
+ </figure></notextile></div></p>
+
+<p><div class='bogus-wrapper'><notextile><figure class='code'><figcaption class='code-header' style='margin-bottom:-5px;'><span>Hash as an initial value </span></figcaption>
+ <div class="CodeRay">
+  <div class="code"><pre>
+<span class="keyword">def</span> <span class="function">change_structure</span>(data)
+  data.reduce({}) <span class="keyword">do</span> |results_hash, element|
+    results_hash[element[<span class="integer">0</span>]] = element[<span class="integer">1</span>]
+    results_hash
+  <span class="keyword">end</span>
+<span class="keyword">end</span>&lt;<span class="regexp"><span class="delimiter">/</span><span class="content">p&gt;
+
+&lt;p&gt;user_info = [[‘username’, ‘carlsagan’], [‘password’,’palebluedot’]]
+change_structure(user_info) # returns {“username”=&amp;gt;”carlsagan”, “password”=&amp;gt;”palebluedot”}
+</span></span></pre></div>
+</div>
+ </figure></notextile></div></p>
+
+<h3 id="symbol">Symbol</h3>
+<p><code>reduce</code> also accepts a symbol, which makes addition and multiplication very easy and simple to read.</p>
+
+<p><div class='bogus-wrapper'><notextile><figure class='code'> <div class="CodeRay">
+  <div class="code"><pre>
+(<span class="integer">1</span>..<span class="integer">10</span>).reduce(<span class="symbol">:+</span>) <span class="comment"># returns 55</span>
+(<span class="integer">1</span>..<span class="integer">10</span>).reduce(<span class="integer">1</span>, <span class="symbol">:+</span>) <span class="comment"># returns 56</span>
+</pre></div>
+</div>
+ </figure></notextile></div>
+The <code>:</code> tells Ruby that we are going to give it a symbol, which in our case is a <code>+</code> (this is the name of the addition method, you can also give it a <code>*</code> for the multiplication method). By passing in a symbol we can apply a method to each one of the values in the collection.</p>
+
+<p>The operator methods can be broken down as follows:
+<div class='bogus-wrapper'><notextile><figure class='code'> <div class="CodeRay">
+  <div class="code"><pre>
+<span class="integer">10</span>.+( <span class="integer">2</span> ) <span class="comment"># returns 12</span>
+<span class="integer">10</span>.*( <span class="integer">2</span> ) <span class="comment"># returns 20</span>
+<span class="integer">10</span>.-( <span class="integer">2</span> ) <span class="comment"># returns 8</span>
+<span class="integer">10</span>./( <span class="integer">2</span> ) <span class="comment"># returns 5</span>
+</pre></div>
+</div>
+ </figure></notextile></div></p>
+]]></content>
+  </entry>
+  
+</feed>

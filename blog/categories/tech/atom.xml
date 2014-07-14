@@ -4,7 +4,7 @@
   <title><![CDATA[Category: tech | Striving for Adequacy]]></title>
   <link href="http://calvached.github.io/blog/categories/tech/atom.xml" rel="self"/>
   <link href="http://calvached.github.io/"/>
-  <updated>2014-06-25T10:21:55-05:00</updated>
+  <updated>2014-07-14T14:32:25-05:00</updated>
   <id>http://calvached.github.io/</id>
   <author>
     <name><![CDATA[Diana Calvache]]></name>
@@ -12,6 +12,115 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Dissecting and Demystifying: Reduce/Inject]]></title>
+    <link href="http://calvached.github.io/blog/2014/06/23/dissecting-and-demystifying-reduce-slash-inject/"/>
+    <updated>2014-06-23T16:30:29-05:00</updated>
+    <id>http://calvached.github.io/blog/2014/06/23/dissecting-and-demystifying-reduce-slash-inject</id>
+    <content type="html"><![CDATA[<p><a href="http://www.ruby-doc.org/core-2.1.0/Enumerable.html#method-i-reduce">Reduce</a> (a.k.a. Inject) is an enumerable method that recently made a whole lot of sense to me, so I figured that it was time to do a deep dive into how <code>reduce</code> works and what it can do for us using Blocks and Symbols.
+<!-- more --></p>
+
+<h3 id="block">Block</h3>
+<p><code>reduce</code> takes three arguments: a collection, an initial value, and a function. If an initial value isn’t given then it defaults to the first value in the collection.
+<div class='bogus-wrapper'><notextile><figure class='code'><figcaption class='code-header' style='margin-bottom:-5px;'><span>Integer as initial value </span></figcaption>
+ <div class="CodeRay">
+  <div class="code"><pre>
+<span class="keyword">def</span> <span class="function">add_numbers</span>
+  (<span class="integer">1</span>..<span class="integer">10</span>).reduce(<span class="integer">0</span>) { |sum, value| sum + value }
+<span class="keyword">end</span>&lt;<span class="regexp"><span class="delimiter">/</span><span class="content">p&gt;
+
+&lt;p&gt;def add_more_numbers
+  (1..10).reduce { |sum, value| sum + value }
+end&lt;</span><span class="delimiter">/</span></span>p&gt;
+
+&lt;p&gt;add_numbers <span class="comment"># returns 55</span>
+add_more_numbers <span class="comment"># returns 55</span>
+</pre></div>
+</div>
+ </figure></notextile></div>
+In <code>add_numbers</code> the arguments are as follows:<br />
+<strong>Collection</strong>: 1, 2, 3, 4, 5, 6, 7, 8, 9, 10<br />
+<strong>Initial Value</strong>: 0<br />
+<strong>Function</strong>: Add each element from the collection to the initial value and return a total.</p>
+
+<p><code>reduce</code> initializes the variable “sum” with the value of 0 and keeps a running total of each return value. In other words, a number from the collection is added each time to the initial value and the total sum becomes the new sum for the next value waiting to be added.</p>
+
+<p>Let’s see what this example looks like using <code>each</code> instead:
+<div class='bogus-wrapper'><notextile><figure class='code'><figcaption class='code-header' style='margin-bottom:-5px;'><span>Using an each method </span></figcaption>
+ <div class="CodeRay">
+  <div class="code"><pre>
+<span class="keyword">def</span> <span class="function">add_numbers</span>
+  sum = <span class="integer">0</span>&lt;<span class="regexp"><span class="delimiter">/</span><span class="content">p&gt;
+
+&lt;p&gt;(1..10).each { |value| sum += value }
+  sum
+end&lt;</span><span class="delimiter">/</span></span>p&gt;
+
+&lt;p&gt;add_numbers <span class="comment"># returns 55</span>
+</pre></div>
+</div>
+ </figure></notextile></div>
+ <code>reduce</code> is like an <code>each</code> with superpowers!</p>
+
+<p>Our initial value can also be an array or a hash.</p>
+
+<p><div class='bogus-wrapper'><notextile><figure class='code'><figcaption class='code-header' style='margin-bottom:-5px;'><span>Array as an initial value </span></figcaption>
+ <div class="CodeRay">
+  <div class="code"><pre>
+<span class="keyword">def</span> <span class="function">even_numbers</span>
+  (<span class="integer">1</span>..<span class="integer">10</span>).reduce([]) <span class="keyword">do</span> |even_arr, value|
+    value.even? ? even_arr « value : even_arr
+  <span class="keyword">end</span>
+<span class="keyword">end</span>&lt;<span class="regexp"><span class="delimiter">/</span><span class="content">p&gt;
+
+&lt;p&gt;even_numbers # returns [2, 4, 6, 8, 10]&lt;</span><span class="delimiter">/</span></span>p&gt;
+
+&lt;h1 id=<span class="string"><span class="delimiter">&quot;</span><span class="content">side-note-there-must-always-be-a-return-value-or-else-the-accumulator-will-be-returned-as-nil</span><span class="delimiter">&quot;</span></span>&gt;<span class="constant">SIDE</span> <span class="key">NOTE</span>: <span class="constant">There</span> must always be a <span class="keyword">return</span> value <span class="keyword">or</span> <span class="keyword">else</span> the accumulator will be returned as “nil”&lt;<span class="regexp"><span class="delimiter">/</span><span class="content">h1&gt;
+&lt;p&gt;</span></span></pre></div>
+</div>
+ </figure></notextile></div></p>
+
+<p><div class='bogus-wrapper'><notextile><figure class='code'><figcaption class='code-header' style='margin-bottom:-5px;'><span>Hash as an initial value </span></figcaption>
+ <div class="CodeRay">
+  <div class="code"><pre>
+<span class="keyword">def</span> <span class="function">change_structure</span>(data)
+  data.reduce({}) <span class="keyword">do</span> |results_hash, element|
+    results_hash[element[<span class="integer">0</span>]] = element[<span class="integer">1</span>]
+    results_hash
+  <span class="keyword">end</span>
+<span class="keyword">end</span>&lt;<span class="regexp"><span class="delimiter">/</span><span class="content">p&gt;
+
+&lt;p&gt;user_info = [[‘username’, ‘carlsagan’], [‘password’,’palebluedot’]]
+change_structure(user_info) # returns {“username”=&amp;gt;”carlsagan”, “password”=&amp;gt;”palebluedot”}
+</span></span></pre></div>
+</div>
+ </figure></notextile></div></p>
+
+<h3 id="symbol">Symbol</h3>
+<p><code>reduce</code> also accepts a symbol, which makes addition and multiplication very easy and simple to read.</p>
+
+<p><div class='bogus-wrapper'><notextile><figure class='code'> <div class="CodeRay">
+  <div class="code"><pre>
+(<span class="integer">1</span>..<span class="integer">10</span>).reduce(<span class="symbol">:+</span>) <span class="comment"># returns 55</span>
+(<span class="integer">1</span>..<span class="integer">10</span>).reduce(<span class="integer">1</span>, <span class="symbol">:+</span>) <span class="comment"># returns 56</span>
+</pre></div>
+</div>
+ </figure></notextile></div>
+The <code>:</code> tells Ruby that we are going to give it a symbol, which in our case is a <code>+</code> (this is the name of the addition method, you can also give it a <code>*</code> for the multiplication method). By passing in a symbol we can apply a method to each one of the values in the collection.</p>
+
+<p>The operator methods can be broken down as follows:
+<div class='bogus-wrapper'><notextile><figure class='code'> <div class="CodeRay">
+  <div class="code"><pre>
+<span class="integer">10</span>.+( <span class="integer">2</span> ) <span class="comment"># returns 12</span>
+<span class="integer">10</span>.*( <span class="integer">2</span> ) <span class="comment"># returns 20</span>
+<span class="integer">10</span>.-( <span class="integer">2</span> ) <span class="comment"># returns 8</span>
+<span class="integer">10</span>./( <span class="integer">2</span> ) <span class="comment"># returns 5</span>
+</pre></div>
+</div>
+ </figure></notextile></div></p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[The Land of Vim Part 1: getting started]]></title>
@@ -171,104 +280,6 @@ Imagine you are hiking down a forested trail with your apprentice. Imagine yours
 <p>Through the entire day’s hike, you’ve kept the apprentice safe. You’ve always know exactly where you were and how to get back home. You could at any moment, taken charge and avoided any danger.</p>
 
 <!-- Afterthought: -->
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Ruby, pass by what?]]></title>
-    <link href="http://calvached.github.io/blog/2014/06/02/ruby-pass-by-what/"/>
-    <updated>2014-06-02T10:12:24-05:00</updated>
-    <id>http://calvached.github.io/blog/2014/06/02/ruby-pass-by-what</id>
-    <content type="html"><![CDATA[<p><img src="http://i.imgur.com/3gQVzL0.gif" alt="david-tennant-confused" /></p>
-
-<p>There are two questions that have been bugging me lately. The first, <em>Why do I have to clone a guess in Mastermind?</em> and the second came after I did some research, <em>What is pass by reference vs. pass by value?</em></p>
-
-<p>Let’s start with the first question.
-<!-- more -->
-To simplify what I was experiencing here’s an example:  </p>
-
-<p><div class='bogus-wrapper'><notextile><figure class='code'><figcaption class='code-header' style='margin-bottom:-5px;'><span>Black magic code going on here </span></figcaption>
- <div class="CodeRay">
-  <div class="code"><pre>
-<span class="keyword">class</span> <span class="class">ExampleClass</span>
-  <span class="keyword">def</span> <span class="function">example_method</span>
-    var = ‘woohooo’&lt;<span class="regexp"><span class="delimiter">/</span><span class="content">p&gt;
-
-&lt;pre&gt;&lt;code&gt;var.object_id # Object Id: 70131019948560
-
-x = SomeClass.new
-x.some_method(var)
-x.return_var # returns 'woohooo'
-
-y = AnotherClass.new
-y.another_method(var)
-
-x.return_var # returns 'boohooo', whyyy??   end end
-&lt;</span><span class="delimiter">/</span></span>code&gt;&lt;<span class="regexp"><span class="delimiter">/</span><span class="content">pre&gt;
-
-&lt;p&gt;class SomeClass
-  def some_method(var)
-    @new_var = var
-  end&lt;</span><span class="delimiter">/</span></span>p&gt;
-
-&lt;p&gt;<span class="keyword">def</span> <span class="function">return_var</span>
-    <span class="instance-variable">@new_var</span>.object_id <span class="comment"># Object Id: 70131019948560&lt;/p&gt;</span>
-
-&lt;pre&gt;&lt;code&gt;<span class="instance-variable">@new_var</span>   <span class="keyword">end</span> <span class="keyword">end</span>
-&lt;<span class="regexp"><span class="delimiter">/</span><span class="content">code&gt;&lt;</span><span class="delimiter">/</span></span>pre&gt;
-
-&lt;p&gt;<span class="keyword">class</span> <span class="class">AnotherClass</span>
-  <span class="keyword">def</span> <span class="function">another_method</span>(var)
-    var[<span class="integer">0</span>] = ‘b’
-    var.object_id <span class="comment"># Object Id: 70131019948560&lt;/p&gt;</span>
-
-&lt;pre&gt;&lt;code&gt;var   <span class="keyword">end</span> <span class="keyword">end</span>
-&lt;<span class="regexp"><span class="delimiter">/</span><span class="content">code&gt;&lt;</span><span class="delimiter">/</span></span>pre&gt;
-
-&lt;p&gt;j = <span class="constant">ExampleClass</span>.new
-j.example_method
-</pre></div>
-</div>
- </figure></notextile></div></p>
-
-<p>So what exactly is going on here? In my ExampleClass I’m passing some_method a variable with the value “woohooo” and I expect it to return the same value (since I’m not making any changes), BUT when I call another_method and pass it the same variable it changes the value that’s being returned by return_var. What is this sorcery?!</p>
-
-<p><img src="http://i.imgur.com/PezBytD.gif" alt="Witchcraft black magic code" /></p>
-
-<p>I could easily solve the problem by using the .clone method which creates a copy of the variable and be on my way, but that’s not how I roll. This leads us to my second question, <em>What is pass by reference vs. pass by value?</em></p>
-
-<p>After consulting with my long-time friend, Google, what seems to be going on is that each time I’m passing a variable to a method it’s not making a copy of the variable, but rather making a copy of the reference to the same object in memory (which is why the Object Ids are all the same). I was absolutely baffled since I had assumed that Ruby makes object copies each time a variable is passed to a method (Oh and by the way this example doesn’t work with Fixnum objects, apparently they have “immediate value” which means that the actual object is passed and not a reference).</p>
-
-<p>In this example we see something a little bit different.  </p>
-
-<p><div class='bogus-wrapper'><notextile><figure class='code'><figcaption class='code-header' style='margin-bottom:-5px;'><span>Slightly less bewildering code </span></figcaption>
- <div class="CodeRay">
-  <div class="code"><pre>
-<span class="keyword">def</span> <span class="function">change</span>(x)
-  x.object_id <span class="comment"># Object Id: 70266982826660</span>
-  x = ‘10’ 
-  x.object_id <span class="comment"># Object Id: 70266982862600&lt;/p&gt;</span>
-
-&lt;p&gt;x
-<span class="keyword">end</span>&lt;<span class="regexp"><span class="delimiter">/</span><span class="content">p&gt;
-
-&lt;p&gt;y = ‘3’
-y.object_id # Object Id: 70266982826660&lt;</span><span class="delimiter">/</span></span>p&gt;
-
-&lt;p&gt;change(y) <span class="comment"># returns ‘10’</span>
-y <span class="comment"># returns ‘3’</span>
-</pre></div>
-</div>
- </figure></notextile></div></p>
-
-<p>I’m passing a variable to the change method and while inside the method I’m assigning it a different value. This method does exactly what I expect it to, it returns a different value, but it leaves the original variable the same. Why? Because the reference is changed (we can see this by looking at the difference in Object Ids) and the return value is actually a completely different object.</p>
-
-<p>In my first example the referenced object value was changed, but in the second example the reference itself was changed. Like I said…witchcraft!</p>
-
-<p>Here’s a really great simple analogy that I found.<br />
-<blockquote><p>Say I want to share a web page with you.</p></p><p><p>If I tell you the URL, I’m passing by reference. You can use that URL to see the same web page I can see. If that page is changed, we both see the changes. If you delete the URL, all you’re doing is destroying your reference to that page - you’re not deleting the actual page itself.</p></p><p><p>If I print out the page and give you the printout, I’m passing by value. Your page is a disconnected copy of the original. You won’t see any subsequent changes, and any changes that you make (e.g. scribbling on your printout) will not show up on the original page. If you destroy the printout, you have actually destroyed your copy of the object - but the original web page remains intact.</p><footer><strong>Dylan Beattie</strong> <cite><a href='http://stackoverflow.com/a/430958'>StackOverflow</a></cite></footer></blockquote></p>
-
-<p>TL;DR Ruby is Pass by Value because a copy of a reference to an object is passed and not the object itself.</p>
 ]]></content>
   </entry>
   
