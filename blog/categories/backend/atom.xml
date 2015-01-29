@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: backend | Striving for Adequacy]]></title>
+  <link href="http://calvached.github.io/blog/categories/backend/atom.xml" rel="self"/>
+  <link href="http://calvached.github.io/"/>
+  <updated>2015-01-29T00:52:22-06:00</updated>
+  <id>http://calvached.github.io/</id>
+  <author>
+    <name><![CDATA[Diana Calvache]]></name>
+    <email><![CDATA[hello@dianathegeek.com]]></email>
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[A necessary alliance: Frontend &amp; Backend]]></title>
+    <link href="http://calvached.github.io/blog/2015/01/20/a-necessary-alliance-frontend-and-backend/"/>
+    <updated>2015-01-20T10:19:18-06:00</updated>
+    <id>http://calvached.github.io/blog/2015/01/20/a-necessary-alliance-frontend-and-backend</id>
+    <content type="html"><![CDATA[<p>Throughout my apprenticeship I’ve primarily worked with Backend languages and technologies (such as <a href="https://www.ruby-lang.org/en/">Ruby</a> and <a href="http://www.sinatrarb.com/">Sinatra</a>), so when my mentor had me start working with <a href="http://backbonejs.org/">Backbone</a> the concept of a frontend framework was utterly baffling. This was my first step into learning the workings of a Distributed System.
+<!-- more --></p>
+
+<p>All I knew about frontend at the time were the primary tools: HTML, CSS, and Javascript. I didn’t know how the backend actually talked to the frontend (How does the exchange of information happen?) or what jobs and duties the frontend was in charge of (At which point does the frontend end and the backend take over?). I had a vague idea as to what asynchronous and synchronous were. But most importantly, where exactly does all this code live?</p>
+
+<h3 id="what-is-frontend-aka-the-client">What is Frontend (aka. The Client)?</h3>
+<p>Frontend is the part of the code that directly interacts with the user, it’s the point of contact for an application. Everytime a user visits a site they are directly interacting with the client by scrolling, clicking, inputing data, etc. Its primary goal is to interact and present data in a well defined way. The code lives on your computer via your browser of choice.</p>
+
+<h3 id="what-is-backend-aka-the-server">What is Backend (aka. The Server)?</h3>
+<p>The backend handles all the complex logic, such interacting with the server and database. It’s goal is to answer a request and return a response to the frontend. Server-side languages such as Ruby, Java, and Python are used to build the backend. Any data you see displayed on the frontend was served through backend code which lives on the server.</p>
+
+<h3 id="how-do-these-two-work-together">How do these two work together?</h3>
+<p>Let’s take Amazon.com as an example. You enter the url of “www.amazon.com” and a request from your browser is sent to a server somewhere. The server responds with some HTML, CSS, and Javascript. Your browser uses this response to render the HTML and shortly after loads the CSS and Javascript. Viola! We have the Amazon.com homepage!</p>
+
+<p><img src="http://i.imgur.com/BVQqZuF.png" alt="Amazon" /></p>
+
+<p>When you enter a search term in the search bar and press ENTER or click Go, another request is sent from the frontend to the server and the response comes back as search results, which are then nicely rendered onto the page.</p>
+
+<p><img src="http://i.imgur.com/3Z2kaNk.png" alt="Search Results" /></p>
+
+<h3 id="now-lets-look-a-bit-deeper">Now let’s look a bit deeper…</h3>
+<p>I mentioned Backbone at the beginning of this post so now let’s define what it is and why it’s used. Backbone is a frontend framework*, it provides structure to what otherwise would be a tangled ball of callbacks. It uses Models and Collections to handle data responses from the backend and Views for handling anything related to the DOM (Document Object Model). There are multiple ways that Backbone can send a request to the server, but I’ll only be talking about two, <a href="http://api.jquery.com/jquery.ajax/">AJAX</a> and <code>fetch</code>. AJAX is the <a href="http://jquery.com/">jQuery</a> way of sending a request, you specify the request type (GET/POST), an endpoint/route/url, and of course any data that you want to send over.</p>
+
+<p>Let’s say we have a Collection called “Library” and inside this “Library” we have various Models called “Book”. If I wanted to add a new “Book” to my “Library” I have to send in my “Book” data to the server.</p>
+
+<p><div class='bogus-wrapper'><notextile><figure class='code'><figcaption class='code-header' style='margin-bottom:-5px;'><span>AJAX example in Coffeescript </span></figcaption>
+ <div class="CodeRay">
+  <div class="code"><pre>
+  $.ajax ‘http://localhost:9393/library/new’,
+    type: ‘POST’
+    data: {‘title’: ‘The Importance of Being Earnest’, ‘author’: ‘Oscar Wilde’}
+    dataType: ‘json’
+    error: @errorCallback()
+    success: @successCallback()
+</pre></div>
+</div>
+ </figure></notextile></div></p>
+
+<p>This method is quite common and will work just fine for most requests, but the Model/Collection will have to be manually updated each time you receive a successful response. Fortunately Backbone comes built in with <code>fetch</code> for a darn good reason. Remember that “Library” I talked about a second ago? Perfect, well a <code>fetch</code> can be called on an instance of a “Library”, it’s technically an AJAX request behind the scenes, but it also updates the data in my “Library” with a new “Book” on a successful response.</p>
+
+<p><div class='bogus-wrapper'><notextile><figure class='code'><figcaption class='code-header' style='margin-bottom:-5px;'><span>fetch example in Coffeescript </span></figcaption>
+ <div class="CodeRay">
+  <div class="code"><pre>
+  @library.fetch
+    url: ‘http://localhost:9393/library/new’
+    type: ‘POST’
+    data: {‘title’: ‘The Importance of Being Earnest’, ‘author’: ‘Oscar Wilde’}
+    error: @errorCallback()
+    success: @successCallback()
+</pre></div>
+</div>
+ </figure></notextile></div></p>
+
+<p>A quick visual overview on how the frontend and backend communicate with each other.</p>
+
+<p><img src="http://i.imgur.com/890WdGu.gif" alt="frontend-backend-visual" /></p>
+
+<ul>
+  <li>Wikipedia: “A framework is a universal, reusable software environment that provides particular functionality as part of a larger software platform to facilitate development of software applications, products and solutions”
+<!--
+AJAX (hit a route or endpoint)
+ENDPOINTS (matching)
+Should there be any critical or complex logic happening at the Frontend?
+--></li>
+</ul>
+]]></content>
+  </entry>
+  
+</feed>
