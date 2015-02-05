@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: sinon | Striving for Adequacy]]></title>
+  <link href="http://calvached.github.io/blog/categories/sinon/atom.xml" rel="self"/>
+  <link href="http://calvached.github.io/"/>
+  <updated>2015-02-05T11:38:18-06:00</updated>
+  <id>http://calvached.github.io/</id>
+  <author>
+    <name><![CDATA[Diana Calvache]]></name>
+    <email><![CDATA[mailto:calvache.diana@gmail.com]]></email>
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Sinon.JS Uncaught TypeError]]></title>
+    <link href="http://calvached.github.io/blog/2015/01/29/sinon-dot-js-uncaught-typeerror/"/>
+    <updated>2015-01-29T16:07:13-06:00</updated>
+    <id>http://calvached.github.io/blog/2015/01/29/sinon-dot-js-uncaught-typeerror</id>
+    <content type="html"><![CDATA[<p>A few days ago I spent 2-3 hours trying to debug a red warning error. A very cryptic error indeed with no insight on how to fix it. Through a combination of trial and error, asking for help, and flipping tables I was able to find a solution to the problem. Here’s what worked for me.
+<!-- more --></p>
+
+<p>Testing Toolbelt: Testem, Jasmine, Jasmine-jQuery and Sinon.JS</p>
+
+<ul>
+  <li>Uncaught TypeError: Fake server request processing threw exception: undefined is not a function at http://localhost:7357/app/bower_components/sinon/index.js, line 907
+<img src="http://i.imgur.com/3l5VO8Q.png" alt="Sinon error" /></li>
+</ul>
+
+<p>If you’ll look at my screenshot you’ll notice that there’s a strange red error at the bottom. I managed to find the test that was causing the red error and have included it below.</p>
+
+<p><div class='bogus-wrapper'><notextile><figure class='code'> <div class="CodeRay">
+  <div class="code"><pre>
+it <span class="error">‘</span>executes a trigger<span class="error">’</span>, -&amp;gt;
+  fakeListener = spyOn(Backbone, <span class="error">“</span>View<span class="error">”</span>)
+  fakeServer.respondWith(
+    <span class="error">‘</span>POST<span class="error">’</span>
+    <span class="error">‘</span>http:<span class="comment">//localhost:9393/new’</span>
+    [<span class="integer">200</span>, {}, JSON.stringify({})]
+  )&lt;<span class="regexp"><span class="delimiter">/</span><span class="content">p&gt;
+
+&lt;p&gt;view = renderSetup()
+  view.listenTo(view, ‘setupComplete’, fakeListener)&lt;</span><span class="delimiter">/</span></span>p&gt;
+
+<span class="tag">&lt;p&gt;</span>view.$(‘[data-id=board-size]’).val(‘6’)
+  view.$(‘[data-id=play-button]’).click()
+  fakeServer.respond()<span class="tag">&lt;/p&gt;</span>
+
+&lt;p&gt;expect(fakeListener).toHaveBeenCalled()
+</pre></div>
+</div>
+ </figure></notextile></div></p>
+
+<p>The purpose of this is to test whether a trigger happens on the success of a fetch from an endpoint. I set up a fakeServer which has a url of “/new”, a status code of 200, and an empty {} as a response. In response I wrote the code below, which results in the red error from the screenshot.</p>
+
+<p><div class='bogus-wrapper'><notextile><figure class='code'> <div class="CodeRay">
+  <div class="code"><pre>
+ <span class="key">submitBoardSize</span>: (boardSize) -&amp;gt;
+    <span class="instance-variable">@clearElem</span>()&lt;<span class="regexp"><span class="delimiter">/</span><span class="content">p&gt;
+
+&lt;pre&gt;&lt;code&gt;@board().fetch
+  data: @boardSizeData()
+  type: 'POST'
+  success: @successCallback
+  error: @errorCallback </span></span></pre></div>
+</div>
+ </figure></notextile></div>
+</code></pre>
+
+<p>There are two possibly reasons why this error occurs, the first being that the context of “this” is not what you would expect it to be, so on the <code>@successCallback</code> and <code>@errorCallback</code> this can be corrected by using a <code>=&gt;</code> instead of the usual <code>-&gt;</code>.</p>
+
+<p><div class='bogus-wrapper'><notextile><figure class='code'> <div class="CodeRay">
+  <div class="code"><pre>
+<span class="key">successCallback</span>: =&amp;gt; <span class="comment"># fat arrow here</span>
+    <span class="instance-variable">@trigger</span>(‘setupComplete’)
+</pre></div>
+</div>
+ </figure></notextile></div></p>
+
+<p>The “fat arrow” preserves what “this” is at that given time. The second, has to do with the way the test itself is written. Depending on the context (fetch vs. ajax) the fakeServer must return a specific response. For example if you are calling <code>fetch</code> on a Model then the fakeServer must return a {} or hash-like object, whereas if you are calling <code>fetch</code> on a Collection then the fakeServer must return a [] or an array-like structure. On an <code>ajax</code> call the response can be anything, it does not trigger the red warning because unlike <code>fetch</code>, <code>ajax</code> does not, by default, update a Model/Collection.</p>
+]]></content>
+  </entry>
+  
+</feed>

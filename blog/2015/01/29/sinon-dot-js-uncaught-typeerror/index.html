@@ -1,0 +1,189 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Sinon.JS Uncaught TypeError - Striving for Adequacy</title>
+  <meta name="author" content="Diana Calvache">
+
+  
+  <meta name="description" content="Sinon.JS Uncaught TypeError written Jan 29th, 2015 in fakeserver, sinon A few days ago I spent 2-3 hours trying to debug a red warning error. A very &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://calvached.github.io/blog/2015/01/29/sinon-dot-js-uncaught-typeerror">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href="/atom.xml" rel="alternate" title="Striving for Adequacy" type="application/atom+xml">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <script>!window.jQuery && document.write(unescape('%3Cscript src="./javascripts/libs/jquery.min.js"%3E%3C/script%3E'))</script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  
+
+</head>
+
+  <body>
+    <a href="/" class="home-icon">
+      <img src="/images/home.png"/>
+    </a>
+
+    <article role="article" class="full-single-article">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-8 col-md-offset-2">
+        <h1>Sinon.JS Uncaught TypeError</h1>
+        <div class="meta">
+          written 
+
+
+
+
+
+
+
+
+  
+
+
+
+<time datetime="2015-01-29T16:07:13-06:00" pubdate data-updated="true">Jan 29<span>th</span>, 2015</time>
+          
+
+in
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/fakeserver/'>fakeserver</a>, <a class='category' href='/blog/categories/sinon/'>sinon</a>
+  
+</span>
+
+
+        </div>
+        <p>A few days ago I spent 2-3 hours trying to debug a red warning error. A very cryptic error indeed with no insight on how to fix it. Through a combination of trial and error, asking for help, and flipping tables I was able to find a solution to the problem. Here’s what worked for me.
+<!-- more --></p>
+
+<p>Testing Toolbelt: Testem, Jasmine, Jasmine-jQuery and Sinon.JS</p>
+
+<ul>
+  <li>Uncaught TypeError: Fake server request processing threw exception: undefined is not a function at http://localhost:7357/app/bower_components/sinon/index.js, line 907
+<img src="http://i.imgur.com/3l5VO8Q.png" alt="Sinon error" /></li>
+</ul>
+
+<p>If you’ll look at my screenshot you’ll notice that there’s a strange red error at the bottom. I managed to find the test that was causing the red error and have included it below.</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"> <div class="CodeRay">
+  <div class="code"><pre>
+it <span class="string"><span class="delimiter">'</span><span class="content">executes a trigger</span><span class="delimiter">'</span></span>, -&gt;
+  fakeListener = spyOn(Backbone, <span class="string"><span class="delimiter">&quot;</span><span class="content">View</span><span class="delimiter">&quot;</span></span>)
+  fakeServer.respondWith(
+    <span class="string"><span class="delimiter">'</span><span class="content">POST</span><span class="delimiter">'</span></span>
+    <span class="string"><span class="delimiter">'</span><span class="content">http://localhost:9393/new</span><span class="delimiter">'</span></span>
+    [<span class="integer">200</span>, {}, JSON.stringify({})]
+  )
+
+  view = renderSetup()
+  view.listenTo(view, <span class="string"><span class="delimiter">'</span><span class="content">setupComplete</span><span class="delimiter">'</span></span>, fakeListener)
+
+  view.<span class="predefined">$</span>(<span class="string"><span class="delimiter">'</span><span class="content">[data-id=board-size]</span><span class="delimiter">'</span></span>).val(<span class="string"><span class="delimiter">'</span><span class="content">6</span><span class="delimiter">'</span></span>)
+  view.<span class="predefined">$</span>(<span class="string"><span class="delimiter">'</span><span class="content">[data-id=play-button]</span><span class="delimiter">'</span></span>).click()
+  fakeServer.respond()
+
+  expect(fakeListener).toHaveBeenCalled()
+</pre></div>
+</div>
+ </figure></notextile></div>
+
+<p>The purpose of this is to test whether a trigger happens on the success of a fetch from an endpoint. I set up a fakeServer which has a url of “/new”, a status code of 200, and an empty {} as a response. In response I wrote the code below, which results in the red error from the screenshot.</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"> <div class="CodeRay">
+  <div class="code"><pre>
+ <span class="key">submitBoardSize</span>: (boardSize) -&gt;
+    <span class="instance-variable">@clearElem</span>()
+
+    <span class="instance-variable">@board</span>().fetch
+      <span class="key">data</span>: <span class="instance-variable">@boardSizeData</span>()
+      <span class="key">type</span>: <span class="string"><span class="delimiter">'</span><span class="content">POST</span><span class="delimiter">'</span></span>
+      <span class="key">success</span>: <span class="instance-variable">@successCallback</span>
+      <span class="key">error</span>: <span class="instance-variable">@errorCallback</span>
+</pre></div>
+</div>
+ </figure></notextile></div>
+
+<p>There are two possibly reasons why this error occurs, the first being that the context of “this” is not what you would expect it to be, so on the <code>@successCallback</code> and <code>@errorCallback</code> this can be corrected by using a <code>=&gt;</code> instead of the usual <code>-&gt;</code>.</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"> <div class="CodeRay">
+  <div class="code"><pre>
+<span class="key">successCallback</span>: =&gt; <span class="comment"># fat arrow here</span>
+    <span class="instance-variable">@trigger</span>(<span class="string"><span class="delimiter">'</span><span class="content">setupComplete</span><span class="delimiter">'</span></span>)
+</pre></div>
+</div>
+ </figure></notextile></div>
+
+<p>The “fat arrow” preserves what “this” is at that given time. The second, has to do with the way the test itself is written. Depending on the context (fetch vs. ajax) the fakeServer must return a specific response. For example if you are calling <code>fetch</code> on a Model then the fakeServer must return a {} or hash-like object, whereas if you are calling <code>fetch</code> on a Collection then the fakeServer must return a [] or an array-like structure. On an <code>ajax</code> call the response can be anything, it does not trigger the red warning because unlike <code>fetch</code>, <code>ajax</code> does not, by default, update a Model/Collection.</p>
+
+      </div>
+    </div>
+  </div>
+</article>
+
+<hr class="divider-short"/>
+
+<div class="archive-link">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-8 col-md-offset-2">
+        
+          <a class="pull-left" href="/blog/2015/01/20/a-necessary-alliance-frontend-and-backend/" title="Previous Post: A necessary alliance: Frontend &amp; Backend">&laquo; Previous: A necessary alliance: Frontend &amp; Backend</a>
+        
+
+        
+      </div>
+    </div>
+  </div>
+</div>
+
+    <footer id="footer" class="her-row">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-1">
+  <a href="/"><h4>Home</h4></a>
+</div>
+
+<div class="col-md-2">
+  <div class="social-icon-list">
+    
+    <a href="https://twitter.com/zephynao"><img src="/images/glyphicons_social_31_twitter.png"/></a>
+    
+    <a href="https://linkedin.com/in/calvached/"><img src="/images/glyphicons_social_17_linked_in.png"></a>
+    
+    <a href="https://github.com/calvached"><img src="/images/glyphicons_social_21_github.png"/></a>
+    
+
+    
+    <a href="mailto:mailto:calvache.diana@gmail.com"><img src="/images/glyphicons_social_39_e-mail.png"/></a>
+    
+  </div>
+</div>
+
+<div class="pull-right">
+  <h4>Powered by <a href="http://octopress.org/">Octopress</a>. Designed by <a href="http://AdrianArtiles.com">Adrian Artiles</a>.</h4>
+</div>
+
+
+    </div>
+  </div>
+</footer>
+
+  </body>
+</html>
