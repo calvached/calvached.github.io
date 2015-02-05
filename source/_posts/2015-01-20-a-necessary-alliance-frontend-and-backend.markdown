@@ -31,7 +31,7 @@ I mentioned Backbone at the beginning of this post so now let's define what it i
 
 Let's say we have a Collection called "Library" and inside this "Library" we have various Models called "Book". If I wanted to add a new "Book" to my "Library" I have to send in my "Book" data to the server.
 
-{% coderay AJAX example in Coffeescript lang:coffeescript %}
+{% coderay AJAX example in Coffeescript lang:ruby %}
   $.ajax 'http://localhost:9393/library/new',
     type: 'POST'
     data: {'title': 'The Importance of Being Earnest', 'author': 'Oscar Wilde'}
@@ -42,14 +42,18 @@ Let's say we have a Collection called "Library" and inside this "Library" we hav
 
 This method is quite common and will work just fine for most requests, but the Model/Collection will have to be manually updated each time you receive a successful response. Fortunately Backbone comes built in with ```fetch``` for a darn good reason. Remember that "Library" I talked about a second ago? Perfect, well a ```fetch``` can be called on an instance of a "Library", it's technically an AJAX request behind the scenes, but it also updates the data in my "Library" with a new "Book" on a successful response.
 
-{% coderay fetch example in Coffeescript lang:coffeescript %}
+{% coderay fetch example in Coffeescript lang:ruby %}
   @library.fetch
     url: 'http://localhost:9393/library/new'
     type: 'POST'
-    data: {'title': 'The Importance of Being Earnest', 'author': 'Oscar Wilde'}
+    data: {'title': 'The Demon-Haunted World', 'author': 'Carl Sagan'}
     error: @errorCallback()
     success: @successCallback()
 {% endcoderay %}
+
+<!--
+Talk a bit more about Sinatra here
+-->
 
 A quick visual overview on how the frontend and backend communicate with each other.
 
