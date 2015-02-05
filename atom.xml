@@ -4,7 +4,7 @@
   <title><![CDATA[Striving for Adequacy]]></title>
   <link href="http://calvached.github.io/atom.xml" rel="self"/>
   <link href="http://calvached.github.io/"/>
-  <updated>2015-01-29T10:18:05-06:00</updated>
+  <updated>2015-02-05T11:37:27-06:00</updated>
   <id>http://calvached.github.io/</id>
   <author>
     <name><![CDATA[Diana Calvache]]></name>
@@ -46,12 +46,12 @@
 <div class="bogus-wrapper"><notextile><figure class="code"><figcaption class="code-header" style="margin-bottom:-5px;"><span>AJAX example in Coffeescript </span></figcaption>
  <div class="CodeRay">
   <div class="code"><pre>
-  $.ajax 'http://localhost:9393/library/new',
-    type: 'POST'
-    data: {'title': 'The Importance of Being Earnest', 'author': 'Oscar Wilde'}
-    dataType: 'json'
-    error: @errorCallback()
-    success: @successCallback()
+  <span class="global-variable">$.</span>ajax <span class="string"><span class="delimiter">'</span><span class="content">http://localhost:9393/library/new</span><span class="delimiter">'</span></span>,
+    <span class="key">type</span>: <span class="string"><span class="delimiter">'</span><span class="content">POST</span><span class="delimiter">'</span></span>
+    <span class="key">data</span>: {<span class="string"><span class="delimiter">'</span><span class="content">title</span><span class="delimiter">'</span></span>: <span class="string"><span class="delimiter">'</span><span class="content">The Importance of Being Earnest</span><span class="delimiter">'</span></span>, <span class="string"><span class="delimiter">'</span><span class="content">author</span><span class="delimiter">'</span></span>: <span class="string"><span class="delimiter">'</span><span class="content">Oscar Wilde</span><span class="delimiter">'</span></span>}
+    <span class="key">dataType</span>: <span class="string"><span class="delimiter">'</span><span class="content">json</span><span class="delimiter">'</span></span>
+    <span class="key">error</span>: <span class="instance-variable">@errorCallback</span>()
+    <span class="key">success</span>: <span class="instance-variable">@successCallback</span>()
 </pre></div>
 </div>
  </figure></notextile></div>
@@ -61,15 +61,19 @@
 <div class="bogus-wrapper"><notextile><figure class="code"><figcaption class="code-header" style="margin-bottom:-5px;"><span>fetch example in Coffeescript </span></figcaption>
  <div class="CodeRay">
   <div class="code"><pre>
-  @library.fetch
-    url: 'http://localhost:9393/library/new'
-    type: 'POST'
-    data: {'title': 'The Importance of Being Earnest', 'author': 'Oscar Wilde'}
-    error: @errorCallback()
-    success: @successCallback()
+  <span class="instance-variable">@library</span>.fetch
+    <span class="key">url</span>: <span class="string"><span class="delimiter">'</span><span class="content">http://localhost:9393/library/new</span><span class="delimiter">'</span></span>
+    <span class="key">type</span>: <span class="string"><span class="delimiter">'</span><span class="content">POST</span><span class="delimiter">'</span></span>
+    <span class="key">data</span>: {<span class="string"><span class="delimiter">'</span><span class="content">title</span><span class="delimiter">'</span></span>: <span class="string"><span class="delimiter">'</span><span class="content">The Demon-Haunted World</span><span class="delimiter">'</span></span>, <span class="string"><span class="delimiter">'</span><span class="content">author</span><span class="delimiter">'</span></span>: <span class="string"><span class="delimiter">'</span><span class="content">Carl Sagan</span><span class="delimiter">'</span></span>}
+    <span class="key">error</span>: <span class="instance-variable">@errorCallback</span>()
+    <span class="key">success</span>: <span class="instance-variable">@successCallback</span>()
 </pre></div>
 </div>
  </figure></notextile></div>
+
+<!--
+Talk a bit more about Sinatra here
+-->
 
 <p>A quick visual overview on how the frontend and backend communicate with each other.</p>
 
@@ -461,7 +465,7 @@ y <span class="comment"># returns '3'</span>
 <p>Here’s a really great simple analogy that I found.  </p>
 <blockquote><p>Say I want to share a web page with you.</p><p>If I tell you the URL, I&#8217;m passing by reference. You can use that URL to see the same web page I can see. If that page is changed, we both see the changes. If you delete the URL, all you&#8217;re doing is destroying your reference to that page - you&#8217;re not deleting the actual page itself.</p><p>If I print out the page and give you the printout, I&#8217;m passing by value. Your page is a disconnected copy of the original. You won&#8217;t see any subsequent changes, and any changes that you make (e.g. scribbling on your printout) will not show up on the original page. If you destroy the printout, you have actually destroyed your copy of the object - but the original web page remains intact.</p><footer><strong>Dylan Beattie</strong> <cite><a href="http://stackoverflow.com/a/430958">StackOverflow</a></cite></footer></blockquote>
 
-<p>TL;DR Ruby is Pass by Value because a copy of a reference to an object is passed and not the object itself.</p>
+<p>TL;DR Ruby is Pass by Reference because a copy of a reference to an object is passed and not the object itself.</p>
 ]]></content>
   </entry>
   

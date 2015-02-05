@@ -98,12 +98,12 @@ in
 <div class="bogus-wrapper"><notextile><figure class="code"><figcaption class="code-header" style="margin-bottom:-5px;"><span>AJAX example in Coffeescript </span></figcaption>
  <div class="CodeRay">
   <div class="code"><pre>
-  $.ajax 'http://localhost:9393/library/new',
-    type: 'POST'
-    data: {'title': 'The Importance of Being Earnest', 'author': 'Oscar Wilde'}
-    dataType: 'json'
-    error: @errorCallback()
-    success: @successCallback()
+  <span class="global-variable">$.</span>ajax <span class="string"><span class="delimiter">'</span><span class="content">http://localhost:9393/library/new</span><span class="delimiter">'</span></span>,
+    <span class="key">type</span>: <span class="string"><span class="delimiter">'</span><span class="content">POST</span><span class="delimiter">'</span></span>
+    <span class="key">data</span>: {<span class="string"><span class="delimiter">'</span><span class="content">title</span><span class="delimiter">'</span></span>: <span class="string"><span class="delimiter">'</span><span class="content">The Importance of Being Earnest</span><span class="delimiter">'</span></span>, <span class="string"><span class="delimiter">'</span><span class="content">author</span><span class="delimiter">'</span></span>: <span class="string"><span class="delimiter">'</span><span class="content">Oscar Wilde</span><span class="delimiter">'</span></span>}
+    <span class="key">dataType</span>: <span class="string"><span class="delimiter">'</span><span class="content">json</span><span class="delimiter">'</span></span>
+    <span class="key">error</span>: <span class="instance-variable">@errorCallback</span>()
+    <span class="key">success</span>: <span class="instance-variable">@successCallback</span>()
 </pre></div>
 </div>
  </figure></notextile></div>
@@ -113,15 +113,19 @@ in
 <div class="bogus-wrapper"><notextile><figure class="code"><figcaption class="code-header" style="margin-bottom:-5px;"><span>fetch example in Coffeescript </span></figcaption>
  <div class="CodeRay">
   <div class="code"><pre>
-  @library.fetch
-    url: 'http://localhost:9393/library/new'
-    type: 'POST'
-    data: {'title': 'The Importance of Being Earnest', 'author': 'Oscar Wilde'}
-    error: @errorCallback()
-    success: @successCallback()
+  <span class="instance-variable">@library</span>.fetch
+    <span class="key">url</span>: <span class="string"><span class="delimiter">'</span><span class="content">http://localhost:9393/library/new</span><span class="delimiter">'</span></span>
+    <span class="key">type</span>: <span class="string"><span class="delimiter">'</span><span class="content">POST</span><span class="delimiter">'</span></span>
+    <span class="key">data</span>: {<span class="string"><span class="delimiter">'</span><span class="content">title</span><span class="delimiter">'</span></span>: <span class="string"><span class="delimiter">'</span><span class="content">The Demon-Haunted World</span><span class="delimiter">'</span></span>, <span class="string"><span class="delimiter">'</span><span class="content">author</span><span class="delimiter">'</span></span>: <span class="string"><span class="delimiter">'</span><span class="content">Carl Sagan</span><span class="delimiter">'</span></span>}
+    <span class="key">error</span>: <span class="instance-variable">@errorCallback</span>()
+    <span class="key">success</span>: <span class="instance-variable">@successCallback</span>()
 </pre></div>
 </div>
  </figure></notextile></div>
+
+<!--
+Talk a bit more about Sinatra here
+-->
 
 <p>A quick visual overview on how the frontend and backend communicate with each other.</p>
 

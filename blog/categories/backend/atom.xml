@@ -4,7 +4,7 @@
   <title><![CDATA[Category: backend | Striving for Adequacy]]></title>
   <link href="http://calvached.github.io/blog/categories/backend/atom.xml" rel="self"/>
   <link href="http://calvached.github.io/"/>
-  <updated>2015-01-29T10:18:05-06:00</updated>
+  <updated>2015-02-05T11:37:27-06:00</updated>
   <id>http://calvached.github.io/</id>
   <author>
     <name><![CDATA[Diana Calvache]]></name>
@@ -46,12 +46,12 @@
 <p><div class='bogus-wrapper'><notextile><figure class='code'><figcaption class='code-header' style='margin-bottom:-5px;'><span>AJAX example in Coffeescript </span></figcaption>
  <div class="CodeRay">
   <div class="code"><pre>
-  $.ajax ‘http://localhost:9393/library/new’,
-    type: ‘POST’
-    data: {‘title’: ‘The Importance of Being Earnest’, ‘author’: ‘Oscar Wilde’}
-    dataType: ‘json’
-    error: @errorCallback()
-    success: @successCallback()
+  <span class="global-variable">$.</span>ajax <span class="key">‘http</span>:<span class="regexp"><span class="delimiter">/</span><span class="delimiter">/</span></span><span class="key">localhost</span>:<span class="integer">9393</span>/library/new’,
+    <span class="key">type</span>: ‘POST’
+    <span class="key">data</span>: {<span class="key">‘title’</span>: ‘The <span class="constant">Importance</span> of <span class="constant">Being</span> <span class="constant">Earnest’</span>, <span class="key">‘author’</span>: ‘Oscar <span class="constant">Wilde’</span>}
+    <span class="key">dataType</span>: ‘json’
+    <span class="key">error</span>: <span class="instance-variable">@errorCallback</span>()
+    <span class="key">success</span>: <span class="instance-variable">@successCallback</span>()
 </pre></div>
 </div>
  </figure></notextile></div></p>
@@ -61,15 +61,19 @@
 <p><div class='bogus-wrapper'><notextile><figure class='code'><figcaption class='code-header' style='margin-bottom:-5px;'><span>fetch example in Coffeescript </span></figcaption>
  <div class="CodeRay">
   <div class="code"><pre>
-  @library.fetch
-    url: ‘http://localhost:9393/library/new’
-    type: ‘POST’
-    data: {‘title’: ‘The Importance of Being Earnest’, ‘author’: ‘Oscar Wilde’}
-    error: @errorCallback()
-    success: @successCallback()
+  <span class="instance-variable">@library</span>.fetch
+    <span class="key">url</span>: <span class="key">‘http</span>:<span class="regexp"><span class="delimiter">/</span><span class="delimiter">/</span></span><span class="key">localhost</span>:<span class="integer">9393</span>/library/new’
+    <span class="key">type</span>: ‘POST’
+    <span class="key">data</span>: {<span class="key">‘title’</span>: ‘The <span class="constant">Demon</span>-<span class="constant">Haunted</span> <span class="constant">World’</span>, <span class="key">‘author’</span>: ‘Carl <span class="constant">Sagan’</span>}
+    <span class="key">error</span>: <span class="instance-variable">@errorCallback</span>()
+    <span class="key">success</span>: <span class="instance-variable">@successCallback</span>()
 </pre></div>
 </div>
  </figure></notextile></div></p>
+
+<!--
+Talk a bit more about Sinatra here
+-->
 
 <p>A quick visual overview on how the frontend and backend communicate with each other.</p>
 
