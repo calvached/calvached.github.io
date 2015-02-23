@@ -4,7 +4,7 @@
   <title><![CDATA[Striving for Adequacy]]></title>
   <link href="http://calvached.github.io/atom.xml" rel="self"/>
   <link href="http://calvached.github.io/"/>
-  <updated>2015-02-05T11:38:18-06:00</updated>
+  <updated>2015-02-23T03:06:56-06:00</updated>
   <id>http://calvached.github.io/</id>
   <author>
     <name><![CDATA[Diana Calvache]]></name>
@@ -12,6 +12,47 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[The Basics of Soldering]]></title>
+    <link href="http://calvached.github.io/blog/2015/02/22/the-basics-of-soldering/"/>
+    <updated>2015-02-22T19:36:22-06:00</updated>
+    <id>http://calvached.github.io/blog/2015/02/22/the-basics-of-soldering</id>
+    <content type="html"><![CDATA[<p>This weekend I attended a beginner soldering class offered by Pumping Station: One. Going in to the class I had no idea how to solder (or knew that solder was also a noun). It was definitely a great introduction to basic soldering for circuit boards. Here’s what I learned!
+<!-- more --></p>
+
+<h3 id="tools">Tools</h3>
+<p>We started the class by first identifying the types of tools we would be using. On our workbench we had a <a href="http://en.wikipedia.org/wiki/Soldering_iron">soldering iron</a>, a <a href="http://i.imgur.com/MaYBFnx.jpg">tip cleaner</a>, <a href="http://i.imgur.com/iIlT8Wl.jpg">safety glasses</a>, <a href="http://en.wikipedia.org/wiki/Diagonal_pliers">diagonal cutters</a>, a <a href="http://en.wikipedia.org/wiki/Wire_stripper">wire stripper</a>, a <a href="http://i.imgur.com/KmngCVa.jpg">helping hand</a>, a <a href="http://i.imgur.com/uSPrg0K.jpg">fume extractor</a>, some wire, and of course <a href="http://en.wikipedia.org/wiki/Solder">solder</a>.</p>
+
+<h3 id="holding-the-iron">Holding the iron</h3>
+<p>The iron should be held in a way which maximizes the amount of heat transfer, sort of how you would hold a marker to get the thickest line possible (depending on the shape of the tip you would hold it a different way). This makes sure that more of the tip’s surface is in contact with the object being soldered.</p>
+
+<h3 id="tinning-and-cleaning">Tinning and Cleaning</h3>
+<p>It is very important to tin the tip of your iron each time it is used. This helps preserves the tip’s lifespan. To tin the tip we simply have to apply a coat of solder all around the surface of the tip. If it is successfully tinned, the tip will be a silver color instead of the original dark charcoal color.</p>
+
+<p>Cleaning should be done frequently to remove any excess solder that remains on the tip. This is usually done one of two ways, with a wet sponge or a bronze wire sponge. Both methods effectively clean the tip, but the wet sponge will cool the iron every time it is used whereas the bronze wire sponge will keep the temperature constant.</p>
+
+<h3 id="using-the-iron">Using the iron</h3>
+<p>Before we start using the iron we need to setup and turn on the fume extractor. Each time solder is melted it expels a poisonous gas which should not be inhaled.</p>
+
+<p>The heat for the soldering iron can be adjusted to various levels to accomodate different metals. You must to set the heat to a level that is hot enough to melt the solder, but cool enough to not melt the metal that is being soldered. Once an adequate temperature has been reached we can start soldering!</p>
+
+<h3 id="soldering">Soldering</h3>
+<p>Helping hands are a great tool for holding a circuit board and keeping it steady. The goal of the soldering iron is to heat up the wire (or any other metal) enough to where it can melt the solder on it’s own. We want to transfer heat to the metal which will then transfer heat to the solder. DO NOT melt the solder onto the metal directly as this will create “Cold joints”. Cold joints can be identified by their “bulbous” features and are very weak. A proper joint is show in the picture below:</p>
+
+<p><img src="http://i.imgur.com/jJqkxZe.png" alt="Ideal joint" /></p>
+
+<p>Once a joint has been properly made you can now cut the excess wire.</p>
+
+<h3 id="safety-precautions">Safety Precautions</h3>
+<p>ALWAYS use safetly glasses. It may not be common for small pieces of solder to come in contact with your eyes, but it is definitely possible. Small pieces of metal can be very hard to remove and cause major discomfort.</p>
+
+<!--
+Flux
+Solder (Lead-free vs Lead)
+-->
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Sinon.JS Uncaught TypeError]]></title>
